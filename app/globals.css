@@ -7,6 +7,36 @@
   --foreground: #171717;
 }
 
+.slider-info-section{
+  background-image: url('/banner.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.introduction1-image{
+  background-image: url('/banner.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.introduction3-1{
+  background-image: url('/soop-stay.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.introduction3-2{
+  background-image: url('/cafe/cafe1.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.introduction3-3{
+  background-image: url('/bookcafe.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
