@@ -23,7 +23,7 @@ jobs:
         run: docker build -t cuu2253/joyful-village:latest .
       - name: Push Docker Image
         run: |
-          docker login -u cuu2253 -p {{ secrets.DOCKER_HUB_TOKEN }}
+          docker login -u cuu2253 -p ${{ secrets.DOCKER_HUB_TOKEN }}
           docker push cuu2253/joyful-village:latest
       # - name: zip create 
       #   run: zip -qq -r ./joyful-village-front.zip ./.next/ ./appspec.yml ./deploy.sh ./public
