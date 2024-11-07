@@ -3,8 +3,8 @@ echo "> Deploy Joyfulvillage"
 sudo su
 cd /home/ec2-user/prod-front
 chmod +x ./deploy.sh
-docker-compose pull
-docker-compose up -d
+docker compose pull
+docker compose up -d
 
 #systemctl restart nginx
 
