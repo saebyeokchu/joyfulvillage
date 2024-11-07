@@ -1,6 +1,11 @@
 "use client"
-import Script from "next/script";
-import { useEffect, useRef } from "react"
+import { useEffect } from "react"
+
+declare global {
+    interface Window {
+        kakao: any;
+    }
+  }
 
 export default function Inquiry(){
 
@@ -13,15 +18,17 @@ export default function Inquiry(){
         console.log(kakaoMapScript)
       
         const onLoadKakaoAPI = () => {
-          window.kakao.maps.load(() => {
-            var container = document.getElementById('map')
-            var options = {
-              center: new window.kakao.maps.LatLng(36.30700271705157, 129.35450572886586),
-              level: 3,
+            if(window.kakao){
+                window.kakao.maps.load(() => {
+                    const container = document.getElementById('map')
+                    const options = {
+                      center: new window.kakao.maps.LatLng(36.30700271705157, 129.35450572886586),
+                      level: 3,
+                    }
+              
+                    new window.kakao.maps.Map(container, options)
+                  })
             }
-      
-            var map = new window.kakao.maps.Map(container, options)
-          })
         }
       
         kakaoMapScript.addEventListener('load', onLoadKakaoAPI)
