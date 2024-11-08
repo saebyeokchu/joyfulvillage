@@ -6,7 +6,7 @@ import Slider from "./_component/Slider";
 export default function Home() {
 
   return (
-    <div className="relative w-full mx-auto ">
+    <div className="relative w-full mx-auto bg-white ">
       {/* slider info section */}
       {/* <div className="justify-center text-center slider-info-section border border-slate-600 h-screen w-full">
         <div className="bg-yellow-300 text-red-500">이미지 슬라이더</div>
