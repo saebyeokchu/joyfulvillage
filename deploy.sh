@@ -2,13 +2,20 @@
 echo "> Deploy Joyfulvillage"
 sudo su
 cd /home/ec2-user/prod-front
-chmod +x ./deploy.sh
-docker compose pull
-docker compose up -d
+if ! docker compose pull; then
+        echo "Failed to pull images." > deploy-result.txt
+        exit 1
+fi
 
-#systemctl restart nginx
+# Start the containers in detached mode
+if ! docker compose up -d; then
+     echo "Failed to start containers."  > deploy-result.txt
+         exit 1
+         fi
+         
+         
+echo "Containers are up-to-date and running."  > deploy-result.txt
 
-# npm -v
-# npm install next@latest
-# pm2 delete phymmr
-# pm2 start "npx next start" --name phymmr
+# chmod +x ./deploy.sh
+# docker compose pull
+# docker compose up -d

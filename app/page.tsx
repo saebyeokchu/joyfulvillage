@@ -21,10 +21,10 @@ export default function Home() {
         <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="relative mx-auto max-w-4xl grid space-y-5 sm:space-y-10">
             <div className="text-center">
-              <p className="text-xs font-semibold text-gray-500 tracking-wide uppercase mb-3 dark:text-neutral-200">
+              <p className="text-xs font-semibold text-gray-500 tracking-wide uppercase mb-3">
               폐교를 리모델링하여 만들어진 자연과 예술이 어우러진 공간
               </p>
-              <h1 className="text-3xl text-gray-800 font-bold sm:text-5xl lg:text-6xl lg:leading-tight dark:text-neutral-200">
+              <h1 className="text-3xl text-gray-800 font-bold sm:text-5xl lg:text-6xl lg:leading-tight">
                 <p className="text-pretty">자연 속 문화 예술 복합 공간의 </p>
                 <p className="text-amber-500"> 조이풀 빌리지</p>
                 
