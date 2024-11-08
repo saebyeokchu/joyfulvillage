@@ -26,7 +26,7 @@ jobs:
           docker login -u cuu2253 -p ${{ secrets.DOCKER_HUB_TOKEN }}
           docker push cuu2253/joyful-village:latest
       - name: zip create 
-        run: zip -qq -r ./joyful-village-front.zip ./docker-compose.yml ./appspec.yml ./deploy.sh ./public
+        run: zip -qq -r ./joyful-village-front.zip ./docker-compose.yml ./appspec.yml ./deploy.sh 
         shell: bash
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4

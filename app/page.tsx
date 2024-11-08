@@ -1,23 +1,45 @@
+"use client"
+
+import ScrollOpacity from "./_component/ScrollOpaicty";
+import Slider from "./_component/Slider";
+
 export default function Home() {
+
   return (
     <div className="relative w-full mx-auto ">
       {/* slider info section */}
-      <div className="justify-center text-center slider-info-section border border-slate-600 h-screen w-full">
+      {/* <div className="justify-center text-center slider-info-section border border-slate-600 h-screen w-full">
         <div className="bg-yellow-300 text-red-500">이미지 슬라이더</div>
+      </div> */}
+      {/* introduction1 - slider */}
+      <div className="h-fit w-full lg:h-screen">
+        <Slider />
       </div>
       
-      {/* introduction */}
-      <div className="grid grid-cols-2 min-h-96">
-        <div>
-          <h1>조이풀 빌리지</h1>
-          <p>자연 속 문화예술 복합공간의 탄생</p>
-          <p>조이풀 빌리지는 폐교를 리모델링하여 만들어진 자연과 예술이 어우러진 공간입니다.</p>
+      {/* introduction2 - introudction title */}
+      <ScrollOpacity className=" flex items-center object-center justify-center text-center w-full min-h-96 lg:h-screen" >
+        <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="relative mx-auto max-w-4xl grid space-y-5 sm:space-y-10">
+            <div className="text-center">
+              <p className="text-xs font-semibold text-gray-500 tracking-wide uppercase mb-3 dark:text-neutral-200">
+              폐교를 리모델링하여 만들어진 자연과 예술이 어우러진 공간
+              </p>
+              <h1 className="text-3xl text-gray-800 font-bold sm:text-5xl lg:text-6xl lg:leading-tight dark:text-neutral-200">
+                <p className="text-pretty">자연 속 문화 예술 복합 공간의 </p>
+                <p className="text-amber-500"> 조이풀 빌리지</p>
+                
+              </h1>
+            </div>
+          </div>
         </div>
-        <div className="border justify-center text-center border-slate-400 rounded-lg introduction1-image m-10">
-          <div className="bg-yellow-300 text-red-500">Introduction Image1</div>
-        </div>
-      </div>
+      </ScrollOpacity>
 
+      {/* introduction3 - joyful illustration */}
+      <ScrollOpacity delay={300} className="fill">
+        <img src="/landing-illustration.jpg" />
+      </ScrollOpacity>
+
+      
       {/* introduction2 */}
       <div className="bg-yellow-300 text-red-500">Introduction Section2 ~ 조이풀 빌리지의 생성과정을 짧게 사진과 이름으로 / 필요한 만큼 늘리기</div>
       <div className="grid grid-cols-2 min-h-96">
