@@ -9,7 +9,7 @@ WORKDIR /code
 COPY .next /code/.next
 COPY public /code/public
 COPY package.json /code/
-COPY next.config.ts /code/
+COPY tsconfig.json /code/
 
 #RUN npm install next@latest react@latest react-dom@latest
 
