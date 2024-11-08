@@ -3,10 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import "./_css/slide.css";
 
-import Header from "./_component/Header";
-import Footer from "./_component/Footer";
 import PrelineScript from "./_component/PrelineScript";
-import { usePathname } from "next/navigation";
 import Middle from "./middle";
 
 const geistSans = localFont({
@@ -36,7 +33,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Middle children={children} />
+        <Middle>
+          {children}
+        </Middle>
       </body>
       <PrelineScript />
       

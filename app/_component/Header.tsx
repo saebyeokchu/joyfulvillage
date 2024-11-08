@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useRouter } from 'next/navigation'
 import { header_mega_menus, header_menus } from "../_data/Menu";
 import { MegaMenu, Menu, Title } from "../_type/Menu";
+import Link from "next/link";
 
 export default function Header(){
     const [ showSubMenu, setShowSubMenu ] = useState(false);
@@ -23,9 +24,9 @@ export default function Header(){
         >
             <nav className=" relative max-w-[85rem] z-50 w-full mx-auto md:flex md:items-center md:justify-between     md:gap-3 py-2 lg:px-8" >
                 <div className="flex justify-between items-center gap-x-1 px-5">
-                    <a className="flex-none font-semibold text-xl text-black focus:outline-none focus:opacity-80 dark:text-white " href="/" aria-label="Brand">
+                    <Link className="flex-none font-semibold text-xl text-black focus:outline-none focus:opacity-80 dark:text-white " aria-label="Brand" href={"/"}>
                         <img src="/logo.png" width={80} height='auto' />
-                    </a>
+                    </Link>
 
                     <button type="button" className="hs-collapse-toggle md:hidden relative size-9 flex justify-center items-center font-medium text-[12px] rounded-lg border border-gray-200 text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-neutral-700 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" id="hs-header-base-collapse"  aria-expanded="false" aria-controls="hs-header-base" aria-label="Toggle navigation"  data-hs-collapse="#hs-header-base" >
                         <svg className="hs-collapse-open:hidden size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
@@ -58,7 +59,7 @@ export default function Header(){
                     <div key={`header-mega-menu-${index}`} className="flex-1 min-h-32  cursor-pointer p-3 space-y-3" >
                         <p className="font-bold" onClick={()=>router.push(menu.mainTitleRoute)}>{menu.mainTitle}</p>
                         { menu.subTitle && menu.subTitle.map((title:Title)=>
-                            <p onClick={()=>router.push(menu.mainTitleRoute)}>{title.name}</p>
+                            <p key={`mega-menu-submenu-${index}`} onClick={()=>router.push(menu.mainTitleRoute)}>{title.name}</p>
                         )}
                     </div>  
                 )}
