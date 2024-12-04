@@ -38,10 +38,10 @@ export const header_mega_menus : MegaMenu[] = [
         subTitle : [
             {
                 name : "숲 스테이 도천",
-                route : "/stay-soop"
+                route : "/lodging/soop"
             },{
                 name : "북 스테이 도천",
-                route : "/stay-book"
+                route : "/lodging/book"
             }
         ]
     },

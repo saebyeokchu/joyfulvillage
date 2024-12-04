@@ -59,7 +59,7 @@ export default function Header(){
                     <div key={`header-mega-menu-${index}`} className="flex-1 min-h-32  cursor-pointer p-3 space-y-3" >
                         <p className="font-bold" onClick={()=>router.push(menu.mainTitleRoute)}>{menu.mainTitle}</p>
                         { menu.subTitle && menu.subTitle.map((title:Title,subIndex:number)=>
-                            <p key={`mega-menu-submenu-${subIndex}`} onClick={()=>router.push(menu.mainTitleRoute)}>{title.name}</p>
+                            <p key={`mega-menu-submenu-${subIndex}`} onClick={()=>router.push(title.route)}>{title.name}</p>
                         )}
                     </div>  
                 )}

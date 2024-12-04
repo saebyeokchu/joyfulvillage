@@ -36,20 +36,20 @@ export default function Inquiry(){
 
     return(
         <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-             <div className="grid grid-cols-2">
-                <div className="max-w-xs">
-                    <h2 className="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">오시는 길</h2>주소
+             <div className="flex-col flex">
+
+                <div className="h-min-[64px]">
+                    <h2 className="text-xl font-bold md:text-4xl md:leading-tight dark:text-white">오시는 길</h2>주소
                     <p className="mt-1 hidden md:block text-gray-600 dark:text-neutral-400">경상북도 영덕군 남정면 산정로 320</p>
-                    <div id="map" className="border border-slate-500 h-full">카카오맵 삽입</div>
+                    <div id="map" className="border border-slate-500" style={{ width: "100%", height: "400px" }}>카카오맵 삽입</div>
                 </div>
-                <div className="max-w-xs">
+
+                <div className="mt-5">
                     <div className="flex flex-col">
-                        <div className="max-w-xs">
-                            <h2 className="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">자주 묻는 질문</h2>
-                        </div>
+                        <h2 className="text-xl font-bold md:text-4xl md:leading-tight dark:text-white">자주 묻는 질문</h2>
                         <div className="pt-8">
-                            <div className="hs-accordion-group divide-y divide-gray-200 dark:divide-neutral-700">
-                                <div className="hs-accordion pb-3 active" id="hs-basic-with-title-and-arrow-stretched-heading-one">
+                            <div className="hs-accordion-group divide-y divide-gray-200 dark:divide-neutral-700 w-full">
+                                <div className="hs-accordion pb-3 active " id="hs-basic-with-title-and-arrow-stretched-heading-one">
                                     <button className="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-start text-gray-800 rounded-lg transition hover:text-gray-500 focus:outline-none focus:text-gray-500 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400" aria-expanded="true" aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-one">
                                         운영시간은 어떻게 되나요?
                                         <svg className="hs-accordion-active:hidden block shrink-0 size-5 text-gray-600 group-hover:text-gray-500 dark:text-neutral-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
