@@ -35,63 +35,71 @@ export default function Inquiry(){
       }, [])
 
     return(
-        <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-             <div className="flex-col flex">
+        <div className="bg-point text-point">
+            <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+                <div className="flex-col flex">
 
-                <div className="h-min-[64px]">
-                    <h2 className="text-xl font-bold md:text-4xl md:leading-tight dark:text-white">오시는 길</h2>주소
-                    <p className="mt-1 hidden md:block text-gray-600 dark:text-neutral-400">경상북도 영덕군 남정면 산정로 320</p>
-                    <div id="map" className="border border-slate-500" style={{ width: "100%", height: "400px" }}>카카오맵 삽입</div>
-                </div>
+                    <div className="h-min-[64px] mt-16 mx-28">
+                        <h2 className="text-xl font-bold md:text-4xl md:leading-tight ">오시는 길</h2>
+                        <span className="hidden md:block mt-4">
+                            주소 경상북도 영덕군 남정면 산정로 320</span>
+                        <div id="map" className="border-point mt-3" style={{ width: "100%", height: "400px" }}>Kakao Map</div>
+                    </div>
 
-                <div className="mt-5">
-                    <div className="flex flex-col">
-                        <h2 className="text-xl font-bold md:text-4xl md:leading-tight dark:text-white">자주 묻는 질문</h2>
-                        <div className="pt-8">
-                            <div className="hs-accordion-group divide-y divide-gray-200 dark:divide-neutral-700 w-full">
-                                <div className="hs-accordion pb-3 active " id="hs-basic-with-title-and-arrow-stretched-heading-one">
-                                    <button className="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-start text-gray-800 rounded-lg transition hover:text-gray-500 focus:outline-none focus:text-gray-500 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400" aria-expanded="true" aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-one">
-                                        운영시간은 어떻게 되나요?
-                                        <svg className="hs-accordion-active:hidden block shrink-0 size-5 text-gray-600 group-hover:text-gray-500 dark:text-neutral-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-                                        <svg className="hs-accordion-active:block hidden shrink-0 size-5 text-gray-600 group-hover:text-gray-500 dark:text-neutral-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m18 15-6-6-6 6"/></svg>
-                                    </button>
-                                    <div id="hs-basic-with-title-and-arrow-stretched-collapse-one" className="hs-accordion-content w-full overflow-hidden transition-[height] duration-300" role="region" aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-one">
-                                        <p className="text-gray-600 dark:text-neutral-400">
-                                        Yes, you can cancel anytime no questions are asked while you cancel but we would highly appreciate if you will give us some feedback.
-                                        </p>
+                    <div className="mt-20 mx-28">
+                        <div className="flex flex-col">
+                            <h2 className="text-xl font-bold md:text-4xl md:leading-tight ">자주 묻는 질문</h2>
+                            <div className="pt-8">
+                                <div className="hs-accordion-group divide-y divide-gray-200 ">
+                                    <div className="hs-accordion pb-3 active " id="hs-basic-with-title-and-arrow-stretched-heading-one">
+                                        <button className="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-start  rounded-lg transition focus:outline-none" aria-expanded="true" aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-one">
+                                            Q  운영시간은 어떻게 되나요?
+                                            <svg className="hs-accordion-active:hidden block shrink-0 size-5 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                                            <svg className="hs-accordion-active:block hidden shrink-0 size-5 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+                                        </button>
+                                        <div id="hs-basic-with-title-and-arrow-stretched-collapse-one" className="hs-accordion-content w-full overflow-hidden transition-[height] duration-300" role="region" aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-one">
+                                            <p>
+                                            Yes, you can cancel anytime no questions are asked while you cancel but we would highly appreciate if you will give us some feedback.
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="hs-accordion pt-6 pb-3" id="hs-basic-with-title-and-arrow-stretched-heading-two">
-                                    <button className="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-start text-gray-800 rounded-lg transition hover:text-gray-500 focus:outline-none focus:text-gray-500 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400" aria-expanded="false" aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-two">
-                                        입금 게좌는 어떻게 되나요?
-                                        <svg className="hs-accordion-active:hidden block shrink-0 size-5 text-gray-600 group-hover:text-gray-500 dark:text-neutral-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-                                        <svg className="hs-accordion-active:block hidden shrink-0 size-5 text-gray-600 group-hover:text-gray-500 dark:text-neutral-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m18 15-6-6-6 6"/></svg>
-                                    </button>
-                                    <div id="hs-basic-with-title-and-arrow-stretched-collapse-two" className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" role="region" aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-two">
-                                        <p className="text-gray-600 dark:text-neutral-400">
-                                        Once your team signs up for a subscription plan. This is where we sit down, grab a cup of coffee and dial in the details.
-                                        </p>
+                                    <div className="hs-accordion pt-6 pb-3" id="hs-basic-with-title-and-arrow-stretched-heading-two">
+                                        <button className="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-start  rounded-lg transition focus:outline-none" aria-expanded="false" aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-two">
+                                        Q  입금 계좌는 어떻게 되나요?
+                                            <svg className="hs-accordion-active:hidden block shrink-0 size-5 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                                            <svg className="hs-accordion-active:block hidden shrink-0 size-5 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+                                        </button>
+                                        <div id="hs-basic-with-title-and-arrow-stretched-collapse-two" className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" role="region" aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-two">
+                                            <p>
+                                            Once your team signs up for a subscription plan. This is where we sit down, grab a cup of coffee and dial in the details.
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="hs-accordion pt-6 pb-3" id="hs-basic-with-title-and-arrow-stretched-heading-three">
-                                    <button className="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-start text-gray-800 rounded-lg transition hover:text-gray-500 focus:outline-none focus:text-gray-500 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400" aria-expanded="false" aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-three">
-                                        환불 규정은 어떻게 되나요?
-                                        <svg className="hs-accordion-active:hidden block shrink-0 size-5 text-gray-600 group-hover:text-gray-500 dark:text-neutral-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-                                        <svg className="hs-accordion-active:block hidden shrink-0 size-5 text-gray-600 group-hover:text-gray-500 dark:text-neutral-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m18 15-6-6-6 6"/></svg>
-                                    </button>
-                                    <div id="hs-basic-with-title-and-arrow-stretched-collapse-three" className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" role="region" aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-three">
-                                        <p className="text-gray-600 dark:text-neutral-400">
-                                        Once your team signs up for a subscription plan. This is where we sit down, grab a cup of coffee and dial in the details.
-                                        </p>
+                                    <div className="hs-accordion pt-6 pb-3" id="hs-basic-with-title-and-arrow-stretched-heading-three">
+                                        <button className="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-start  rounded-lg transition focus:outline-none" aria-expanded="false" aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-three">
+                                        Q  환불 규정은 어떻게 되나요?
+                                            <svg className="hs-accordion-active:hidden block shrink-0 size-5 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                                            <svg className="hs-accordion-active:block hidden shrink-0 size-5 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+                                        </button>
+                                        <div id="hs-basic-with-title-and-arrow-stretched-collapse-three" className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" role="region" aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-three">
+                                            <p>
+                                            Once your team signs up for a subscription plan. This is where we sit down, grab a cup of coffee and dial in the details.
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <div className="my-16 mx-28 border-point-top " >
+                        <p className="font-bold pt-5">다른 궁금증이 있으신가요?</p>
+                        <p className="mt-3">010-6513-8461 여기로 문의주시면 친절히 안내드리겠습니다.</p>
+                    </div>
                 </div>
-             </div>
+            </div>
         </div>
     )
 }

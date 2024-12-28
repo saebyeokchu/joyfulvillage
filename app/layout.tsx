@@ -6,16 +6,29 @@ import "./_css/slide.css";
 import PrelineScript from "./_component/PrelineScript";
 import Middle from "./middle";
 
-const geistSans = localFont({
-  src: "./_fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./_fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+const maruburis = localFont({
+  src: [
+    {
+      path: '../public/fonts/MaruBuri-ExtraLight.ttf',
+      weight: '200'
+    },{
+      path: '../public/fonts/MaruBuri-Light.ttf',
+      weight: '300'
+    },{
+      path: '../public/fonts/MaruBuri-Regular.ttf',
+      weight: '400'
+    },
+    {
+      path: '../public/fonts/MaruBuri-SemiBold.ttf',
+      weight: '600'
+    },
+    {
+      path: '../public/fonts/MaruBuri-Bold.ttf',
+      weight: '700'
+    }
+  ],
+  variable: '--font-maruburis'
+})
 
 export const metadata: Metadata = {
   title: "조이풀빌리지",
@@ -30,15 +43,13 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${maruburis.variable} font-sans text-point bg-point` }> 
         <Middle>
           {children}
         </Middle>
+        {/* <script src="../node_modules/preline/dist/preline.js"></script> */}
       </body>
       <PrelineScript />
-      
     </html>
   );
 }

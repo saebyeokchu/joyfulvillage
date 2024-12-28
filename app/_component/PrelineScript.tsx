@@ -14,6 +14,9 @@ export default function PrelineScript() {
   const path = usePathname();
 
   useEffect(() => {
+    
+    import('../../node_modules/preline/dist/preline.js');
+
     const loadPreline = async () => {
       await import("preline/preline");
 

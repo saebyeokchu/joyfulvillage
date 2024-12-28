@@ -2,9 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+
+/* :root {
   --background: #ffffff;
   --foreground: #171717;
+} */
+
+body {
+  background-color: #F1EBDD;
+}
+
+.font-test {
+  font-family: "MaruBuri-Regular";
+}
+
+.bg-point {
+  background-color: #F1EBDD;
+}
+
+.bg-point-hover:hover {
+  background-color: #c9c3b1;
+}
+
+.bg-point-darker {
+  background-color: #c9c3b1;
+}
+
+.text-point {
+  color : #746E60;
+}
+
+.border-point {
+  border-color : #ECE6D9;
+  border: 1px;
+  border-style: solid;
+}
+
+.border-point-top {
+  border-color : #ECE6D9;
+  border-top: 1px;
+  border-style: solid;
+}
+
+.border-point-bottom {
+  border-color : #ECE6D9;
+  border-bottom: 1px;
+  border-style: solid;
 }
 
 .slider-info-section{

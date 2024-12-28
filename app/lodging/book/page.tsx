@@ -104,7 +104,7 @@ export default function LoadgingSoop() {
             {/* 텍스트 입력 부분 */}
             <div className="flex flex-col p-5 border-t  border-t-slate-300">
                 <strong className="text-red-500">이 부분은 직접 입력하여 수정할 수 있습니다</strong>
-                <p className="mt-3">'숲 스테이 도천'은 조이풀 빌리지 옆 도천숲에 위치해 있으며 자연 속에서 깊은 휴식을 취할 수 있는 숙소입니다. <br />숲의 고요함과 맑은 공기를 느끼며, 일상에서 벗어나 완전한 휴식을 경험할 수 있습니다.</p>
+                <p className="mt-3">&apos;숲 스테이 도천&apos;은 조이풀 빌리지 옆 도천숲에 위치해 있으며 자연 속에서 깊은 휴식을 취할 수 있는 숙소입니다. <br />숲의 고요함과 맑은 공기를 느끼며, 일상에서 벗어나 완전한 휴식을 경험할 수 있습니다.</p>
                 <p className="font-bold text-xl mt-3">* 숲 스테이 도천만의 투숙 경험</p>
                 <p>숲 스테이 도천에 투숙하시면 색 다른 프로그램을 즐기실 수 있습니다<br/>(불멍, 숲멍, 물멍)</p>
             </div>

@@ -1,6 +1,6 @@
 export default function Ready(){
     return (
-        <div className="overflow-hidden">
+        <div className="overflow-hidden bg-point">
             <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-20 h-screen relative">
                 <div className="absolute top-1/3 left-64 mx-auto max-w-4xl grid space-y-5 sm:space-y-10">
                     <div className="text-center">

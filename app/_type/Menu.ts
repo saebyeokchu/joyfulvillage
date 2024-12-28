@@ -11,6 +11,7 @@ type Menu = {
 type MegaMenu = {
     mainTitle : string,
     mainTitleRoute : string,
+    iconSvg : any,
     subTitle? : Title[]
 }
 
