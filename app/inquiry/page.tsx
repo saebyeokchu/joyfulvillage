@@ -59,7 +59,7 @@ export default function Inquiry(){
                                         </button>
                                         <div id="hs-basic-with-title-and-arrow-stretched-collapse-one" className="hs-accordion-content w-full overflow-hidden transition-[height] duration-300" role="region" aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-one">
                                             <p>
-                                            Yes, you can cancel anytime no questions are asked while you cancel but we would highly appreciate if you will give us some feedback.
+                                                조이풀 빌리지의 운영시간은 월요일 부터 금요일까지는 오전 10시에서 6시입니다. (일요일은 별도로 운영하지 않습니다.)
                                             </p>
                                         </div>
                                     </div>
@@ -72,7 +72,7 @@ export default function Inquiry(){
                                         </button>
                                         <div id="hs-basic-with-title-and-arrow-stretched-collapse-two" className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" role="region" aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-two">
                                             <p>
-                                            Once your team signs up for a subscription plan. This is where we sit down, grab a cup of coffee and dial in the details.
+                                             입금계좌는 010-6513-8461로 문의주시면 안내해 드리겠습니다.
                                             </p>
                                         </div>
                                     </div>
@@ -85,7 +85,8 @@ export default function Inquiry(){
                                         </button>
                                         <div id="hs-basic-with-title-and-arrow-stretched-collapse-three" className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" role="region" aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-three">
                                             <p>
-                                            Once your team signs up for a subscription plan. This is where we sit down, grab a cup of coffee and dial in the details.
+                                            환불규정은 010-6513-8461로 문의주시면 안내해 드리겠습니다.
+                                            
                                             </p>
                                         </div>
                                     </div>

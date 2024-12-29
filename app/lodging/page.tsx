@@ -35,7 +35,9 @@ export default function Loading(){
                             </p>
                         </div>
                         <div className="flex flex-row space-x-3 text-sm font-bold w-full mt-3 cursor-pointer ">
-                            <p className="bg-point-hover p-2 rounded-lg">상세보기</p>
+                            <a href="/lodging/soop">
+                                <p className="bg-point-hover p-2 rounded-lg">상세보기</p>
+                            </a>
                         </div>
                     </div>
                     <div className="group flex flex-col h-full">
@@ -50,7 +52,9 @@ export default function Loading(){
                             </p>
                         </div>
                         <div className="flex flex-row space-x-3 text-sm font-bold w-full mt-3 cursor-pointer ">
+                            <a href="/lodging/book">
                             <p className="bg-point-hover p-2 rounded-lg">상세보기</p>
+                            </a>
                         </div>
                     </div>
 
