@@ -25,25 +25,25 @@ jobs:
         run: |
           docker login -u cuu2253 -p ${{ secrets.DOCKER_HUB_TOKEN }}
           docker push cuu2253/joyful-village:latest
-      - name: zip create 
-        run: zip -qq -r ./joyful-village-front.zip ./docker-compose.yml ./appspec.yml ./deploy.sh 
-        shell: bash
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.CICD_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.CICD_SECERET_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
-      - name: Upload to S3 
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.CICD_ACCESS_KEY }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.CICD_SECERET_KEY }}
-        run: |
-          aws s3 cp --region ${{ secrets.AWS_REGION }} ./joyful-village-front.zip s3://joyful-village/joyful-village-front.zip 
-      - name: Deploy # Deploy to EC2
-        run: aws deploy create-deployment
-          --application-name joyful-village
-          --deployment-config-name CodeDeployDefault.AllAtOnce
-          --file-exists-behavior OVERWRITE
-          --deployment-group-name joyful-village
-          --s3-location bucket=joyful-village,key=joyful-village-front.zip,bundleType=zip
+      # - name: zip create 
+      #   run: zip -qq -r ./joyful-village-front.zip ./docker-compose.yml ./appspec.yml ./deploy.sh 
+      #   shell: bash
+      # - name: Configure AWS credentials
+      #   uses: aws-actions/configure-aws-credentials@v4
+      #   with:
+      #     aws-access-key-id: ${{ secrets.CICD_ACCESS_KEY }}
+      #     aws-secret-access-key: ${{ secrets.CICD_SECERET_KEY }}
+      #     aws-region: ${{ secrets.AWS_REGION }}
+      # - name: Upload to S3 
+      #   env:
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.CICD_ACCESS_KEY }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.CICD_SECERET_KEY }}
+      #   run: |
+      #     aws s3 cp --region ${{ secrets.AWS_REGION }} ./joyful-village-front.zip s3://joyful-village/joyful-village-front.zip 
+      # - name: Deploy # Deploy to EC2
+      #   run: aws deploy create-deployment
+      #     --application-name joyful-village
+      #     --deployment-config-name CodeDeployDefault.AllAtOnce
+      #     --file-exists-behavior OVERWRITE
+      #     --deployment-group-name joyful-village
+      #     --s3-location bucket=joyful-village,key=joyful-village-front.zip,bundleType=zip

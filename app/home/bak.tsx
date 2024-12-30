@@ -1,8 +1,8 @@
 "use client"
 
 import { useRef } from "react";
-import ScrollOpacity from "./_component/ScrollOpaicty";
-import Slider from "./_component/Slider";
+import ScrollOpacity from "../_component/ScrollOpaicty";
+import Slider from "../_component/Slider";
 
 export default function Home() {
 
