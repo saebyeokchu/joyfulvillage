@@ -71,7 +71,7 @@ export default function Header(){
                           return DropDownMenu(menu, index);
                         }else{
                           return (
-                            menu.disabled? <span className="p-2 flex items-center text-sm bg-point-darker rounded-lg">{menu.iconSvg}{menu.mainTitle}</span> :
+                            menu.disabled? <span key={`header-menu-${index}`} className="p-2 flex items-center text-sm text-gray-300">{menu.iconSvg}{menu.mainTitle}</span> :
                             <a 
                               key={`header-menu-${index}`}
                               className={`p-2 flex items-center text-sm bg-point bg-point-hover rounded-lg focus:outline-none focus:bg-point-darker`} 

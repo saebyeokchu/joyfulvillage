@@ -4,7 +4,7 @@ services:
     ports:  
      - "5432:5432"
     volumes:
-      - pg-data:/var/lib/docker/volumes/pg-data/_data
+      - pg-data:/home/ec2-user/prod/pg-data
     restart: always
     environment:
       POSTGRES_USER: postgres
@@ -21,7 +21,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: cuu2252@gmail.com
       PGADMIN_DEFAULT_PASSWORD: 1234
     volumes:
-      - pgadmin-data:/var/lib/docker/volumes/pgadmin-data/_data
+      - pgadmin-data:/home/ec2-user/prod/pgadmin-data
 
 
   editor-front:
