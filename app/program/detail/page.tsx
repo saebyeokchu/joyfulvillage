@@ -21,7 +21,7 @@ function DetailContent() {
       useEffect(()=>{
           //인덱스로 정보불러오기
           if(programId){
-              let info = Programs.find(e=>e.id==parseInt(programId));
+              const info = Programs.find(e=>e.id==parseInt(programId));
               if(info){
                 const htmlString = `<iframe 
                     src="https://www.youtube.com/embed/m7tHzK52bk8" 
