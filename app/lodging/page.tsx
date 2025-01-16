@@ -1,7 +1,13 @@
+"use client"
+
 import Image from "next/image"
+import { EditButton } from "../_component/Button"
+import { useRouter } from "next/navigation";
 
 // 숙소전체보기
 export default function Loading(){
+    const router = useRouter();
+    
     return (
         <div className="relative flex flex-col p-32 w-full mx-auto md:flex md:justify-between ">
             {/* head breadcrumble */}
@@ -19,6 +25,7 @@ export default function Loading(){
             {/* title */}
             <div className="flex w-full text-center justify-center content-center">
                 <p className="text-3xl font-bold">숙소</p>
+                <span className="ml-3"><EditButton onClickFunction={()=>router.push("/admin?m=lodging")} btnName={"관리하기"} /></span>
             </div>
 
             <div className="min-h-[38rem] mt-28">

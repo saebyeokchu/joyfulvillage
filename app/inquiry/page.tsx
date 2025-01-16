@@ -39,14 +39,14 @@ export default function Inquiry(){
             <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
                 <div className="flex-col flex">
 
-                    <div className="h-min-[64px] mt-16 mx-28">
+                    <div className="h-min-[64px] mt-8  mx-12 md:mt-16 md:mx-28">
                         <h2 className="text-xl font-bold md:text-4xl md:leading-tight ">오시는 길</h2>
-                        <span className="hidden md:block mt-4">
+                        <span className={`block text-sm mt-4 md:text-base`}>
                             주소 경상북도 영덕군 남정면 산정로 320</span>
                         <div id="map" className="border-point mt-3" style={{ width: "100%", height: "400px" }}>Kakao Map</div>
                     </div>
 
-                    <div className="mt-20 mx-28">
+                    <div className=" mt-16  mx-12 md:mx-28">
                         <div className="flex flex-col">
                             <h2 className="text-xl font-bold md:text-4xl md:leading-tight ">자주 묻는 질문</h2>
                             <div className="pt-8">
@@ -95,7 +95,7 @@ export default function Inquiry(){
                         </div>
                     </div>
 
-                    <div className="my-16 mx-28 border-point-top " >
+                    <div className="my-16  mx-12 md:mx-28" >
                         <p className="font-bold pt-5">다른 궁금증이 있으신가요?</p>
                         <p className="mt-3">010-6513-8461 여기로 문의주시면 친절히 안내드리겠습니다.</p>
                     </div>

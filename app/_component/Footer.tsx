@@ -84,7 +84,7 @@ export default function Footer(){
 
                 <div className="flex flex-row justify-items-end text-end w-full gap-x-2 content-end items-end justify-end">
                     <div className="text-sm">
-                        <a href="/login/admin" className="">관리자 페이지 이동하기</a>
+                        <a href="/login/admin" className="">관리자 로그인</a>
                     </div>
                     <div> | </div>
                     <div className="text-sm">

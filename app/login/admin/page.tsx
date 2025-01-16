@@ -1,27 +1,57 @@
 "use client"
 
+import { GetCurrentIp } from "@/app/_api/Common";
+import { AdminEmailAddress, ManagerName, ResetCode } from "@/app/_data/Const";
+import { GeneralError } from "@/app/_data/Messages";
 import { authService } from "@/app/_service";
 import { useRouter } from "next/navigation";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 export default function Login() {
 
     const emailAuthCodeRef = useRef<any>();
     const router = useRouter();
+    const [ sendEmailSuccessful, setSendEmailSuccessful ] = useState<boolean>(false);
+    const requestNameRef : any = useRef<any>('');
+    const requestCodeRef : any = useRef<any>('');
+    
+    
+    const sendErrorRequest = async () => {
+        console.log("[sendErrorRequest]");
+        const currentIp = await GetCurrentIp();
+
+        if(requestNameRef.current && requestCodeRef.current && currentIp){
+            //random code 확인 
+            //이메일 추후 비밀처리
+            await authService.sendRecoverRequest(requestNameRef.current.value, currentIp.ip); //dbal6436@naver.com
+
+            if(requestCodeRef.current.value == ResetCode && requestNameRef.current.value == ManagerName){
+                window.confirm("관리자 이메일은 " + AdminEmailAddress + " 입니다. 관리자 이메일 변경절차를 진행할까요?");
+            }else{
+                window.alert(GeneralError.unmatchedInfo);
+            }
+        }
+        
+        window.alert("관리자 로그인 절차에 문제가 생겼습니다. 잠시후 다시 시도하시거나 01027403096으로 문의하세요.");
+
+    }
 
     const sendEmailAuthCode = async () => {
         console.log("[sendEmailAuthCode]");
+        
         //이메일 추후 비밀처리
-        const result = await authService.sendAuth("cuu2252@gmail.com");
+        const result = await authService.sendAuth(AdminEmailAddress); //dbal6436@naver.com
         console.log(result);
         if(result.status == 200){
             window.alert("인증번호 전송이 완료되었습니다.");
+            setSendEmailSuccessful(true);
         }
 
     }
 
     const checkEmailAuthCode = async() => {
         console.log("[checkEmailAuthCode]");
+
         //이메일 추후 비밀처리
         const result = await authService.getAuth(emailAuthCodeRef.current?.value);
         console.log(result);
@@ -34,6 +64,38 @@ export default function Login() {
 
     return (
         <div className="relative flex flex-col h-screen max-w-[85rem] w-full mx-auto content-center justify-items-center self-center items-center place-self-center justify-self-center md:flex md:justify-between">
+            <div id="requestRocoverModal" className="hs-overlay hs-overlay-open:opacity-100 hs-overlay-open:duration-500 hidden size-full fixed top-0 start-0 z-[80] opacity-0 overflow-x-hidden transition-all overflow-y-auto pointer-events-none" role="dialog" aria-labelledby="requestRocoverModal-label">
+                <div className="sm:max-w-lg sm:w-full m-3 sm:mx-auto">
+                    <div className="flex flex-col  shadow-sm rounded-xl pointer-events-auto bg-white">
+                        <div className="flex justify-between items-center py-3 px-4 ">
+                            <h3 id="requestRocoverModal-label" className="font-bold ">
+                            오류 전송하기
+                            </h3>
+                            <button type="button" className="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent hover:bg-point-darker focus:outline-none focus:bg-point-darker disabled:opacity-50 disabled:pointer-events-none " aria-label="Close" data-hs-overlay="#requestRocoverModal">
+                            <span className="sr-only">Close</span>
+                            <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M18 6 6 18"></path>
+                                <path d="m6 6 12 12"></path>
+                            </svg>
+                            </button>
+                        </div>
+                        <div className="p-4 overflow-y-auto">
+                            <p className="mt-1">
+                                <input ref={requestNameRef} type="text" placeholder="접수자 이름" className="block w-full  
+                                        mr-4 py-2 px-4
+                                        border
+                                    "/>
+                                <input ref={requestCodeRef} type="text" placeholder="접수코드" className="block w-full  
+                                        mr-4 py-2 px-4
+                                        border
+                                    "/>
+                            </p>
+                        </div>
+                        <button onClick={sendErrorRequest} className="w-full mt-3 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium border border-transparent bg-amber-600 text-white hover:bg-amber-700 focus:outline-none focus:bg-amber-700 disabled:opacity-50 disabled:pointer-events-none">관리자 이메일 찾기</button>
+                    </div>
+                </div>
+            </div>
+
             <div className="mt-20 bg-white border border-gray-200 rounded-xl shadow-sm w-[30rem]">
                 <div className="p-4 sm:p-7">
                     <div className="text-center">
@@ -76,17 +138,17 @@ export default function Login() {
 
                             <button onClick={sendEmailAuthCode} className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-amber-600 text-white hover:bg-amber-700 focus:outline-none focus:bg-amber-700 disabled:opacity-50 disabled:pointer-events-none">관리자 이메일로 인증번호 받기</button>
 
-                            <input ref={emailAuthCodeRef} type="text" id="emailAuthCode" name="emailAuthCode" className="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" required aria-describedby="password-error" />
+                            { sendEmailSuccessful && <input ref={emailAuthCodeRef} type="text" id="emailAuthCode" name="emailAuthCode" className="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" required aria-describedby="password-error" /> }
 
                             <div className="flex items-center">
-                                <p className="mt-2 text-sm text-gray-600 ">관리자 로그인이 불가능하신가요? 
-                                    <a className="text-amber-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium " href="../examples/html/signup.html">
+                                <p className="mt-2 text-sm text-gray-600 cursor-pointer">관리자 로그인이 불가능하신가요? 
+                                    <span className="text-amber-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium " aria-haspopup="dialog" aria-expanded="false" aria-controls="requestRocoverModal" data-hs-overlay="#requestRocoverModal">
                                         문의하기
-                                    </a>
+                                    </span>
                                 </p>
                             </div>
 
-                            <button onClick={checkEmailAuthCode} className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-amber-600 text-white hover:bg-amber-700 focus:outline-none focus:bg-amber-700 disabled:opacity-50 disabled:pointer-events-none">접속하기</button>
+                            { sendEmailSuccessful &&  <button onClick={checkEmailAuthCode} className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-amber-600 text-white hover:bg-amber-700 focus:outline-none focus:bg-amber-700 disabled:opacity-50 disabled:pointer-events-none">접속하기</button> }
                         </div>
                     </div>
                 </div>

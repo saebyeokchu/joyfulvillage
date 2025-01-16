@@ -27,5 +27,14 @@ const config: Config = {
   typescript: {
     ignoreBuildErrors: true, // Ignores TypeScript errors
   },
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/home",
+        permanent: true, // Set to `true` for SEO-friendly 301 redirect
+      },
+    ];
+  },
 };
 export default config;

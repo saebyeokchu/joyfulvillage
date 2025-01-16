@@ -5,6 +5,7 @@ import "./_css/slide.css";
 
 import PrelineScript from "./_component/PrelineScript";
 import Middle from "./middle";
+import { JoyfulContextProvider } from "./_context/JoyfulContext";
 
 const maruburis = localFont({
   src: [
@@ -40,13 +41,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html lang="en">
-      <body className={`${maruburis.variable} font-sans text-point bg-point` }> 
-        <Middle>
-          {children}
-        </Middle>
+      <body className={`${maruburis.variable} font-sans text-point ` }> 
+        <JoyfulContextProvider>
+          <Middle>
+            {children}
+          </Middle>
+        </JoyfulContextProvider>
         {/* <script src="../node_modules/preline/dist/preline.js"></script> */}
       </body>
       <PrelineScript />

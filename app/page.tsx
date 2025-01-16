@@ -10,7 +10,13 @@ export default function Home() {
 
   const router = useRouter();
 
-  useEffect(() => router.push("/home"),[])
+  useEffect(() => {
+    router.replace("/home");
+  }, []);
+      
+  useEffect(() => {
+    router.replace("/home");
+  }, [router]);
 
   return (
     <BlockedPage />

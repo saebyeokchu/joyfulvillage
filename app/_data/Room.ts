@@ -1,7 +1,8 @@
 const Soops = [
     {
         id : 1,
-        title : '숲스테이도천1호',
+        name : '숲스테이도천1호',
+        mainImg : '/soop/1.jpg',
         topImages : ['/soop/1.jpg','/soop/5.jpg','/soop/4.jpg'],
         contentImages : [
             '/soop/1.jpg',
@@ -17,7 +18,7 @@ const Soops = [
 ]
 
 const Book = {
-    title : '북스테이도천',
+    name : '북스테이도천',
     topImages : ['/book/15.jpg','/book/2.jpeg','/book/8.jpeg'],
     contentImages : [
         '/book/1.jpeg',

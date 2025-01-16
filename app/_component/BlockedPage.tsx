@@ -3,9 +3,9 @@ export default function BlockedPage(){
         <div className="overflow-hidden bg-point">
             <div className="mx-auto px-4 sm:px-6 lg:px-8 py-20 h-screen relative">
                     <div className="text-center mt-16">
-                        <h1 className="text-2xl font-bold sm:text-5xl lg:text-6xl lg:leading-tight dark:text-neutral-200">
-                        직접 접근이 제한된 페이지 입니다
-                        </h1>
+                        <p className="text-3xl font-bold ">
+                        직접 접근이 제한된 페이지 입니다.
+                        </p>
                     </div>
 
                     <div className="sm:flex sm:justify-center sm:items-center text-center sm:text-start">

@@ -1,21 +1,57 @@
 "use client"
-import { useState } from "react"
+
+import { useEffect, useState } from "react"
 import { useRouter } from 'next/navigation'
 import { header_mega_menus, header_menus } from "../_data/Menu";
-import { MegaMenu, Menu, Title } from "../_type/Menu";
 import Link from "next/link";
+import { AdminCode } from "../_data/Const";
+import { useJoyfulContext } from "../_context/JoyfulContext";
+import Announcement from "./Announcement";
+import { MegaMenu } from "../_data/Menu";
+
+const MenuWithClick = ({
+  onClickFunction,
+  name
+}:{
+  onClickFunction : any,
+  name : string
+}) => <a 
+        className={`cursor-pointer p-2 flex items-center text-sm bg-point bg-point-hover rounded-lg focus:outline-none focus:bg-point-darker`} 
+        aria-current="page"
+        onClick={onClickFunction}
+        >
+        {name}
+      </a>
+
+const MenuWithHref = ({
+  keyStr,
+  hrefRoute,
+  iconSvg,
+  name
+}:{
+  keyStr : string
+  hrefRoute : string,
+  iconSvg: any,
+  name : string,
+}) => <a 
+        key={keyStr}
+        className={`p-2 flex items-center text-sm bg-point bg-point-hover rounded-lg focus:outline-none focus:bg-point-darker`} 
+        href={hrefRoute} 
+        aria-current="page"
+        >
+        {iconSvg}
+        {name}
+      </a>
 
 export default function Header(){
-    const [ showSubMenu, setShowSubMenu ] = useState(false);
-    const router = useRouter();
+    const joyfulContext = useJoyfulContext();
 
-    const openSubMenu = () => {
-        setShowSubMenu(true);
+    const logoutAdmin = () => {
+      localStorage.setItem("joyfuladminaccpedted","");
+      joyfulContext.setIsAdmin(false);
+      location.reload();
     }
 
-    const closeSubMenu = () => {
-        setShowSubMenu(false);
-    }
 
     const DropDownMenu = (menu : MegaMenu, index : number) => <div key={`header-sub-menu-${index}`} className="hs-dropdown [--strategy:static] md:[--strategy:fixed] [--adaptive:none] [--is-collapse:true] md:[--is-collapse:false] ">
       <button id="hs-header-base-mega-menu-small" type="button" className="hs-dropdown-toggle w-full p-2 flex items-center text-sm bg-point-hover rounded-lg focus:outline-none focus:bg-point-darker dark:text-neutral-200 " aria-haspopup="menu" aria-expanded="false" aria-label="Mega Menu">
@@ -84,7 +120,14 @@ export default function Header(){
                           )
                         }
                       })}
-
+                      
+                      {
+                        joyfulContext.isAdmin && 
+                        <>
+                          <MenuWithHref name={"관리 페이지"} keyStr={"go-to-admin"} hrefRoute={"/admin"} iconSvg={undefined} />
+                          <MenuWithClick onClickFunction={logoutAdmin} name={"관리자 모드 해재"} />
+                        </>
+                      }
 
 
                   </div>
