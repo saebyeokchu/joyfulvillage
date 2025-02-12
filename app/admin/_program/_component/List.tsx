@@ -3,8 +3,8 @@ import { useEffect, useState } from "react"
 
 import { Program } from "@/types/Types";
 import { programService } from "@/service";
-import { EditButton } from "@/app/_component";
 import { GeneralError } from "@/lib/messages";
+import { EditButton } from "@/components/ui";
 
 
 export default function ListProgram({
@@ -34,17 +34,20 @@ export default function ListProgram({
         });
     }
 
-    const onClickDeleteBtn = ( id : number , name : string) => {
-        if(window.confirm(name+GeneralError.verifyDeletion)){
-            programService.deleteById(id).then(response=>{
-                if(response){
-                    updateProgramList();
-                    window.alert(GeneralError.successfullyDeleted);
-                }else{
-                    window.alert(GeneralError.unknownError + GeneralError.tryLater);
-                }
-            });
+    const onClickDeleteBtn = ( id : number | null , name : string) => {
+        if(id) {
+            if(window.confirm(name+GeneralError.verifyDeletion)){
+                programService.deleteById(id).then(response=>{
+                    if(response){
+                        updateProgramList();
+                        window.alert(GeneralError.successfullyDeleted);
+                    }else{
+                        window.alert(GeneralError.unknownError + GeneralError.tryLater);
+                    }
+                });
+            }
         }
+        
     }
 
     return (

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import "/css/slide.css";
+import "../public/css/slide.css";
 
 import Middle from "./middle";
 import PrelineScript from "@/components/PrelineScript";

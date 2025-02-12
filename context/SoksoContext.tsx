@@ -1,9 +1,8 @@
 "use client";
 
+import { SoksoClass } from "@/class/SoksoClass";
+import { SoksoDetailClass } from "@/class/SoksoDetailClass";
 import { createContext, useContext, useState, ReactNode, Dispatch, SetStateAction } from "react";
-import { SoksoDetail } from "../_data/Types";
-import { SoksoDetailClass } from "../_data/_class/SoksoDetailClass";
-import { SoksoClass } from "../_data/_class/SoksoClass";
 
 // Define the type for the reservation state
 interface ReserveState {

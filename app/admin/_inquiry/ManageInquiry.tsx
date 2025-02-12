@@ -1,16 +1,12 @@
-import { DisabledEditButton, EditButton } from "@/app/_component/Button";
-import Preview from "@/app/_component/Preview";
 import { useEffect, useRef, useState } from "react";
 import { AxiosResponse, HomeSection } from "@/lib/enums";
 import { findDuplicateAfterValues, isStrValid } from "@/lib/common";
-import { homeServcie } from "@/service";
-import { GetHomeData } from "@/app/_api/Home";
-import EditBox from ".@/component/EditBox";
-import { CustomNumberInput, CustomTextInput } from "@/app/_component/CustomInput";
 import { getQnaList } from "@/service/qnaService";
-import { FilledBadge, OutlineBadge } from "@/app/_component/Badge";
-import { DeleteQnaData, EditSortOrder, InsertQnaData, UpdateQna } from "@/app/_api/Qna";
-import { EditBiz, GetKakao } from "@/app/_api/Biz";
+import { DeleteQnaData, EditBiz, GetKakao } from "@/lib/api/Biz";
+import { UpdateQna } from "@/lib/api/Qna";
+import { CustomNumberInput, CustomTextInput, DisabledEditButton, EditButton, FilledBadge } from "@/components/ui";
+import { EditBox } from "../_component";
+import Preview from "@/components/layout/Preview";
 
 export default function ManageInquiry(){
     const [ order, setOrder ]= useState<any>([]);

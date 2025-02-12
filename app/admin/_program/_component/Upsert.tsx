@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { Program } from "@/types/Types";
 import { isStrValid } from "@/lib/common";
-import { ProgramClass } from "@/app/_data/_class/ProgramClass";
 import { GeneralError } from "@/lib/messages";
 import { programService } from "@/service";
 import { CustomTextInput, EditButton, FilledBadge } from "@/components/ui";
 import Wysiwyg from "../../_component/Wysiwyg";
 import { ImageLibraryModal } from "../../_component";
+import { ProgramClass } from "@/class/ProgramClass";
 
 
 export default function UpsertProgram({

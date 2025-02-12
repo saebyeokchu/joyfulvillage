@@ -1,18 +1,16 @@
-import { EditButton } from "@/app/_component/Button";
-import { CustomTextInput, FileInput } from "@/app/_component/CustomInput";
-import Preview from "@/app/_component/Preview";
-import { useEffect, useRef, useState } from "react";
-import EditBox from ".@/component/EditBox";
 import { AxiosResponse, HomeSection } from "@/lib/enums";
 import { isStrValid } from "@/lib/common";
 import { homeServcie, programService } from "@/service";
-import { FilledBadge, OutlineBadge } from "@/app/_component/Badge";
-import { GetHomeData } from "@/app/_api/Home";
 import {  HomeSpaceBookImgSrc, HomeSpaceCafeImgSrc, HomeSpaceSoopImgSrc } from "@/lib/const";
-import { useJoyfulContext } from "@/app/_context/JoyfulContext";
+import { useEffect, useRef, useState } from "react";
+import { useJoyfulContext } from "@/context/JoyfulContext";
+import { GetHomeData } from "@/lib/api/Home";
 import { GeneralError } from "@/lib/messages";
-import Wysiwyg from ".@/component/Wysiwyg";
-import MainImgSection from "@/component/mainImgSection";
+import { CustomTextInput, EditButton, FileInput, FilledBadge, OutlineBadge } from "@/components/ui";
+import Preview from "@/components/layout/Preview";
+import MainImgSection from "./_component/mainImgSection";
+import { EditBox } from "../_component";
+import Wysiwyg from "../_component/Wysiwyg";
 
 export default function EditHome(){
 
@@ -114,7 +112,7 @@ export default function EditHome(){
     const onClickSaveBtn = async () => {
         joyfulContext.openAdminLoading = true;
 
-        const mainImg : any = mainImgRef.current;
+        // const mainImg : any = mainImgRef.current;
         const mainImgContent1 : any = mainImgContent1Ref.current;
         const mainImgContent2 : any = mainImgContent2Ref.current;
         const mainImgContent3 : any = mainImgContent3Ref.current;
@@ -131,21 +129,21 @@ export default function EditHome(){
         let editPart : any[] = [];
 
         //메인 이미지 수정을 위한 데이터 세팅하기
-        if(mainImg){
-            if( mainImg.files[0] != null){
-                const formData : FormData = new FormData();
-                formData.append("image", mainImg.files[0]);
-                formData.append("imageName","mainImg.jpg");
-                formData.append("folderName","home");
+        // if(mainImg){
+        //     if( mainImg.files[0] != null){
+        //         const formData : FormData = new FormData();
+        //         formData.append("image", mainImg.files[0]);
+        //         formData.append("imageName","mainImg.jpg");
+        //         formData.append("folderName","home");
     
-                editPart.push({
-                    section : HomeSection.mainImg,
-                    part : "mainImg",
-                    formData : formData 
-                });
-            }
+        //         editPart.push({
+        //             section : HomeSection.mainImg,
+        //             part : "mainImg",
+        //             formData : formData 
+        //         });
+        //     }
 
-        }
+        // }
 
         //메인문구1
         if(mainImgContent1 != null && isStrValid(mainImgContent1.value)){

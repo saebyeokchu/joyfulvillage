@@ -1,5 +1,5 @@
+import { ProgramApi } from "@/lib/api";
 import { AxiosResponse } from "../lib/enums";
-import { ProgramApi } from "../app/_api";
 import { Program } from "../types/Types";
 
 

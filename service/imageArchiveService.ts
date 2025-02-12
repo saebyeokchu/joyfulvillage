@@ -1,12 +1,8 @@
 
 
-import { ImageArchiveApi } from "../app/_api";
-import { getCurrentTimestamp } from "../app/_api/Common";
-import { UploadImageWithDeletion } from "../app/_api/File";
-import { UpdateHomeData } from "../app/_api/Home";
-import { GetAll } from "../app/_api/ImageArchive";
-import { GetQnaData } from "../app/_api/Qna";
-import { AxiosResponse, HomeSection } from "../lib/enums";
+import { ImageArchiveApi } from "@/lib/api";
+import { AxiosResponse } from "../lib/enums";
+import { getCurrentTimestamp } from "@/lib/common";
 
 const getAll = async () =>{
     return await ImageArchiveApi.GetAll().then(response => {

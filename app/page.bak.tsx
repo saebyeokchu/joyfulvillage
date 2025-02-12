@@ -1,10 +1,10 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { GetHomeData } from "./_api/Home";
 import { GetHomeintrodcutionContent, GetHomeMainImgContent, GetHomeSpaceContent } from "../service/homeService";
 import { mobilePx } from "../lib/const";
 import { useJoyfulContext } from "@/context/JoyfulContext";
+import { GetHomeData } from "@/lib/api/Home";
 
 export default function Home(){
 

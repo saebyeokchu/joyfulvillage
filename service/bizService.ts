@@ -1,4 +1,4 @@
-import { BizApi } from "../app/_api";
+import { BizApi } from "@/lib/api";
 import { AxiosResponse, BizSection } from "../lib/enums";
 
 const splitValue = (ary : any) => {

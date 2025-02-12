@@ -1,8 +1,7 @@
 "use client"
 import { useEffect, useState } from "react"
-import { GetQnaData } from "../_api/Qna";
 import { AxiosResponse } from "../../lib/enums";
-import { GetKakao } from "../_api/Biz";
+import { GetQnaData } from "@/lib/api/Qna";
 
 declare global {
     interface Window {

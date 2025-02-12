@@ -1,4 +1,4 @@
-import { CafeApi } from "../app/_api";
+import { CafeApi } from "@/lib/api";
 import { AxiosResponse, CafeSection} from "../lib/enums";
 import { Cafe } from "../types/Types";
 

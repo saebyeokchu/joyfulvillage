@@ -1,12 +1,9 @@
 
 
-import { SoksoApi } from "../app/_api";
-import { UploadImageWithDeletion } from "../app/_api/File";
-import { UpdateHomeData } from "../app/_api/Home";
-import { GetQnaData } from "../app/_api/Qna";
+import { SoksoApi } from "@/lib/api";
 import { StringDivider } from "../lib/const";
-import { AxiosResponse, HomeSection } from "../lib/enums";
-import { Sokso, SoksoDetail } from "../types/Types";
+import { AxiosResponse } from "../lib/enums";
+import { Sokso } from "@/types/sokso";
 
 const modelingSoksoDetail = (soksodetail : any) => {
     if(soksodetail){

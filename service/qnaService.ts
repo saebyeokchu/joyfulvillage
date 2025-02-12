@@ -1,8 +1,6 @@
 
 
-import { UploadImageWithDeletion } from "../app/_api/File";
-import { UpdateHomeData } from "../app/_api/Home";
-import { GetQnaData } from "../app/_api/Qna";
+import { GetQnaData } from "@/lib/api/Qna";
 import { AxiosResponse, HomeSection } from "../lib/enums";
 
 const getQnaList = async () =>{

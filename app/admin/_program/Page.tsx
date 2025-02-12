@@ -3,10 +3,9 @@ import { useEffect, useState } from "react"
 
 import { Program } from "@/types/Types";
 import { programService } from "@/service";
-import { EditButton } from "@/app/_component";
-import ListProgram from "@/component/List";
-import UpsertProgram from "@/component/Upsert";
-import { ProgramClass } from "@/app/_data/_class/ProgramClass";
+import { ProgramClass } from "@/class/ProgramClass";
+import ListProgram from "./_component/List";
+import UpsertProgram from "./_component/Upsert";
 
 
 export default function ManageProgram(){

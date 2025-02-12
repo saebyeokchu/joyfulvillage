@@ -1,9 +1,9 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react";
-import { GetHomeData } from "./_api/Home";
 import { GetHomeintrodcutionContent, GetHomeMainImgContent, GetHomeSpaceContent } from "../service/homeService";
 import { useJoyfulContext } from "@/context/JoyfulContext";
+import { GetHomeData } from "@/lib/api/Home";
 
 const images = [
     "/system/home/mainImg.jpg",

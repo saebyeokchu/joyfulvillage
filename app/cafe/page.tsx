@@ -4,12 +4,12 @@ import Image from "next/image"
 import { useEffect, useState } from "react";
 
 import { useRouter } from "next/navigation";
-import BreadCrumbs from ".@/component/BreadCrumbs";
 import { cafeService, soksoService } from "../../service";
 import { Cafe } from "../../types/Types";
 import MobileSlider from "../sokso/[parent]/[detailId]/MobileSlider";
 import { CafeSection } from "../../lib/enums";
 import { StringDivider } from "../../lib/const";
+import { BreadCrumbs } from "@/components/ui";
 
 // 숙소전체보기
 export default function CafePage(){
