@@ -115,19 +115,23 @@ export default function Sidebar() {
                 </li>*/}
 
                 <li><a className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:text-neutral-200 dark:hover:text-neutral-300" href="/admin?m=home">
-                    홈(맨 앞페이지) 관리 (완료)
+                    홈(맨 앞페이지) 관리
                 </a></li>
 
                 <li><a className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:text-neutral-200 dark:hover:text-neutral-300" href="/admin?m=sokso">
-                    숙소 관리
+                    숙소 관리(수정중)
                 </a></li>
 
                 <li><a className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:text-neutral-200 dark:hover:text-neutral-300" href="/admin?m=program">
                     프로그램 관리
                 </a></li>
 
-                <li><a className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg bg-gray-100" >
-                    실시간 예약 관리(준비중)
+                <li><a className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-300 rounded-lg cursor-not-allowed" >
+                    실시간 예약 관리
+                </a></li>
+
+                <li><a className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:text-neutral-200 dark:hover:text-neutral-300" href="/admin?m=cafe">
+                    카페 도천
                 </a></li>
 
                 <li>
@@ -140,13 +144,13 @@ export default function Sidebar() {
                 
                 <li>
                     <a className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800  rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:text-neutral-200 dark:hover:text-neutral-300" href="/admin?m=info">
-                        사업자 정보 관리
+                        운영 정보 관리(수정중)
                     </a>
                 </li>
 
                 <li>
-                    <a className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800  rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:text-neutral-200 dark:hover:text-neutral-300" href="/admin?m=info">
-                        관리자 정보 관리
+                    <a className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800  rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:text-neutral-200 dark:hover:text-neutral-300" href="/admin?m=image">
+                        이미지 관리하기
                     </a>
                 </li>
 

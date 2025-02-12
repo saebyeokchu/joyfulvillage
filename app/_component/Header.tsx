@@ -1,13 +1,9 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { useRouter } from 'next/navigation'
-import { header_mega_menus, header_menus } from "../_data/Menu";
 import Link from "next/link";
-import { AdminCode } from "../_data/Const";
 import { useJoyfulContext } from "../_context/JoyfulContext";
-import Announcement from "./Announcement";
-import { MegaMenu } from "../_data/Menu";
+import { MegaMenu } from "../_data/Types";
+import { header_mega_menus } from "../_data/Const";
 
 const MenuWithClick = ({
   onClickFunction,
@@ -81,8 +77,9 @@ export default function Header(){
     </div>
     
     return(
-      <header className="flex flex-wrap bg-point md:justify-start md:flex-nowrap z-50 w-full border-point-bottom">
-        <nav className="relative max-w-[85rem] w-full mx-auto md:flex md:items-center md:justify-between md:gap-3 py-2 px-4 sm:px-6 lg:px-8">
+      // border-point-bottom
+      <header className="flex flex-wrap bg-point md:justify-start md:flex-nowrap z-50 w-full ">
+        <nav className="relative w-full mx-auto md:flex md:items-center md:justify-between md:gap-3 py-2 px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center gap-x-1">
             <Link className="flex-none font-semibold text-xl focus:outline-none focus:opacity-80 " href="/" aria-label="Brand">
               <img src="/logo.png" className="pt-3" width={80} height='auto' />

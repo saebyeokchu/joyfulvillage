@@ -1,20 +1,23 @@
 "use client"
-
-import Link from "next/link";
-import { useJoyfulContext } from "../_context/JoyfulContext";
 import { useEffect, useState } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useJoyfulContext } from "../_context/JoyfulContext";
+import { useRouter, useSearchParams } from "next/navigation";
+
 import { AdminCode } from "../_data/Const";
 import { AuthError } from "../_data/Messages";
-import DimBackground from "../_component/DimBackground";
-import Notice from "../_component/Notice";
-import { Soops } from "../_data/Room";
-import { Programs } from "../_data/Programs";
-import ManageLoading from "./_lodging/Page";
-import ManageProgram from "./_program/Page";
+import { 
+    DimBackground,
+    Notice
+} from "../_component/";
+
+import ManageLoading from "./_lodging/page";
 import Sidebar from "./_component/Sidebar";
-import EditHome from "./_home/EditHome";
+import EditHome from "./_home/page"; 
 import ManageInquiry from "./_inquiry/ManageInquiry";
+import ManageImage from "./_image/page";
+import ManageCafe from "./_cafe/page";
+import ManageProgram from "./_program/page";
+import ManageBusniess from "./_busniess/page";
 
 export default function Admin(){
 
@@ -31,7 +34,7 @@ export default function Admin(){
       
           if (adminLoginCompleted != AdminCode) {
             window.alert(AuthError.NotAuthorized);
-            router.back();
+            router.push("/");
           } 
         },[localStorage.getItem("joyfuladminaccpedted")]);
 
@@ -55,16 +58,32 @@ export default function Admin(){
         <div className="hidden bg-white h-100 lg:flex lg:flex-row">
 
            <Sidebar />
+
+            { joyfulContext.openAdminLoading &&
+            <>
+                <DimBackground />
+                <div className="flex justify-center items-center w-full z-10 absolute top-1/3">
+                    <div className="animate-spin inline-block size-6 border-[3px] border-current border-t-transparent text-yellow-600 rounded-full" role="status" aria-label="loading">
+                        <span className="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </>}
             
             {/* 수정내용 */}
             <div className="
                 w-full  h-full
-                 start-64 z-[60] bg-white">
+                 start-64 bg-white">
                 { (searchParams.get('m') == 'home' || searchParams.get('m') ==  null) && <EditHome />}
                 { searchParams.get('m') == 'sokso' && <ManageLoading />}
                 { searchParams.get('m') == 'program' && <ManageProgram />}
+                {/* { searchParams.get('m') == 'addProgram' && <AddProgram />} */}
                 { searchParams.get('m') == 'inquiry' && <ManageInquiry />}
+                { searchParams.get('m') == 'image' && <ManageImage />}
+                { searchParams.get('m') == 'cafe' && <ManageCafe />}
+                { searchParams.get('m') == 'info' && <ManageBusniess />}
             </div>
+            
+
         </div>
         </>
     );

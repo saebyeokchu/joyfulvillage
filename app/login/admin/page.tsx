@@ -1,8 +1,8 @@
 "use client"
 
-import { GetCurrentIp } from "@/app/_api/Common";
 import { AdminEmailAddress, ManagerName, ResetCode } from "@/app/_data/Const";
 import { GeneralError } from "@/app/_data/Messages";
+import { GetCurrentIp } from "@/app/_lib/Common";
 import { authService } from "@/app/_service";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";

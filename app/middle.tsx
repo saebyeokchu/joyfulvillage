@@ -1,13 +1,15 @@
 "use client"
+
+import { useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation'
 
-import Footer from "./_component/Footer";
-import Header from "./_component/Header";
-import Admin from './admin/page';
-import { JoyfulContextProvider, useJoyfulContext } from './_context/JoyfulContext';
-import { useEffect } from 'react';
+import { useJoyfulContext } from './_context/JoyfulContext';
+
+import {
+  Footer,
+  Header
+ } from "./_component";
 import { AdminCode } from './_data/Const';
-import Announcement from './_component/Announcement';
 
 export default function Middle({
     children,
@@ -37,11 +39,19 @@ export default function Middle({
 
 // className={`${openEditModal && 'h-screen overflow-hidden'}`}
     return(
-        <div className={`bg-point ${openEditModal && 'overflow-hidden'}`}>
+        <div className={`bg-point ${openEditModal && 'overflow-hidden'}`} >
+          {/* <div style={{width:'1440px'}} className='flex flex-col mx-auto'> */}
           {/* <Announcement /> */}
-          { !pathName.includes('admin') && <Header/>  }
+          { !pathName.includes('admin') && 
+            <div className="container flex justify-self-center">
+              <Header/>
+            </div>
+          }
           {children}
-          { !pathName.includes('admin') && <Footer/>  }
+          { !pathName.includes('admin') && 
+            <div className="container flex justify-self-center">
+              <Footer/>
+            </div>  }
         </div>
     )
 }

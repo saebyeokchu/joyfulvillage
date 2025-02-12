@@ -1,15 +1,11 @@
-import { EditButton } from "@/app/_component/Button";
-import { Programs } from "@/app/_data/Programs";
-import { Soops } from "@/app/_data/Room";
-import { Sokso } from "@/app/_data/Sokso";
 import { Magnifier, Return } from "@/app/_component/Svg";
 import { useEffect, useState } from "react";
-import AddNewSokso from "./AddNewSokso";
-import EditSokso from "./EditSokso";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import LevelTwoSokso from "./LevelTwoSokso";
-import LevelOneSokso from "./LevelOneSokso";
-import SoksoDetail from "./SoksoDetail";
+import { 
+    LevelTwoSokso,
+    LevelOneSokso
+} from "./soksoByLevel";
+import SoksoDetail from "./soksoByLevel/SoksoDetail";
 
 function Preview({
     closePreview,
@@ -88,15 +84,15 @@ export default function ManageLoading(){
             <div className="flex flex-row justify-between w-2/3">
                 <div className="font-bold text-4xl">숙소 관리</div>
                 <div className="flex flex-row space-x-3">
-                    { levelTwoParentId || targetSoksoId  && <div className="cursor-pointer" onClick={setReturnUrl}>
+                    { ( levelTwoParentId || targetSoksoId )  && <div className="cursor-pointer" onClick={setReturnUrl}>
                         <Return />
                     </div> }
-                    <div className="cursor-pointer" onClick={()=>{ setPreviewUrl("/lodging"); setShowPreview(!showPreview);}}>
+                    <div className="cursor-pointer" onClick={()=>{ setPreviewUrl("/sokso"); setShowPreview(!showPreview);}}>
                         <Magnifier />
                     </div>
                 </div>
             </div>
-            { targetSoksoId ? <SoksoDetail /> : levelTwoParentId ? <LevelTwoSokso parent={levelTwoParentId} /> :  <LevelOneSokso /> }     
+            { targetSoksoId ? <SoksoDetail  /> : levelTwoParentId ? <LevelTwoSokso parent={levelTwoParentId}  /> :  <LevelOneSokso /> }     
             { showPreview && <Preview closePreview={()=>setShowPreview(false)} previewUrl={previewUrl}/> }
   
         </div>

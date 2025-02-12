@@ -12,6 +12,7 @@ export async function GetHomeDataBySection(section : string){
 }
 
 export async function UpdateHomeData(section : number, contents : string){
+    console.log(section,":",contents);
     return await axios.post(`${AdminApiAddress}/home/update/contents/`,{
         section,
         contents 

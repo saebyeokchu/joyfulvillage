@@ -2,36 +2,25 @@
 
 import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useRef, useState } from "react";
 
-const JoyfulContext = createContext<
-    [
-        boolean, 
-        Dispatch<SetStateAction<boolean>>,
-        boolean, 
-        Dispatch<SetStateAction<boolean>>,
-        string, 
-        Dispatch<SetStateAction<string>>,
-        any,
-        number, 
-        Dispatch<SetStateAction<number>>,
-        string, 
-        Dispatch<SetStateAction<string>>,
-        any
-    ]>(
-        [
-            false,
-            () => {},
-            false,
-            () => {},
-            '',
-            () => {},
-            null,
-            0,
-            () => {},
-            '',
-            () => {},
-            null
-        ]
-    );
+// Define the type for the context
+interface JoyfulContextType {
+    isAdmin: boolean;
+    setIsAdmin:Dispatch<SetStateAction<boolean>>;
+    openEditModal: boolean;
+    setOpenEditModal:Dispatch<SetStateAction<boolean>>;
+    editModalTitle: string;
+    setEditModalTitle:Dispatch<SetStateAction<string>>;
+    editVal : any;
+    editOption : number;
+    setEditOption : Dispatch<SetStateAction<number>>;
+    editModalContent : string;
+    setEditModalContent : Dispatch<SetStateAction<string>>;
+    isAdminRef : any;
+    openAdminLoading : boolean;
+}
+
+// Create Context with a default undefined value to enforce proper usage
+const JoyfulContext = createContext<JoyfulContextType | undefined>(undefined);
 
 export function JoyfulContextProvider({ children }: { children: React.ReactNode }){
     const [ isAdmin, setIsAdmin ] : [ boolean , Dispatch<SetStateAction<boolean>>] =  useState( false );
@@ -41,20 +30,27 @@ export function JoyfulContextProvider({ children }: { children: React.ReactNode 
     const [ editModalContent, setEditModalContent ] : [ string , Dispatch<SetStateAction<string>>] =  useState( '' );
     const editVal = useRef<any>();
     const isAdminRef = useRef(isAdmin);
+    let openAdminLoading : boolean = false;
 
     return (
-        <JoyfulContext.Provider value={[ 
+        <JoyfulContext.Provider value={{
             isAdmin, setIsAdmin, openEditModal, 
             setOpenEditModal, editModalTitle, setEditModalTitle,
              editVal, editOption, setEditOption,
              editModalContent, setEditModalContent,
-             isAdminRef ]} >
+             isAdminRef, openAdminLoading }} >
             {children}
         </JoyfulContext.Provider>
     )
 }
 
+// Custom Hook for Using Context
 export function useJoyfulContext() {
-    const [ isAdmin, setIsAdmin, openEditModal, setOpenEditModal, editModalTitle, setEditModalTitle, editVal, editOption, setEditOption,editModalContent, setEditModalContent, isAdminRef  ] = useContext(JoyfulContext);
-    return { isAdmin, setIsAdmin, openEditModal, setOpenEditModal, editModalTitle, setEditModalTitle, editVal, editOption, setEditOption, editModalContent, setEditModalContent, isAdminRef   };
+  const context = useContext(JoyfulContext);
+  
+  if (!context) {
+    throw new Error("useJoyfulContext must be used within a RoomContextProvider");
+  }
+
+  return context;
 }

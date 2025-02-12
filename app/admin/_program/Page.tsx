@@ -1,43 +1,51 @@
-import { EditButton } from "@/app/_component/Button";
-import { Programs } from "@/app/_data/Programs";
-import { Soops } from "@/app/_data/Room";
-import { Sokso } from "@/app/_data/Sokso";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react"
+
+import { Program } from "@/app/_data/Types";
+import { programService } from "@/app/_service";
+import { EditButton } from "@/app/_component";
+import ListProgram from "./_component/List";
+import UpsertProgram from "./_component/Upsert";
+import { ProgramClass } from "@/app/_data/_class/ProgramClass";
 
 
 export default function ManageProgram(){
-    const [showLevelTwoList, setShowLevelTwoList] = useState(false);
-    const [levelTwoParentId, setlevelTwoParentId] = useState(false);
+    const router = useRouter();
+    const [ programs, setPrograms ] = useState<Program[]>([]);
+    const [ targetProgram, setTargetProgram ] = useState<ProgramClass>(new ProgramClass());
+    const [ option, setOption ] = useState<string>("목록");
+    
+    useEffect(() => {
+        init();
+    }, []);
+
+    const init = () => {
+        programService.getAll().then((response : any)=>{
+            setPrograms(response);
+        });
+    }
+
+    const onClickAddProgram = () => {
+        setTargetProgram(new ProgramClass());
+        setOption("추가");
+    }
+
+    const onClickListProgram = () => {
+        setOption("목록");
+    }
+
+    const onClickEditeBtn = (program : Program) => {
+        targetProgram.setProgram(program);
+        setTargetProgram(targetProgram);
+        setOption("수정");
+    }
 
     return (
         <div className="flex flex-col p-20">
-            <div>
-                <p className="font-bold text-4xl">프로그램 관리</p>
-            </div>
-            <div className="flex flex-row space-x-3 mt-3">
-                <EditButton onClickFunction={undefined} btnName={"추가하기"} />
-            </div>
-            <div className="flex flex-col space-y-3  mt-3">
-            {Programs.map((program : any)=>
-                <a className="w-2/3 border border-gray-200 rounded-lg hover:shadow-sm focus:outline-none " href="#">
-                    <div className="relative flex items-center overflow-hidden ">
-                        <div className="w-96 p-4 ms-32 sm:ms-48"> 
-                            <div className="min-h-24 flex flex-col justify-center">
-                                <h3 className="font-semibold text-sm text-gray-800 ">
-                                {program.name}
-                                </h3>
-                                <p className="mt-1 text-sm text-gray-500 ">
-                                {program.subname}
-                                </p>
-                            </div>
-                            <div>
-                                <EditButton onClickFunction={undefined} btnName={""} />
-                            </div>
-                        </div>
-                    </div>
-                </a>)}
-
-               
+            <div className="flex flex-col justify-between w-full">
+                <div className="font-bold text-4xl">프로그램 관리</div>
+                { option == "목록" && <ListProgram onClickAddProgram={onClickAddProgram} onClickEditeBtn={onClickEditeBtn} /> }
+                { ( option == "추가" || option == "수정" ) && <UpsertProgram onClickListProgram={onClickListProgram} targetProgram={targetProgram} /> }
             </div>
         </div>
     )

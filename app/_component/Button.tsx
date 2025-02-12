@@ -19,19 +19,38 @@ function FatButton({
 
 function EditButton({
     onClickFunction,
-    btnName
+    btnName,
+    csProps,
 } : {
     onClickFunction : any,
-    btnName : string
+    btnName : string,
+    csProps? : string,
 }){
+    
     return(
-        <button onClick={onClickFunction} type="button"   className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none " >
-            {btnName}
+        <button  onClick={onClickFunction} type="button"   className={`${csProps} py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none `} >
+            {btnName} 
+        </button> 
+    )
+}
+
+function DisabledEditButton({
+    btnName,
+    csProps,
+} : {
+    btnName : string,
+    csProps? : string,
+}){
+    
+    return(
+        <button disabled type="button"   className={`${csProps} py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none `} >
+            {btnName} 
         </button> 
     )
 }
 
 export {
     FatButton,
-    EditButton
+    EditButton,
+    DisabledEditButton
 }

@@ -4,8 +4,8 @@ import "./globals.css";
 import "./_css/slide.css";
 
 import PrelineScript from "./_component/PrelineScript";
+import ContextProviders from "./_context/ContextProviders";
 import Middle from "./middle";
-import { JoyfulContextProvider } from "./_context/JoyfulContext";
 
 const maruburis = localFont({
   src: [
@@ -44,11 +44,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${maruburis.variable} font-sans text-point ` }> 
-        <JoyfulContextProvider>
+        <ContextProviders>
           <Middle>
             {children}
           </Middle>
-        </JoyfulContextProvider>
+        </ContextProviders>
         {/* <script src="../node_modules/preline/dist/preline.js"></script> */}
       </body>
       <PrelineScript />

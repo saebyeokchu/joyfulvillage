@@ -1,51 +1,66 @@
+"use client"
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image"
 
+import { BreadCrumbs } from "../_component";
+import { Program } from "../_data/Types";
+import { programService } from "../_service";
+import { useProgramContext } from "../_context/ProgramContext";
+
 // 숙소전체보기
-export default function Program(){
+export default function ProgramPage(){
+    const router = useRouter();
+    const programContext = useProgramContext();
+
+    const [ programs, setPrograms ] = useState<Program[]>([]);
+
+    useEffect(() => {
+        init();
+
+      }, []);
+
+    const init = () => {
+        programService.getAll().then((response : any)=>{
+            setPrograms(response);
+        });
+    }
+
+    const onClickGoToDetail = (program : Program) => {
+        programContext.currentProgram.setProgram(program);
+        router.push("/program/detail");
+    }
+
+    
     return (
-        <div className="relative flex flex-col p-32 w-full mx-auto md:flex md:justify-between ">
+        <div className="relative flex flex-col my-16 mx-12 md:mx-44 md:my-32 md:flex md:justify-between ">
+            {/* head breadcrumble */}
+            <BreadCrumbs crumbs={[{title:'프로그램',link:'/program'}]} />
+
             {/* title */}
             <div className="flex w-full text-center justify-center content-center">
                 <p className="text-3xl font-bold">프로그램</p>
             </div>
 
-            <div className="min-h-[38rem] mt-28">
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div className="group flex flex-col h-full">
-                        <Image className="mt-3 h-40 object-cover" src="/soop-n/1.jpeg" width={345} height={276} alt={"soop-n-dapyo"} />
-                        <div >
-                            <h3 className="mt-3 text-base font-bold ">
-                            숲N멍
-                            </h3>
-                            <p className="mt-3 text-sm"></p>
-                            <p className="mt-3 text-sm">
-                            '숲N멍' 프로그램은 자연 속에서의 진정한 휴식을 즐길 수 있는 네 가지 특별한 경험을 제공합니다.
-                            </p>
-                        </div>
-                        <div className="flex flex-row space-x-3 text-sm font-bold w-full mt-3 cursor-pointer ">
-                            <a href="/program/detail?programId=1">
-                                <p className="bg-point-hover p-2 rounded-lg">상세보기</p>
-                            </a>
-                        </div>
-                    </div>
-                    <div className="group flex flex-col h-full">
-                        <Image className="mt-3 h-40 object-cover" src="/outside/1.jpg" width={345} height={276} alt={"rest-dapyo"} />
-                        <div > 
-                            <h3 className="mt-3 text-base font-bold ">
-                            온전한 쉼
-                            </h3>
-                            <p className="mt-3 text-sm"></p>
-                            <p className="mt-3 text-sm">
-                            온전한 쉼은 바쁜 일상에서 벗어나 완벽한 휴식을 제공하는 프로그램입니다.
-                            </p>
-                        </div>
-                        <div className="flex flex-row space-x-3 text-sm font-bold w-full mt-3 cursor-pointer ">
-                            <a href="/program/detail?programId=2">
-                            <p className="bg-point-hover p-2 rounded-lg">상세보기</p>
-                            </a>
-                        </div>
-                    </div>
+            <div className="min-h-[38rem] mt-14 md:mt-28">
+                <div className="grid sm:grid-cols-1 lg:grid-cols-3 gap-6">
 
+                    { programs.length > 0 && programs.map( (program : Program, index : number) => 
+                        <div key={`sokso-wrapper-${index}`} className="group flex flex-col h-full items-center text-center">
+                            {/* image part */}
+                            <div className="w-80 h-64 border">
+                                <Image  src={"/images/"+program.img}  width={350} height={230} alt={`sokso-main-image-${index}`} style={{width:350, height:230, objectFit:'cover'}} />
+                                <p className="w-full h-8  bg-white flex cursor-pointer" onClick={()=>onClickGoToDetail(program)}>
+                                    <span className="mx-auto pt-2 text-xs">상세보기</span>
+                                </p>
+                            </div>
+                            {/* explanation part */}
+                            <div className="mt-3 w-80 flex flex-col " >
+                                <span className="text-lg">{program.name}</span>
+                                <span className="text-sm mt-1">{program.subName}</span>
+                            </div>
+                        </div>
+                    ) }
                 </div>
             </div>
         </div>
