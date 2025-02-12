@@ -1,13 +1,13 @@
 import { DisabledEditButton, EditButton } from "@/app/_component/Button";
 import Preview from "@/app/_component/Preview";
 import { useEffect, useRef, useState } from "react";
-import { AxiosResponse, HomeSection } from "@/app/_data/Enums";
-import { findDuplicateAfterValues, isStrValid } from "@/app/_lib/Common";
-import { bizService, homeServcie } from "@/app/_service";
+import { AxiosResponse, HomeSection } from "@/lib/enums";
+import { findDuplicateAfterValues, isStrValid } from "@/lib/common";
+import { bizService, homeServcie } from "@/service";
 import { GetHomeData } from "@/app/_api/Home";
-import EditBox from "../_component/EditBox";
+import EditBox from ".@/component/EditBox";
 import { CustomNumberInput, CustomTextInput } from "@/app/_component/CustomInput";
-import { getQnaList } from "@/app/_service/qnaService";
+import { getQnaList } from "@/service/qnaService";
 import { FilledBadge, OutlineBadge } from "@/app/_component/Badge";
 import { DeleteQnaData, EditSortOrder, InsertQnaData, UpdateQna } from "@/app/_api/Qna";
 import { EditBiz, GetKakao } from "@/app/_api/Biz";

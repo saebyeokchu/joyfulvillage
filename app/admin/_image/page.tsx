@@ -1,9 +1,9 @@
-import { ImageArchive } from "@/app/_data/Types";
-import { imageArchiveService } from "@/app/_service";
+import { ImageArchive } from "@/types/Types";
+import { imageArchiveService } from "@/service";
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import { EditButton } from "@/app/_component/Button";
-import { GeneralError } from "@/app/_data/Messages";
+import { GeneralError } from "@/lib/messages";
 import AddNewImage from "./AddNewImage";
 
 

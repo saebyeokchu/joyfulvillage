@@ -4,12 +4,12 @@ import Image from "next/image"
 import { useEffect, useState } from "react";
 
 import { useRouter } from "next/navigation";
-import BreadCrumbs from "../_component/BreadCrumbs";
-import { cafeService, soksoService } from "../_service";
-import { Cafe } from "../_data/Types";
+import BreadCrumbs from ".@/component/BreadCrumbs";
+import { cafeService, soksoService } from "../../service";
+import { Cafe } from "../../types/Types";
 import MobileSlider from "../sokso/[parent]/[detailId]/MobileSlider";
-import { CafeSection } from "../_data/Enums";
-import { StringDivider } from "../_data/Const";
+import { CafeSection } from "../../lib/enums";
+import { StringDivider } from "../../lib/const";
 
 // 숙소전체보기
 export default function CafePage(){

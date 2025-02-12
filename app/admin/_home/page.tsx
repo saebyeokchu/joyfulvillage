@@ -2,17 +2,17 @@ import { EditButton } from "@/app/_component/Button";
 import { CustomTextInput, FileInput } from "@/app/_component/CustomInput";
 import Preview from "@/app/_component/Preview";
 import { useEffect, useRef, useState } from "react";
-import EditBox from "../_component/EditBox";
-import { AxiosResponse, HomeSection } from "@/app/_data/Enums";
-import { isStrValid } from "@/app/_lib/Common";
-import { homeServcie, programService } from "@/app/_service";
+import EditBox from ".@/component/EditBox";
+import { AxiosResponse, HomeSection } from "@/lib/enums";
+import { isStrValid } from "@/lib/common";
+import { homeServcie, programService } from "@/service";
 import { FilledBadge, OutlineBadge } from "@/app/_component/Badge";
 import { GetHomeData } from "@/app/_api/Home";
-import {  HomeSpaceBookImgSrc, HomeSpaceCafeImgSrc, HomeSpaceSoopImgSrc } from "@/app/_data/Const";
+import {  HomeSpaceBookImgSrc, HomeSpaceCafeImgSrc, HomeSpaceSoopImgSrc } from "@/lib/const";
 import { useJoyfulContext } from "@/app/_context/JoyfulContext";
-import { GeneralError } from "@/app/_data/Messages";
-import Wysiwyg from "../_component/Wysiwyg";
-import MainImgSection from "./_component/mainImgSection";
+import { GeneralError } from "@/lib/messages";
+import Wysiwyg from ".@/component/Wysiwyg";
+import MainImgSection from "@/component/mainImgSection";
 
 export default function EditHome(){
 

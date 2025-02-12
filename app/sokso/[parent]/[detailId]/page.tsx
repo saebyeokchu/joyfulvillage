@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import Image from 'next/image'
 
 import { useSoksoContext } from "@/app/_context/SoksoContext";
-import { Sokso, SoksoDetail } from "@/app/_data/Types";
+import { Sokso, SoksoDetail } from "@/types/Types";
 import { BreadCrumbs } from "@/app/_component";
-import { GeneralError } from "@/app/_data/Messages";
-import { OpenWindow } from "@/app/_lib/Common";
+import { GeneralError } from "@/lib/messages";
+import { OpenWindow } from "@/lib/common";
 import MobileSlider from "./MobileSlider";
 
 export default function SoksoDetailPage() {

@@ -3,13 +3,9 @@
 import { useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation'
 
-import { useJoyfulContext } from './_context/JoyfulContext';
-
-import {
-  Footer,
-  Header
- } from "./_component";
-import { AdminCode } from './_data/Const';
+import { AdminCode } from '../lib/const';
+import Header from '@/components/layout/Header';
+import { useJoyfulContext } from '@/context/JoyfulContext';
 
 export default function Middle({
     children,
@@ -44,14 +40,14 @@ export default function Middle({
           {/* <Announcement /> */}
           { !pathName.includes('admin') && 
             <div className="container flex justify-self-center">
-              <Header/>
+              <Header />
             </div>
           }
           {children}
-          { !pathName.includes('admin') && 
+          {/* { !pathName.includes('admin') && 
             <div className="container flex justify-self-center">
               <Footer/>
-            </div>  }
+            </div>  } */}
         </div>
     )
 }

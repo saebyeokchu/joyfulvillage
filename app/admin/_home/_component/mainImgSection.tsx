@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { FilledBadge } from "@/app/_component";
-import { EditBox, ImageLibraryModal } from "../../_component";
+import { EditBox, ImageLibraryModal } from "../.@/component";
 
 export default function MainImgSection(){
     const mainImgRef = useRef<any>();

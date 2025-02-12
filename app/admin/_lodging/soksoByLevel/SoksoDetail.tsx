@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-// import Wysiwyg from "../_component/Wysiwyg";
+// import Wysiwyg from ".@/component/Wysiwyg";
 import dynamic from "next/dynamic";
-import ImageLibraryModal from "../../_component/ImageLibraryModal";
-import { Sokso, SoksoDetail } from "@/app/_data/Types";
-import { soksoService } from "@/app/_service";
+import ImageLibraryModal from "../.@/component/ImageLibraryModal";
+import { Sokso, SoksoDetail } from "@/types/Types";
+import { soksoService } from "@/service";
 import { CustomTextInput, EditButton, FilledBadge, OutlineBadge } from "@/app/_component";
 import { usePathname, useSearchParams } from "next/navigation";
-const Wysiwyg = dynamic(() => import("../../_component/Wysiwyg"), { ssr: false });
+const Wysiwyg = dynamic(() => import("../.@/component/Wysiwyg"), { ssr: false });
 
 export default function UpsertSoksoDetailPage({
 } : {

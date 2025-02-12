@@ -1,4 +1,4 @@
-import Ready from "../_component/Ready";
+import Ready from ".@/component/Ready";
 
 export default function Booking(){
     return (

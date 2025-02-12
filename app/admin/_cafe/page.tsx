@@ -1,15 +1,15 @@
 "use client"
 
 import { CustomTextInput, EditButton, FileInput, FilledBadge, OutlineBadge } from "@/app/_component";
-import { CafeSection, HomeSection } from "@/app/_data/Enums";
+import { CafeSection, HomeSection } from "@/lib/enums";
 import { useEffect, useRef, useState } from "react";
-import EditBox from "../_component/EditBox";
-import { cafeService } from "@/app/_service";
-import { Cafe } from "@/app/_data/Types";
-import ManageMainImg from "./_component/ManageMainImg";
-import ManageMenus from "./_component/ManageMenus";
-import { GeneralError } from "@/app/_data/Messages";
-import ManageSpecials from "./_component/ManageSpecials";
+import EditBox from ".@/component/EditBox";
+import { cafeService } from "@/service";
+import { Cafe } from "@/types/Types";
+import ManageMainImg from "@/component/ManageMainImg";
+import ManageMenus from "@/component/ManageMenus";
+import { GeneralError } from "@/lib/messages";
+import ManageSpecials from "@/component/ManageSpecials";
 
 export default function ManageCafe(){
     const [ selectedSection, setSelectedSection ]= useState<CafeSection>(CafeSection.subTitle);

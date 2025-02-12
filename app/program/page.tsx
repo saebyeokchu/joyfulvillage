@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image"
 
-import { BreadCrumbs } from "../_component";
-import { Program } from "../_data/Types";
-import { programService } from "../_service";
-import { useProgramContext } from "../_context/ProgramContext";
+import { Program } from "../../types/Types";
+import { programService } from "../../service";
+import { BreadCrumbs } from "@/components/ui";
+import { useProgramContext } from "@/context/ProgramContext";
 
 // 숙소전체보기
 export default function ProgramPage(){

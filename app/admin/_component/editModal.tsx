@@ -1,10 +1,10 @@
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { FatButton } from "../../_component/Button";
+import { FatButton } from "../.@/component/Button";
 import { useJoyfulContext } from "../../_context/JoyfulContext";
 import { UploadImageWithDeletion } from "../../_api/File";
-import { EditOption, HomeSection } from "../../_data/Const";
+import { EditOption, HomeSection } from "../../../lib/const";
 
 import { UpdateHomeData } from "../../_api/Home";
 import dynamic from "next/dynamic";

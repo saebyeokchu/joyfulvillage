@@ -1,23 +1,23 @@
 "use client"
 import { useEffect, useState } from "react";
-import { useJoyfulContext } from "../_context/JoyfulContext";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useJoyfulContext } from "@/context/JoyfulContext";
 
-import { AdminCode } from "../_data/Const";
-import { AuthError } from "../_data/Messages";
+import { AdminCode } from "../../lib/const";
+import { AuthError } from "../../lib/messages";
 import { 
     DimBackground,
     Notice
-} from "../_component/";
+} from "@/components/ui";
 
 import ManageLoading from "./_lodging/page";
-import Sidebar from "./_component/Sidebar";
 import EditHome from "./_home/page"; 
 import ManageInquiry from "./_inquiry/ManageInquiry";
 import ManageImage from "./_image/page";
 import ManageCafe from "./_cafe/page";
 import ManageProgram from "./_program/page";
 import ManageBusniess from "./_busniess/page";
+import Sidebar from "./_component/Sidebar";
 
 export default function Admin(){
 

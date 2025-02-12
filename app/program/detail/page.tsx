@@ -4,7 +4,7 @@ import DOMPurify from 'dompurify';
 import { useParams, useSearchParams  } from "next/navigation";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { useProgramContext } from "@/app/_context/ProgramContext";
-import { Program } from "@/app/_data/Types";
+import { Program } from "@/types/Types";
 import { BreadCrumbs } from "@/app/_component";
 
 interface Props {

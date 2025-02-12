@@ -1,8 +1,8 @@
 import { EditButton } from "@/app/_component/Button";
 import { CustomTextInput } from "@/app/_component/CustomInput";
-import { programService } from "@/app/_service";
+import { programService } from "@/service";
 import { useEffect, useState } from "react";
-import Wysiwyg from "../_component/Wysiwyg";
+import Wysiwyg from ".@/component/Wysiwyg";
 
 
 export default function AddProgram(){

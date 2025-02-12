@@ -1,14 +1,12 @@
-import { EditButton } from "@/app/_component/Button";
-import { CustomTextInput, FileInput } from "@/app/_component/CustomInput";
-import { programService } from "@/app/_service";
 import { useEffect, useState } from "react";
-import Wysiwyg from "../../_component/Wysiwyg";
-import ImageLibraryModal from "../../_component/ImageLibraryModal";
-import { Program } from "@/app/_data/Types";
-import { isStrValid } from "@/app/_lib/Common";
+import { Program } from "@/types/Types";
+import { isStrValid } from "@/lib/common";
 import { ProgramClass } from "@/app/_data/_class/ProgramClass";
-import { FilledBadge } from "@/app/_component";
-import { GeneralError } from "@/app/_data/Messages";
+import { GeneralError } from "@/lib/messages";
+import { programService } from "@/service";
+import { CustomTextInput, EditButton, FilledBadge } from "@/components/ui";
+import Wysiwyg from "../../_component/Wysiwyg";
+import { ImageLibraryModal } from "../../_component";
 
 
 export default function UpsertProgram({

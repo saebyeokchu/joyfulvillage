@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from "react"
 import { GetQnaData } from "../_api/Qna";
-import { AxiosResponse } from "../_data/Enums";
+import { AxiosResponse } from "../../lib/enums";
 import { GetKakao } from "../_api/Biz";
 
 declare global {

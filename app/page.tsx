@@ -1,10 +1,15 @@
 "use client"
 
-import { useEffect, useState } from "react";
-import { useJoyfulContext } from "./_context/JoyfulContext";
+import { useEffect, useRef, useState } from "react";
 import { GetHomeData } from "./_api/Home";
-import { GetHomeintrodcutionContent, GetHomeMainImgContent, GetHomeSpaceContent } from "./_service/homeService";
-import { mobilePx } from "./_data/Const";
+import { GetHomeintrodcutionContent, GetHomeMainImgContent, GetHomeSpaceContent } from "../service/homeService";
+import { useJoyfulContext } from "@/context/JoyfulContext";
+
+const images = [
+    "/system/home/mainImg.jpg",
+    "/images/2025_01_31_17_56_28.jpg",
+    "/images/2025_01_31_18_55_13.jpg",
+  ];
 
 export default function Home(){
 
@@ -13,8 +18,12 @@ export default function Home(){
     const [ introdcutionContent, setIntrodcutionContent ] = useState<string>("");
     const [ spaceContents, setSpaceContents ] = useState<[string,string,string]>(["","",""]);
 
+    const [index, setIndex] = useState(1); // Start at the first real slide
+    const [fade, setFade] = useState(false);
+    const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
+        setAutoPlay();
         const homeDataUpdated : string | null =  localStorage.getItem("joyfulhomedataupdated");
         //update when page reloaded
         if(true){
@@ -28,105 +37,64 @@ export default function Home(){
         }
     }, [])
 
+    const setAutoPlay = () => {
+        intervalRef.current = setInterval(handleNext, 6000); // Auto-slide every 3 seconds
+        return () => clearInterval(intervalRef.current!); // Cleanup on unmount
+    }
+
+
+    // Handle next image with fade effect
+    const handleNext = () => {
+        setFade(true);
+        setTimeout(() => {
+        setIndex((prevIndex) => (prevIndex + 1) % images.length);
+        setFade(false);
+        }, 500); // Halfway fade duration
+    };
+
+    // Handle previous image with fade effect
+    const handlePrev = () => {
+        setFade(true);
+        setTimeout(() => {
+        setIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+        setFade(false);
+        }, 500);
+    };
+
 
     return (
-        <div className="flex flex-col bg-point pb-16  border border-red-700 w-full" >
-            {/* <EditModal /> */}
+        <div className="flex flex-col bg-point border border-red-700 w-full overflow-y-hidden overflow-hidden h-screen" >
 
-            {/* main image */}
-            <div className="relative mt-3">
-                <img src="/system/home/mainImg.jpg" alt={""} className="w-full object-cover md:h-screen " />
+            {/* main image*/}
+            <div className="absolute inset-0 flex items-center justify-center">
+                {images.map((src, i) => (
+                <img
+                    key={i}
+                    src={src}
+                    alt=""
+                    className={`absolute w-full h-full object-cover transition-opacity ease-in-out duration-1000 ${
+                    i === index ? "opacity-100" : "opacity-0"
+                    }`}
+                />
+                ))}
             </div>
+            
 
-            {/* main image text */}
-            {/* <div className={`container flex justify-self-center border border-slate-700 ${mobilePx} w-screen`}> */}
-            <div className={`border flex justify-center border-slate-700 w-full`}>
-                <div className={`container border border-red-700 ${mobilePx} text-center mt-24 text-sm md:text-xl md:mt-32`}>
-                    <div
-                        dangerouslySetInnerHTML={{ __html: introdcutionContent }}
-                    />
-                {/* <div className="flex justify-center items-center text-center joyful-text-black mt-16 text-sm md:text-xl md:mt-32">
-                    <div
-                        dangerouslySetInnerHTML={{ __html: introdcutionContent }}
-                    />
-                </div> */}
-                </div>
-            </div>
+            <button
+                className="absolute left-4 top-1/2 -translate-y-1/2  text-white p-3 rounded-full text-3xl"
+                onClick={handlePrev}
+            >
+                ❮
+            </button>
 
-            {/* introduction */}
-            <div className={`border flex justify-center border-slate-700 w-full`}>
-                <div className={`container border border-red-700 ${mobilePx} text-center mt-24 text-sm md:text-xl md:mt-32`}>
-                    <img 
-                        src='/system/home/introduction.jpg' 
-                        alt={""} 
-                        className={`w-full h-auto text-sm `}
-                        // style={{minWidth:'1071px',minHeight:'388px'}}
-                    />
-                </div>
-            </div>
+            {/* Right Arrow */}
+            <button
+                className="absolute right-4 top-1/2 -translate-y-1/2  text-white p-3 rounded-full text-3xl"
+                onClick={handleNext}
+            >
+                ❯
+            </button>
 
-            {/* spaces */}
-            <div className={`border flex justify-center border-slate-700 w-full`}>
-                <div className={`container border border-red-700 ${mobilePx} text-center mt-24 text-sm md:text-xl md:mt-32`}>
-                    <div className="flex flex-col space-y-3">
-                        {/* 숲스테이도천 */}
-                        <div className="grid grid-cols-1 gap-5 md:grid-cols-12">
-                            <div className="col-span-1 md:col-span-8">
-                                <img src='/system/home/spacesoop.jpg' alt={""} className="object-cover w-full h-48 md:h-96"/>
-                            </div>
-                            <div className="col-span-1 md:col-span-4 joyful-text-black">
-                                <p className="text-2xl md:mt-16 font-bold">숲스테이도천</p>
-                                {/* {spaceContents[0]} */}
-                                <div className="mt-3 md:mt-6" style={{lineHeight:'28px'}} dangerouslySetInnerHTML={{ __html: spaceContents[0] }}>
-                                    {/* '숲스테이 도천'은 조이풀 빌리지 건너편 도천숲에 위치해 있으며 자연 속에서 깊은 휴식을 취할 수 있는 숙소입니다.
-                                    <br />
-                                    숲의 고요함과 맑은 공기를 느끼며, 일상에서 벗어나 완전한 휴식을 경험할 수 있습니다. */}
-                                    
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="grid grid-cols-1 gap-5 pt-24 md:pt-0 md:grid-cols-12">
-                            <div className="col-span-1 md:col-span-8">
-                                <img src='/system/home/spacebook.jpg' alt={""} className="object-cover w-full h-48 md:h-96"/>
-                            </div>
-                            <div className="col-span-1 md:col-span-4 joyful-text-black">
-                                <p className="text-2xl md:mt-16 font-bold">북스테이도천</p>
-                                {/* {spaceContents[0]} */}
-                                <div className="mt-3 md:mt-6" style={{lineHeight:'28px'}} dangerouslySetInnerHTML={{ __html: spaceContents[1] }}>
-                                    {/* '북스테이 도천'은 조이풀빌리지 1층에 위치해있으며 미디어를 잠시 멀리하며 책을 읽고 휴식을 즐길 수 있는 공간입니다.
-                                    <br />
-                                    자연과 책이 조화를 이루는 이곳에서 마음의 평온을 찾고, 독서의 즐거움을 만끽할 수 있습니다. */}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="grid grid-cols-1 gap-5 pt-24 md:pt-0 md:grid-cols-12">
-                            <div className="col-span-1 md:col-span-8">
-                                <img src='/system/home/spacecafe.jpg' alt={""} className="object-cover w-full h-48 md:h-96"/>
-                            </div>
-                            <div className="col-span-1 md:col-span-4 joyful-text-black">
-                                <p className="text-2xl md:mt-16 font-bold">카페도천</p>
-                                {/* {spaceContents[0]} */}
-                                <div className="mt-3 md:mt-6" style={{lineHeight:'28px'}} dangerouslySetInnerHTML={{ __html: spaceContents[2] }}>
-                                {/* '카페 도천'은 조이풀빌리지 2층에 위치하여 산과 들의 아름다운 풍경을 바라보며 차와 브런치를 즐길 수 있는 공간입니다. */}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* 
-                    <div className="mb-24 lg:mb-80">
-                        <p className="font-bold">'카페도천'</p>
-                        <div className="relative">
-                            <img src='/system/home/spacecafe.jpg' alt={""} className="h-auto max-w-full pt-7" />
-                        </div>
-                        <div className="pt-6 text-sm relative">
-                            {spaceContents[2]}
-                        </div>
-                    </div> */}
-                </div>
-            </div>
         </div>  
     )
 }

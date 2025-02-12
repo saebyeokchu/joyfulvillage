@@ -1,12 +1,12 @@
 import { CustomTextInput, EditButton } from "@/app/_component";
-import { CafeSection } from "@/app/_data/Enums";
-import { Cafe } from "@/app/_data/Types";
-import { cafeService, imageArchiveService } from "@/app/_service";
+import { CafeSection } from "@/lib/enums";
+import { Cafe } from "@/types/Types";
+import { cafeService, imageArchiveService } from "@/service";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import ImageLibraryModal from "../../_component/ImageLibraryModal";
-import { GeneralError } from "@/app/_data/Messages";
-import EditBox from "../../_component/EditBox";
+import ImageLibraryModal from "../.@/component/ImageLibraryModal";
+import { GeneralError } from "@/lib/messages";
+import EditBox from "../.@/component/EditBox";
 import { CustomTextArea } from "@/app/_component/CustomInput";
 
 export default function ManageMenus({

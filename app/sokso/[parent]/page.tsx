@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image"
 
-import { Sokso, SoksoDetail } from "@/app/_data/Types";
-import { commonService, soksoService } from "@/app/_service";
+import { Sokso, SoksoDetail } from "@/types/Types";
+import { commonService, soksoService } from "@/service";
 import { BreadCrumbs, OutlineBadge, OutlineBadgeGreen } from "@/app/_component";
 import { useSoksoContext } from "@/app/_context/SoksoContext";
-import { SoksoError } from "@/app/_data/Messages";
+import { SoksoError } from "@/lib/messages";
 
 const DefaultOption = ( { name, onClickFunction } : { name : string, onClickFunction : any } ) => 
 <div onClick={onClickFunction} className="flex justify-center text-green bg-white w-32 h-8 pt-1 cursor-pointer">

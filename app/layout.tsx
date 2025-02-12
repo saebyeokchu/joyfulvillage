@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import "./_css/slide.css";
+import "/css/slide.css";
 
-import PrelineScript from "./_component/PrelineScript";
-import ContextProviders from "./_context/ContextProviders";
 import Middle from "./middle";
+import PrelineScript from "@/components/PrelineScript";
+import ContextProviders from "@/context/ContextProviders";
 
 const maruburis = localFont({
   src: [

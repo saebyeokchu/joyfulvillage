@@ -1,11 +1,11 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react"
 
-import { Program } from "@/app/_data/Types";
-import { programService } from "@/app/_service";
+import { Program } from "@/types/Types";
+import { programService } from "@/service";
 import { EditButton } from "@/app/_component";
-import ListProgram from "./_component/List";
-import UpsertProgram from "./_component/Upsert";
+import ListProgram from "@/component/List";
+import UpsertProgram from "@/component/Upsert";
 import { ProgramClass } from "@/app/_data/_class/ProgramClass";
 
 

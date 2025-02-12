@@ -1,8 +1,8 @@
 import { EditButton } from "@/app/_component/Button"
 import { FileInput } from "@/app/_component/CustomInput";
 import { SoksoClass } from "@/app/_data/_class/SoksoClass";
-import { ImageArchive } from "@/app/_data/Types";
-import { imageArchiveService, soksoService } from "@/app/_service"
+import { ImageArchive } from "@/types/Types";
+import { imageArchiveService, soksoService } from "@/service"
 import { useRef } from "react";
 
 export default function AddNewImage({ 

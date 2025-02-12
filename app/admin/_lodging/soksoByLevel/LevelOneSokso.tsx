@@ -5,9 +5,9 @@ import { EditButton } from "@/app/_component/Button"
 import {
     UpsertSokso
 } from "../action";
-import { soksoService } from "@/app/_service";
-import { Sokso } from "@/app/_data/Types";
-import { GeneralError } from "@/app/_data/Messages";
+import { soksoService } from "@/service";
+import { Sokso } from "@/types/Types";
+import { GeneralError } from "@/lib/messages";
 
 export default function LevelOneSokso({
 } : {

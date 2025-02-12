@@ -2,10 +2,10 @@ import { useEffect, useRef } from "react";
 import Image from "next/image"
 
 import { getCurrentTimestamp } from "@/app/_api/Common";
-import { GeneralError } from "@/app/_data/Messages";
+import { GeneralError } from "@/lib/messages";
 import { SoksoClass } from "@/app/_data/_class/SoksoClass";
-import { Sokso } from "@/app/_data/Types";
-import { imageArchiveService, soksoService } from "@/app/_service"
+import { Sokso } from "@/types/Types";
+import { imageArchiveService, soksoService } from "@/service"
 import { EditButton, FileInput } from "@/app/_component";
 
 export default function UpsertSokso({ 

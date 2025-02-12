@@ -1,10 +1,10 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react"
 
-import { Program } from "@/app/_data/Types";
-import { programService } from "@/app/_service";
+import { Program } from "@/types/Types";
+import { programService } from "@/service";
 import { EditButton } from "@/app/_component";
-import { GeneralError } from "@/app/_data/Messages";
+import { GeneralError } from "@/lib/messages";
 
 
 export default function ListProgram({

@@ -1,4 +1,4 @@
-import BlockedPage from "../_component/BlockedPage";
+import BlockedPage from ".@/component/BlockedPage";
 
 export default function Login() {
     return (
