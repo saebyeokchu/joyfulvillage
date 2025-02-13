@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+### Jovil.com
 
-## Getting Started
+Welcome to Jovil.com, an innovative web service designed to provide [briefly describe your service, e.g., seamless online shopping, expert consultation, community engagement, etc.].
 
-First, run the development server:
+## 🚀 About Jovil.com
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Jovil.com is a real-time hotel service built to effectively managing the hotel and promoting itself to customer. Whether you're looking for real-time reservation or customizable features, Jovil.com offers a seamless experience tailored to your needs.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# 🌟 Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Responsive Design: Optimized for various devices, ensuring a seamless experience on desktops, tablets, and smartphones.
+Real-time Notifications: Keep users informed with instant updates and alerts.
+Interactive User Interface: Engaging and intuitive UI components for enhanced user interaction.
+Data Visualization: Comprehensive charts and graphs to represent data insights effectively.
 
-This project uses [`next/_font`](https://nextjs.org/docs/app/building-your-application/optimizing/_fonts) to automatically optimize and load [Geist](https://vercel.com/_font), a new font family for Vercel.
+## 📌 Technologies Used
 
-## Learn More
+Jovil.com is powered by:
 
-To learn more about Next.js, take a look at the following resources:
+Frontend: Next.js
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Backend:  Django
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Database: PostgreSQL
 
-## Deploy on Vercel
+Hosting: AWS, Docker
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📬 Contact & Support
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+For any inquiries or support, feel free to reach out:
+
+🌐 Website: https://jovil.com
+
+📧 Email: cuu2252@gmail.com
+
+## 📜 License
+
+This project is licensed under the MIT License.
+
+Feel free to contribute, raise issues, or provide feedback! 🎉
