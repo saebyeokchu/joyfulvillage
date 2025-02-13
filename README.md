@@ -1,4 +1,4 @@
-### Jovil.com
+# Jovil.com
 
 Welcome to Jovil.com, an innovative web service designed to provide [briefly describe your service, e.g., seamless online shopping, expert consultation, community engagement, etc.].
 
@@ -6,12 +6,12 @@ Welcome to Jovil.com, an innovative web service designed to provide [briefly des
 
 Jovil.com is a real-time hotel service built to effectively managing the hotel and promoting itself to customer. Whether you're looking for real-time reservation or customizable features, Jovil.com offers a seamless experience tailored to your needs.
 
-# 🌟 Features
+### 🌟 Features
 
-Responsive Design: Optimized for various devices, ensuring a seamless experience on desktops, tablets, and smartphones.
-Real-time Notifications: Keep users informed with instant updates and alerts.
-Interactive User Interface: Engaging and intuitive UI components for enhanced user interaction.
-Data Visualization: Comprehensive charts and graphs to represent data insights effectively.
+- Responsive Design: Optimized for various devices, ensuring a seamless experience on desktops, tablets, and smartphones.
+- Real-time Notifications: Keep users informed with instant updates and alerts.
+- Interactive User Interface: Engaging and intuitive UI components for enhanced user interaction.
+- Data Visualization: Comprehensive charts and graphs to represent data insights effectively.
 
 ## 📌 Technologies Used
 
