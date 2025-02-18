@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react"
 import { AxiosResponse } from "../../lib/enums";
 import { GetQnaData } from "@/lib/api/Qna";
+import { StayHeader } from "../stay/component";
 
 declare global {
     interface Window {
@@ -85,55 +86,99 @@ export default function Inquiry(){
     
 
     return(
-        <div className="bg-point text-point">
-            <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-                <div className="flex-col flex">
+        // <div className="bg-point text-point">
+        //     <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+        //         <div className="flex-col flex">
 
-                    <div className="h-min-[64px] mt-8  mx-12 md:mt-16 md:mx-28">
+        //             <div className="h-min-[64px] mt-8  mx-12 md:mt-16 md:mx-28">
+        //                 <h2 className="text-xl font-bold md:text-4xl md:leading-tight ">오시는 길</h2>
+        //                 <span className={`block text-sm mt-4 md:text-base`}>
+        //                     {addressText}</span>
+        //                 <div id="map" className="border-point mt-3" style={{ width: "100%", height: "400px" }}>Kakao Map</div>
+        //             </div>
+
+        //             <div className=" mt-16  mx-12 md:mx-28">
+        //                 <div className="flex flex-col">
+        //                     <h2 className="text-xl font-bold md:text-4xl md:leading-tight ">자주 묻는 질문</h2>
+        //                     <div >
+        //                         {
+        //                             // transition-all duration-500 ease-in-out
+        //                             qnaList.map((qna : any, index : number) => {
+        //                                 return(
+        //                                     <div key={index} className="flex flex-col my-5 py-5 border-b border-b-gray-300 space-y-3">
+        //                                         <div
+        //                                             className="text-lg font-bold flex flex-row justify-between cursor-pointer"
+        //                                             onClick={() => onClickQuestion(index)}
+        //                                         > 
+        //                                             <div>Q. {qna.question}</div>
+        //                                             <div>{openAnswerDiv[index] ? "-" : "+"}</div>
+        //                                         </div>
+        //                                         <div
+        //                                             className={`overflow-hidden  ${
+        //                                             openAnswerDiv[index] ? "max-h-96" : "max-h-0"
+        //                                             }`}
+        //                                         >
+        //                                             <div className="pt-2">A. {qna.answer}</div>
+        //                                         </div>
+        //                                     </div>
+        //                                 )
+        //                             })
+        //                         }
+                                
+        //                     </div>
+        //                 </div>
+        //             </div>
+
+        //             <div className="my-16  mx-12 md:mx-28" >
+        //                 <p className="font-bold pt-5">다른 궁금증이 있으신가요?</p>
+        //                 <p className="mt-3">010-6513-8461 여기로 문의주시면 친절히 안내드리겠습니다.</p>
+        //             </div>
+        //         </div>
+        //     </div>
+        // </div>
+        <div className="border border-red-700" >
+            {/* Header */}
+            <StayHeader src={"/images/outside/5.jpg"} title={"문의사항"} subTitle={""} alt={"inquiry-header"} />
+
+            {/* inquiry list */}
+            <div className="max-w-[85rem] py-10 px-8 md:mx-auto w-full border border-purple-500 gap-16 md:gap-12 md:min-h-lvh flex flex-col justify-center items-center text-center">
+                <div className="w-full md:w-[810px] flex flex-col border border-red-500">
+                    <h2 className="text-xl font-bold md:text-4xl md:leading-tight ">자주 묻는 질문</h2>
+                    <div >
+                            {
+                            // transition-all duration-500 ease-in-out
+                            qnaList.map((qna : any, index : number) => {
+                                return(
+                                    <div key={index} className="flex flex-col my-5 py-5 border-b border-b-gray-300 space-y-3">
+                                        <div
+                                            className="text-lg font-bold flex flex-row justify-between cursor-pointer"
+                                            onClick={() => onClickQuestion(index)}
+                                        > 
+                                            <div>Q. {qna.question}</div>
+                                            <div>{openAnswerDiv[index] ? "-" : "+"}</div>
+                                        </div>
+                                        <div
+                                            className={`flex text-start overflow-hidden  ${
+                                            openAnswerDiv[index] ? "max-h-96" : "max-h-0"
+                                            }`}
+                                        >
+                                            <div className="pt-2">A. {qna.answer}</div>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
+                        
+                    </div>
+                </div>
+
+                <div className="w-full md:w-[810px] h-min-[64px] ">
                         <h2 className="text-xl font-bold md:text-4xl md:leading-tight ">오시는 길</h2>
                         <span className={`block text-sm mt-4 md:text-base`}>
                             {addressText}</span>
-                        <div id="map" className="border-point mt-3" style={{ width: "100%", height: "400px" }}>Kakao Map</div>
-                    </div>
-
-                    <div className=" mt-16  mx-12 md:mx-28">
-                        <div className="flex flex-col">
-                            <h2 className="text-xl font-bold md:text-4xl md:leading-tight ">자주 묻는 질문</h2>
-                            <div >
-                                {
-                                    // transition-all duration-500 ease-in-out
-                                    qnaList.map((qna : any, index : number) => {
-                                        return(
-                                            <div key={index} className="flex flex-col my-5 py-5 border-b border-b-gray-300 space-y-3">
-                                                <div
-                                                    className="text-lg font-bold flex flex-row justify-between cursor-pointer"
-                                                    onClick={() => onClickQuestion(index)}
-                                                > 
-                                                    <div>Q. {qna.question}</div>
-                                                    <div>{openAnswerDiv[index] ? "-" : "+"}</div>
-                                                </div>
-                                                <div
-                                                    className={`overflow-hidden  ${
-                                                    openAnswerDiv[index] ? "max-h-96" : "max-h-0"
-                                                    }`}
-                                                >
-                                                    <div className="pt-2">A. {qna.answer}</div>
-                                                </div>
-                                            </div>
-                                        )
-                                    })
-                                }
-                                
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="my-16  mx-12 md:mx-28" >
-                        <p className="font-bold pt-5">다른 궁금증이 있으신가요?</p>
-                        <p className="mt-3">010-6513-8461 여기로 문의주시면 친절히 안내드리겠습니다.</p>
-                    </div>
+                       <div id="map" className="border-point mt-3" style={{ width: "100%", height: "400px" }}>Kakao Map</div>
+                   </div>
                 </div>
-            </div>
         </div>
     )
 }

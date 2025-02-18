@@ -1,7 +1,7 @@
-import Ready from ".@/component/Ready";
+import { Comming } from "@/components/layout";
 
 export default function Booking(){
     return (
-        <Ready readyTitle={"실시간 예약기능"} />
+        <Comming />
     )
 }

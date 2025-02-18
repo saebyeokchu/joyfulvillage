@@ -12,7 +12,7 @@ const AboutContainer = ({
     address : string,
     description : string,
     instagramId : string
-}) => <div className='flex flex-row justify-center border border-red-700 pb-3 space-x-3'>
+}) => <div className='flex flex-col lg:flex-row justify-center border border-red-700 p-5 space-y-3 md:space-x-3 md:pb-3 ' >
     <Image src={`/images/${imgSrc}`} alt="about-soop" layout="intrinsic" width={992} height={334} style={{maxHeight:"600px", objectFit:"cover"}} />
     <div className='flex flex-col justify-between'>
         <div>
@@ -22,7 +22,7 @@ const AboutContainer = ({
             </div>
         </div>
 
-        <div className='flex flex-row space-x-3'>
+        <div className='flex flex-row space-x-3 mt-3 lg:mt-0'>
             <div className="w-4 h-4">
                 <a className="inline-flex cursor-pointer justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-point-hover focus:outline-none focus:bg-point-darker disabled:opacity-50 disabled:pointer-events-none" >
                     <svg className="shrink-0 size-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -38,8 +38,10 @@ const AboutContainer = ({
 
 const About = () => {
     return(
-        <div className="flex flex-col py-14 border border-red-700 mt-44 space-y-32" style={{color:"#4B5A62"}}>
-            <div className='flex flex-row justify-center border border-red-700 pb-3 space-x-3'>
+        <div className="max-w-[85rem] mx-auto flex flex-col py-14 border border-red-700 mt-20 lg:mt-44 space-y-32" style={{color:"#4B5A62"}}>
+
+            {/* Header Container */}
+            <div className='flex flex-col lg:flex-row justify-center border border-red-700 space-y-3 md:space-x-3 space-x-3 p-5 md:pb-3'>
                 <Image src="/images/illustrator.png" alt="about-illustrator" layout="intrinsic" width={992} height={334} objectFit="cover" />
                 <div className='flex flex-col justify-between '>
                     <div>
@@ -53,7 +55,7 @@ const About = () => {
                         </p>
                     </div>
 
-                    <div className='flex flex-row space-x-3'>
+                    <div className='flex flex-row space-x-3 mt-3 lg:mt-0'>
                         <div className="w-4 h-4">
                             <a className="inline-flex cursor-pointer justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-point-hover focus:outline-none focus:bg-point-darker disabled:opacity-50 disabled:pointer-events-none" >
                                 <svg className="shrink-0 size-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">

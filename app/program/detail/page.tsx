@@ -3,9 +3,9 @@ import DOMPurify from 'dompurify';
 
 import { useParams, useSearchParams  } from "next/navigation";
 import { Suspense, useEffect, useRef, useState } from "react";
-import { useProgramContext } from "@/app/_context/ProgramContext";
 import { Program } from "@/types/Types";
-import { BreadCrumbs } from "@/app/_component";
+import { useProgramContext } from '@/context/ProgramContext';
+import { BreadCrumbs } from '@/components/ui';
 
 interface Props {
     htmlString: string;
@@ -57,7 +57,7 @@ function DetailContent() {
   
       return(
         info && 
-          <div className="relative flex flex-col my-16 mx-12 md:mx-44 md:my-32 md:flex md:justify-between ">
+          <div className="relative flex flex-col my-16 mx-12 md:mx-44 md:my-48 md:flex md:justify-between ">
               {/* head breadcrumble */}
               <BreadCrumbs crumbs={[{title:'프로그램',link:'/program'}, {title:info.name,link:'/program'}]} />
   

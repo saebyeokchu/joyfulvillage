@@ -1,3 +1,5 @@
+import { clsx } from 'clsx';
+
 function FatButton({
     onClickFunction,
     btnName
@@ -49,8 +51,24 @@ function DisabledEditButton({
     )
 }
 
+const GrayRoundButton = ({
+    onClickFunction,
+    btnName,
+    className,
+} : {
+    onClickFunction? : any,
+    btnName : string,
+    className? : string,
+}) => <button 
+    onClick={onClickFunction} 
+    style={{backgroundColor : '#F2F2F2'}} 
+    className={clsx(`font-bold rounded-3xl w-[107px] h-8`, className)}
+     >
+{btnName}
+</button>
 export {
     FatButton,
     EditButton,
-    DisabledEditButton
+    DisabledEditButton,
+    GrayRoundButton
 }

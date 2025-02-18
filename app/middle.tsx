@@ -1,11 +1,12 @@
 "use client"
 
 import { useEffect } from 'react';
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
+import { useJoyfulContext } from '@/context/JoyfulContext';
 
 import { AdminCode } from '../lib/const';
 import Header from '@/components/layout/Header';
-import { useJoyfulContext } from '@/context/JoyfulContext';
+import Footer from '@/components/layout/Footer';
 
 export default function Middle({
     children,
@@ -13,41 +14,30 @@ export default function Middle({
     children: React.ReactNode;
   }>) {
     const { setIsAdmin, openEditModal } = useJoyfulContext();
-    const router = useRouter();
     const pathName = usePathname();
 
-    if (typeof window !== 'undefined') {
+    //define the excluded paths
+    const excludeHeaderPaths = ["/admin"]; // Add more if needed
+    const excludeFooterPaths = ["/admin", "/"]; // Hides footer on `/admin` & `/`
 
-      //check admin function
-      useEffect(() => {
-        // Check login status
-        const adminLoginCompleted = localStorage.getItem("joyfuladminaccpedted");
-    
-        if (adminLoginCompleted == AdminCode) {
-          setIsAdmin(true);
-        } else {
-          setIsAdmin(false);
-        }
+    useEffect(() => {
+      const adminLoginCompleted = localStorage.getItem("joyfuladminaccpedted");
+      setIsAdmin(adminLoginCompleted == AdminCode);
+    },[]);
 
-      }, [localStorage.getItem("joyfuladminaccpedted")]); // Add setIsAdmin to the dependency array
+    //dynamically check if header or footer should be displayed
+    const showHeader = !excludeHeaderPaths.some((path)=>pathName == path);
+    const showFooter = !excludeFooterPaths.some((path)=>pathName == path);
 
-    }
-
-// className={`${openEditModal && 'h-screen overflow-hidden'}`}
     return(
         <div className={`bg-point ${openEditModal && 'overflow-hidden'}`} >
-          {/* <div style={{width:'1440px'}} className='flex flex-col mx-auto'> */}
-          {/* <Announcement /> */}
-          { !pathName.includes('admin') && 
+          { showHeader && 
             <div className="container flex justify-self-center">
               <Header />
             </div>
           }
           {children}
-          {/* { !pathName.includes('admin') && 
-            <div className="container flex justify-self-center">
-              <Footer/>
-            </div>  } */}
+          { showFooter &&  <Footer /> }
         </div>
     )
 }

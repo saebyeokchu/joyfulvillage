@@ -1,6 +1,8 @@
 import BreadCrumbs from "./BreadCrumbs";
 import Notice from "../layout/Notice";
 import DimBackground from "./DimBackground";
+import Card from "./Card";
+import Divider from "./Divider";
 import { 
     CustomTextInput,
     CustomNumberInput,
@@ -22,6 +24,7 @@ export {
     BreadCrumbs,
     Notice,
     DimBackground,
+    Card,
     CustomTextInput,
     CustomNumberInput,
     FileInput,
@@ -31,5 +34,6 @@ export {
     FilledBadge,
     OutlineBadge,
     FilledBadgeGreen,
-    OutlineBadgeGreen
+    OutlineBadgeGreen,
+    Divider
 }

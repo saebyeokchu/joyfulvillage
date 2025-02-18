@@ -60,3 +60,7 @@ export type MegaMenu = {
     subTitle? : Title[],
     disabled : boolean
 }
+
+export type Pill = {
+    targetVal : any, name : string, onClickFunction : any 
+}

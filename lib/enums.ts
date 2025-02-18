@@ -26,6 +26,11 @@ enum HomeSection{
     'spacecafeCotnent'
 }
 
+enum CafeOption {
+    cafe,
+    menu,
+}
+
 enum CafeSection {
     subTitle,
     mainImgs,
@@ -44,10 +49,17 @@ enum AxiosResponse {
     Successful = 200
 }
 
+enum StayPillOption {
+    rooms,
+    option
+} 
+
 export {
     EditOption,
     HomeSection,
+    CafeOption,
     CafeSection,
     BizSection,
-    AxiosResponse
+    AxiosResponse,
+    StayPillOption
 }
