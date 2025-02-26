@@ -5,14 +5,11 @@ import { useParams, useRouter } from "next/navigation";
 import Image from "next/image"
 import useSWR from "swr";
 
-import { StayPillOption } from "@/lib/enums";
-import { StayType } from "@/types";
 import { Options, Rooms } from "@/lib/tempData";
 import { GrayRoundButton, IndigoRoundButton } from "@/components/ui/Button";
 import NotFound from "@/components/layout/NotFound";
-import OptionPills from "../../component/OptionPills";
 import { Loading, PageHeader } from "@/components/layout";
-import { StayHeader } from "@/app/stay/component";
+import { StayType } from "@/types";
 
 
 export default function RoomDetail(){
@@ -31,9 +28,14 @@ export default function RoomDetail(){
     const { data, error } = useSWR(`/api/rooms/${roomId}`, fetcher);
 
     const renderedMainImgs = useMemo(() => {
-        return data?.mainImgs.map((src : string, index : number) => (
-            <Image key={`room-image-${index}`} src={src} alt={`detail-image-${index}`} layout="intrinsic" width={992} height={334} style={{maxHeight:"600px", objectFit:"cover"}} />
-        ));
+        if(typeof(data) === 'string'){
+            return undefined;
+        }else{
+            return data!.mainImgs.map((src : string, index : number) => (
+                <Image key={`room-image-${index}`} src={src} alt={`detail-image-${index}`} layout="intrinsic" width={992} height={334} style={{maxHeight:"600px", objectFit:"cover"}} />
+            ));
+        }
+       
     }, [data]);
 
     const handleReturnClick = useCallback(() => {

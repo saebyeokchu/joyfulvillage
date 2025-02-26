@@ -7,7 +7,7 @@
 // createdAt? : Date
 
 import { isStrValid } from "@/lib/common";
-import { Program } from "../../../types/Types";
+import { Program } from "@/types/Types";
 
 export class ProgramClass {
     private _id: number | null;

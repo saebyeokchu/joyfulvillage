@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import { HomeSection } from "../lib/enums";
 import { UploadImageWithDeletion } from "@/api/File";
-import { UpdateHomeData } from "@/api/Home";
+import { UpdateHomeData } from "@/api/About";
 
 
 const GetHomeMainImgContent = (data : any, setMainImgContent : Dispatch<SetStateAction<[string, string, string]>>) => {

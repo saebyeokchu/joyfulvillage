@@ -20,7 +20,7 @@ import { useRouter } from "next/navigation";
 
 export default function UpsertProgram(){
     const [content, setContent] = useState<string>("");
-    let [program, setProgram] = useState(new ProgramClass());
+    const [program, setProgram] = useState(new ProgramClass());
     const [openImageLibrary, setOpenImageLibrary] = useState(false);
 
     const programContext = useProgramContext();

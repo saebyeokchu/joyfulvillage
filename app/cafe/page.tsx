@@ -6,10 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { cafeService, soksoService } from "../../service";
 import { Cafe } from "../../types/Types";
-import MobileSlider from "../sokso/[parent]/[detailId]/MobileSlider";
 import { CafeOption, CafeSection } from "../../lib/enums";
-import { StringDivider } from "../../lib/const";
-import { BreadCrumbs, Divider } from "@/components/ui";
 import { ImagePopUp, OptionPills, PageHeader } from "@/components/layout";
 import { BelowArrow } from "@/lib/svgs";
 import { GrayRoundButton, IndigoRoundButton } from "@/components/ui/Button";
@@ -143,7 +140,7 @@ export default function CafePage(){
                         className="flex w-full h-96 space-x-3 overflow-x-hidden scroll-smooth overflow-hidden"
                     >
                         {mainImgs.map((d : Cafe, index : number) => (
-                            <Image key={`cafe-image-${index}`} width={600} height={400} className="object-cover" src={d.img} alt="" />
+                            d.img && <Image key={`cafe-image-${index}`} width={600} height={400} className="object-cover" src={d.img} alt="" />
                         ))}
                     </div>
                     </div>

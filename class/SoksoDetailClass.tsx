@@ -6,20 +6,21 @@
 // lastModifiedAt : Date,
 // createdAt : Date
 
-import { SoksoDetail } from "../../../types/Types";
+import { SoksoDetail } from "@/types/sokso";
+
 
 export class SoksoDetailClass {
     private _id: number | null;
-    private _topImages: string;
-    private _contentImages : string;
+    private _topImages: string[];
+    private _contentImages : string[];
     private _content: string;
     private _lastModifiedAt: Date;
     private _createdAt: Date;
 
     public constructor() {
         this._id = null
-        this._topImages  = '';
-        this._contentImages  = '';
+        this._topImages  = [''];
+        this._contentImages  = [''];
         this._content = '';
         this._lastModifiedAt = new Date();
         this._createdAt = new Date();
@@ -53,17 +54,17 @@ export class SoksoDetailClass {
         this._id = value;
     }
 
-    public get topImages(): string {
+    public get topImages(): string[] {
         return this._topImages;
     }
-    public set topImages(value: string) {
+    public set topImages(value: string[]) {
         this._topImages = value;
     }
 
-    public get contentImages(): string {
+    public get contentImages(): string[] {
         return this._contentImages;
     }
-    public set contentImages(value: string) {
+    public set contentImages(value: string[]) {
         this._contentImages = value;
     }
 

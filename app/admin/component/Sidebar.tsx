@@ -206,11 +206,8 @@ export default function Sidebar() {
 
                     <hr />
 
-                    <li>
-                        <a className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:text-neutral-200 dark:hover:text-neutral-300" href="/">
-                            홈으로 돌아가기
-                        </a>
-                    </li>
+                    
+                    <AdminMenuList name={"홈으로 돌아가기"} url={"/"} isDevelopeCompleted={true} />
                 
                 </ul>
                 </nav>

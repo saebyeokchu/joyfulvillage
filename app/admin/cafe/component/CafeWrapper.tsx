@@ -23,14 +23,14 @@ const CafeWrapper = ({
   }: Readonly<{
     subTitle : string,
     children: React.ReactNode;
-    buttons : ButtonInfo[] 
+    buttons? : ButtonInfo[] 
   }>) => {
     const [ selectedSection, setSelectedSection ]= useState<CafeSection | null>(null);
     const [ showPreview, setShowPreview ]= useState<boolean>(false);
-    const [ cafeContent, setCafeContent ] = useState<Cafe[]>([]);
-    const [ menus , setMenus ] = useState<Cafe[]>([]);
-    const [ specials , setSpecials ] = useState<Cafe[]>([]);
-    const [ newSpecial , setNewSpecial ] = useState<Cafe>({section : CafeSection.specials, note : null, content : null, img : []});
+    const [ cafeContent, setCafeContent ] = useState<Cafe[] | null>(null);
+    const [ menus , setMenus ] = useState<Cafe[] | null>(null);
+    const [ specials , setSpecials ] = useState<Cafe[] | null>(null);
+    const [ newSpecial , setNewSpecial ] = useState<Cafe>({section : CafeSection.specials, note : null, content : null, img : ''});
 
     const subTitleRef = useRef<any>(null);
     const router = useRouter();
@@ -119,7 +119,7 @@ const CafeWrapper = ({
             <p className="text-xl font-semibold">{subTitle}</p>
             <div className="flex flex-row space-x-3">
             {   
-                buttons.map((button : ButtonInfo, index : number) => (
+                buttons && buttons.map((button : ButtonInfo, index : number) => (
                     <IndigoRoundButton key={`cafe-wrapper-${index}`} onClickFunction={button.onClickFunction}  btnName={button.btnName} /> 
                 ))
             }

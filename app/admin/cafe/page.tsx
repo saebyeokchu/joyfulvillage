@@ -10,8 +10,8 @@ import CafeWrapper from "./component/CafeWrapper";
 export default function ManageCafe(){
     const [ selectedSection, setSelectedSection ]= useState<CafeSection>(CafeSection.subTitle);
     const [ cafeContent, setCafeContent ] = useState<Cafe[]>([]);
-    let [ menus , setMenus ] = useState<Cafe[]>([]);
-    let [ specials , setSpecials ] = useState<Cafe[]>([]);
+    const [ menus , setMenus ] = useState<Cafe[]>([]);
+    const [ specials , setSpecials ] = useState<Cafe[]>([]);
 
     const subTitleRef = useRef<any>(null);
 
@@ -70,8 +70,8 @@ export default function ManageCafe(){
     return (
         <>
             <AdminWrapper>
-                <CafeWrapper subTitle={""} buttons={[]} >
-                    {undefined}
+                <CafeWrapper subTitle={""}>
+                    {''}
                 {/* <div className="mt-3 flex flex-col space-y-7">
                     <div className="flex flex-col space-y-2">
                         <p className="text-xl font-semibold">카페 도천 소개글</p>

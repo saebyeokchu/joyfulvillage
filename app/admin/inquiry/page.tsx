@@ -121,14 +121,14 @@ export default function CafeInquiry(){
     }
 
     const onSortChange = (event : any, id : number) => {
-        const target = order.filter(e=>e.before == id);
+        const target = order.filter(( e : any ) =>e.before == id);
         target[0].after = parseInt(event.target.value);
     }
 
     const editSortOrder = async () => {
 
         //check count
-        const count = order.filter(e => e.after != -1);
+        const count = order.filter( ( e : any )  => e.after != -1);
 
         console.log(count)
 

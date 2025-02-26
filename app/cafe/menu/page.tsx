@@ -9,8 +9,8 @@ import { OptionPills, PageHeader } from "@/components/layout";
 import { Cafe } from "@/types/Types";
 import { CafeOption, CafeSection } from "@/lib/enums";
 import { cafeService } from "@/service";
-import MobileSlider from "@/app/sokso/[parent]/[detailId]/MobileSlider";
 import { StringDivider } from "@/lib/const";
+import MobileSlider from "@/components/layout/MobileSlider";
 
 // 숙소전체보기
 export default function CafePage(){
@@ -82,7 +82,7 @@ export default function CafePage(){
                         <div key={`cafe_menu_${index}`}>
                             <p className="flex text-center justify-center text-xl">{menu.note?.toUpperCase()}</p>
                             <div className="mt-5">
-                                { menu.img && menu.img.length > 0 && <MobileSlider images={menu.img}  autoPlay={false} /> }
+                                { menu.img && menu.img.length > 0 && <MobileSlider images={[menu.img]}  autoPlay={false} /> }
                             </div>
                             <p className="mt-6">
                                 {menu.content}

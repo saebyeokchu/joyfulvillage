@@ -1,8 +1,5 @@
 import axios from "axios";
 import { AdminApiAddress } from "../lib/const";
-import { UploadImageWithDeletion } from "./File";
-import { HomeSection } from "../lib/enums";
-import { Sokso } from "../types/Types";
 
 export async function GetById(id : number){
     return await axios.get(`${AdminApiAddress}/sokso/getById/?id=`+id);
@@ -16,7 +13,7 @@ export async function GetByLevelAndGroup(level : number, group : number){
     return await axios.get(`${AdminApiAddress}/sokso/getByLevelAndGroup/?level=`+level+'&group='+group);
 }
 
-export async function Upsert(newSokso : Sokso){
+export async function Upsert(newSokso : any){
     return await axios.post(`${AdminApiAddress}/sokso/upseart/`,{
         data : newSokso
     });

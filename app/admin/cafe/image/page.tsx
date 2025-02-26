@@ -19,7 +19,7 @@ import { ImageLibraryModal } from "../../_component";
 
 export default function CafeIntroduction(){
     const [ cafeContent, setCafeContent ] = useState<Cafe[]>([]);
-    let [ images , setImages ] = useState<string[]>([]);
+    const [ images , setImages ] = useState<string[]>([]);
     const [ openImageLibrary , setImageLibrary ] = useState<boolean>(false);
     const router = useRouter();
 

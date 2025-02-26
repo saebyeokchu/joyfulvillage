@@ -19,6 +19,6 @@ export default function Admin(){
             // </div> */}
 
     return (
-        <AdminWrapper children={undefined} />
+        <AdminWrapper> {undefined} </AdminWrapper>
     );
 }

@@ -125,8 +125,8 @@ export default function ManageProgram(){
     return (
         <>
         <AdminWrapper>
-           <CafeWrapper subTitle={"스페셜 메뉴 관리하기"} children={undefined} buttons={[{onClickFunction : ()=>setIsOpenSpecialModal(true), btnName : "추가하기"}]}>
-
+           <CafeWrapper subTitle={"스페셜 메뉴 관리하기"}buttons={[{onClickFunction : ()=>setIsOpenSpecialModal(true), btnName : "추가하기"}]}>
+                {undefined}
            </CafeWrapper>
             <div className="grid grid-cols-3 gap-12 mt-3">
                 { data.map((d : Cafe)=>

@@ -1,4 +1,4 @@
-import { Crumb } from "../_data/Types"
+import { Crumb } from "@/types/Types"
 
 export default function BreadCrumbs({
     crumbs

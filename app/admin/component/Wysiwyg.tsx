@@ -13,9 +13,9 @@ export default function Wysiwyg({
     content:any, setContent : any, isImageAllowed : boolean, height : number
 }){
     const editorRef = useRef<any>(null);
-    const [editorInstance, setEditorInstance] = useState<any | null>(null);
-    const [textContent, setTextContent] = useState<any | null>(null);
-    const [openImageLibrary, setOpenImageLibrary] = useState(false);
+    // const [editorInstance, setEditorInstance] = useState<any | null>(null);
+    // const [textContent, setTextContent] = useState<any | null>(null);
+    // const [openImageLibrary, setOpenImageLibrary] = useState(false);
 
     const config : any= {
         readonly: false, // Make the editor editable
@@ -100,7 +100,7 @@ export default function Wysiwyg({
 
     return (
         <>
-        { openImageLibrary && <ImageLibraryModal onClickCloseModal={() => setOpenImageLibrary(false)} onClickAddAction={onClickAddAction} />}
+        {/* { openImageLibrary && <ImageLibraryModal onClickCloseModal={() => setOpenImageLibrary(false)} onClickAddAction={onClickAddAction} />} */}
         <JoditEditor
             ref={editorRef}
             config={config}

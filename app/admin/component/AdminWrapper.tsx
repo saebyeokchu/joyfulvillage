@@ -16,16 +16,16 @@ const AdminWrapper = ({
   }>) => {
     const router = useRouter();
     const pathName = usePathname();
-
     useEffect(() => {
-        // Check login status
-      const adminLoginCompleted = localStorage.getItem("joyfuladminaccpedted");
-  
-      if (adminLoginCompleted != AdminCode) {
-        window.alert(AuthError.NotAuthorized);
-        router.push("/");
-      } 
-    },[localStorage.getItem("joyfuladminaccpedted")]);
+      // Check login status
+      if (typeof window !== "undefined") {
+        const adminLoginCompleted = localStorage.getItem("joyfuladminaccpedted");
+        if (adminLoginCompleted !== AdminCode) {
+          window.alert(AuthError.NotAuthorized);
+          router.push("/");
+        }
+      }
+    }, []); // Removed localStorage call from dependency array
 
     const subTitle : string = useMemo(()=>{
       const target : string = pathName.split("/")[2];

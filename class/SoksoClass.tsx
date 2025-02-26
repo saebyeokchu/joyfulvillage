@@ -10,7 +10,8 @@
 // lastModifiedAt : Date,
 // createdAt : Date
 
-import { Sokso, SoksoDetail } from "../../../types/Types";
+import { Sokso, SoksoDetail } from "@/types/sokso";
+
 
 export class SoksoClass {
     private _id: number | null;

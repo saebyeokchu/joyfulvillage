@@ -118,12 +118,10 @@ export default function StayRooms(){
       }, [Stays, stayId]);
     
 
-      if (!thisStay) {
-        return <AdminWrapper>
-            <Loading />
-        </AdminWrapper>;
-    }
+    
     const renderedOptions = useMemo(() => {
+        if (!thisStay) return [];
+
         const roomPill = {
             targetVal : StayPillOption.rooms,
             name : '객실',
@@ -152,8 +150,7 @@ export default function StayRooms(){
     //     );
     // }
 
-
-
+   
     //use swr and fetch for getting a data
     const renderedRooms = useMemo(() => {
         return data.map((room : StayType.Room, index : number) => (
@@ -174,6 +171,11 @@ export default function StayRooms(){
 
 
     // if(!currentOption) return <NotFound onClickFunction={handleReturnClick} />
+    if (!thisStay) {
+        return <AdminWrapper>
+            <Loading />
+        </AdminWrapper>;
+    }
 
 
     return(

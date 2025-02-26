@@ -1,5 +1,3 @@
-import { slider_img_ursl } from "../_data/Slider"
-
 export default function Slider() {
     return (
         <div data-hs-carousel='{
@@ -9,7 +7,7 @@ export default function Slider() {
         }' className="relative">
         <div className="hs-carousel relative overflow-hidden bg-white w-full min-h-72 lg:h-screen">
             <div className="fill hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0 ">
-            { slider_img_ursl.map((url: string,index:number) => 
+            { ['https://naver.com'].map((url: string,index:number) => 
                 <div className="hs-carousel-slide " key={`introduction-slider-${index}`}>
                     <div className="flex justify-center h-full bg-gray-100" >
                         <img src={url}  />

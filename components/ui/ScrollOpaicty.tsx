@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSpring, animated, useInView } from '@react-spring/web';
+import { animated, useInView, useSpring } from 'react-spring';
 
 const ScrollOpacity = ({ children, delay = 0, className = '' } : {children : any, delay? : number, className? : string}) => {
   const [ref, inView] = useInView();
