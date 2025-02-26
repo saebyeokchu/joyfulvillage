@@ -16,7 +16,7 @@ jobs:
       - name: Check Node v
         run: node -v
       - name: Install Dependencies
-        run: npm install
+        run: npm --force install
       - name: Build Next Prod
         run: npm run build
       - name: Build Docker Image
