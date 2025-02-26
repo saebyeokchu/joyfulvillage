@@ -3,12 +3,12 @@ import { useParams, useRouter, useSearchParams  } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Image from 'next/image'
 
-import { useSoksoContext } from "@/app/_context/SoksoContext";
-import { Sokso, SoksoDetail } from "@/types/Types";
-import { BreadCrumbs } from "@/app/_component";
-import { GeneralError } from "@/lib/messages";
 import { OpenWindow } from "@/lib/common";
 import MobileSlider from "./MobileSlider";
+import { useSoksoContext } from "@/context/SoksoContext";
+import { Sokso, SoksoDetail } from "@/types/sokso";
+import { GeneralError } from "@/lib/messages";
+import { BreadCrumbs } from "@/components/ui";
 
 export default function SoksoDetailPage() {
     const topImageLayout = [

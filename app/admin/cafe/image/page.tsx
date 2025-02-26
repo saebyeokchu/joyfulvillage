@@ -4,8 +4,6 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import AdminWrapper from "../../component/AdminWrapper";
-import { IndigoRoundButton } from "@/components/ui/Button";
-import ManageMainImg from "../component/ManageMainImg";
 import { Cafe } from "@/types/Types";
 import { cafeService } from "@/service";
 import CafeWrapper from "../component/CafeWrapper";

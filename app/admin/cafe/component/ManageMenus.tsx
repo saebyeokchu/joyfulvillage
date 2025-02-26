@@ -16,7 +16,7 @@ export default function ManageMenus({
     menus : Cafe[],
     updateCafeContent : any
 }){
-    let [ targetMenu , setTargetMenu ] = useState<Cafe | null>(null);
+    const [ targetMenu , setTargetMenu ] = useState<Cafe | null>(null);
     const [ images , setImages ] = useState<string[]>([]);
     const [ openImageLibrary , setImageLibrary ] = useState<boolean>(false);
 

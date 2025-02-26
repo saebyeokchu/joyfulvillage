@@ -170,7 +170,7 @@ export default function CafePage(){
                             </div>
                         </div>
                         {specials.map((special : Cafe, index : number) => (
-                            <div  className="w-[390px]">
+                            <div  className="w-[390px]"  key={`cafe-special-${index}`}>
                                 <div className="relative w-[390px] h-[270px] border-0 border-gray-600 overflow-hidden">
                                 <Image style={{ objectFit: "cover" }} src={special.img ?? ''} fill alt="cafe-signature" className="border-0 border-red-500" />
                                 </div>

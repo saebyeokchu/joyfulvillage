@@ -4,9 +4,9 @@ import Image from "next/image"
 import { useEffect, useState } from "react";
 
 import { useRouter } from "next/navigation";
-import BreadCrumbs from ".@/component/BreadCrumbs";
 import { soksoService } from "../../service";
-import { Sokso } from "../../types/Types";
+import { BreadCrumbs } from "@/components/ui";
+import { Sokso } from "@/types/sokso";
 
 // 숙소전체보기
 export default function Loading(){

@@ -11,7 +11,6 @@ declare global {
     }
   }
 
-
 export default function Inquiry(){
 
     const [qnaList, setQnaList ] = useState<any>([]);
@@ -67,7 +66,7 @@ export default function Inquiry(){
                 setQnaList(response.data);
                 
                 let i = 0;
-                let openDiv : boolean[] = [true];
+                const openDiv : boolean[] = [true];
 
                 for(i=1;i<response.data.length;i++){
                     openDiv.push(false);

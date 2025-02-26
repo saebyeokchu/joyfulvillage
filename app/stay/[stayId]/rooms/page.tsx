@@ -99,6 +99,10 @@ export default function StayRooms(){
     const params = useParams();
     const { stayId } = params;
 
+    const handleReturnClick = useCallback(() => {
+        router.push(`/stay`);
+    },[router, stayId]);
+
 
     // const { data, error, mutate  } = useSWR<Cafe[]>(
     //     GetCafeDataBySection + CafeSection.subTitle,
@@ -113,12 +117,12 @@ export default function StayRooms(){
         return Stays.find((stay: StayType.Stay) => String(stay.id) === stayId);
       }, [Stays, stayId]);
     
-    if (!thisStay) {
+
+      if (!thisStay) {
         return <AdminWrapper>
             <Loading />
         </AdminWrapper>;
     }
-
     const renderedOptions = useMemo(() => {
         const roomPill = {
             targetVal : StayPillOption.rooms,
@@ -148,9 +152,7 @@ export default function StayRooms(){
     //     );
     // }
 
-    const handleReturnClick = useCallback(() => {
-        router.push(`/stay`);
-    },[router, stayId]);
+
 
     //use swr and fetch for getting a data
     const renderedRooms = useMemo(() => {
@@ -168,6 +170,8 @@ export default function StayRooms(){
             </Card> 
         ));
     }, [stayId]);
+
+
 
     // if(!currentOption) return <NotFound onClickFunction={handleReturnClick} />
 

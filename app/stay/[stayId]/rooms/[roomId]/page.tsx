@@ -32,7 +32,7 @@ export default function RoomDetail(){
 
     const renderedMainImgs = useMemo(() => {
         return data?.mainImgs.map((src : string, index : number) => (
-            <Image src={src} alt={`detail-image-${index}`} layout="intrinsic" width={992} height={334} style={{maxHeight:"600px", objectFit:"cover"}} />
+            <Image key={`room-image-${index}`} src={src} alt={`detail-image-${index}`} layout="intrinsic" width={992} height={334} style={{maxHeight:"600px", objectFit:"cover"}} />
         ));
     }, [data]);
 

@@ -4,22 +4,14 @@ import { CafeSection, HomeSection } from "@/lib/enums";
 import { useEffect, useRef, useState } from "react";
 import { cafeService } from "@/service";
 import { Cafe } from "@/types/Types";
-import { GeneralError } from "@/lib/messages";
-import { CustomTextInput, EditButton, FilledBadge, OutlineBadge } from "@/components/ui";
-import ManageMainImg from "./component/ManageMainImg";
-import ManageMenus from "./component/ManageMenus";
-import ManageSpecials from "./component/ManageSpecials";
 import AdminWrapper from "../component/AdminWrapper";
-import { IndigoOutlineRoundButton, IndigoRoundButton } from "@/components/ui/Button";
 import CafeWrapper from "./component/CafeWrapper";
 
 export default function ManageCafe(){
     const [ selectedSection, setSelectedSection ]= useState<CafeSection>(CafeSection.subTitle);
-    const [ showPreview, setShowPreview ]= useState<boolean>(false);
     const [ cafeContent, setCafeContent ] = useState<Cafe[]>([]);
     let [ menus , setMenus ] = useState<Cafe[]>([]);
     let [ specials , setSpecials ] = useState<Cafe[]>([]);
-    let [ newSpecial , setNewSpecial ] = useState<Cafe>({section : CafeSection.specials, note : null, content : null, img : []});
 
     const subTitleRef = useRef<any>(null);
 

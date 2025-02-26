@@ -28,9 +28,9 @@ const CafeWrapper = ({
     const [ selectedSection, setSelectedSection ]= useState<CafeSection | null>(null);
     const [ showPreview, setShowPreview ]= useState<boolean>(false);
     const [ cafeContent, setCafeContent ] = useState<Cafe[]>([]);
-    let [ menus , setMenus ] = useState<Cafe[]>([]);
-    let [ specials , setSpecials ] = useState<Cafe[]>([]);
-    let [ newSpecial , setNewSpecial ] = useState<Cafe>({section : CafeSection.specials, note : null, content : null, img : []});
+    const [ menus , setMenus ] = useState<Cafe[]>([]);
+    const [ specials , setSpecials ] = useState<Cafe[]>([]);
+    const [ newSpecial , setNewSpecial ] = useState<Cafe>({section : CafeSection.specials, note : null, content : null, img : []});
 
     const subTitleRef = useRef<any>(null);
     const router = useRouter();
