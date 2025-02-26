@@ -8,7 +8,7 @@ export default function EditBox({
     subTitle? : string;
   }>){
     return(
-        <div  className="mt-7 flex flex-col space-y-3 border rounded-lg shadow-sm p-3">
+        <div  className="mt-7 flex flex-col space-y-3 border-0 rounded-lg shadow-sm p-3 bg-white">
             <p className="font-bold text-xl">{title}</p>
             <small>{subTitle}</small>
             <div className="overflow-y-auto mt-3">

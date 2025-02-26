@@ -11,15 +11,27 @@ type Option = {
 
 //stay -> room -> rommdetail
 
-type Room = {
+type Stay = {
     id : number | null,
     name : string,
-    introduction : string ,
+    address: string,
+    introduction : string,
+    mainImgs: string[],
+    optionAvailable : boolean,
+    lastModifiedAt: Date,
+    createdAt: Date
+}
+
+type Room = {
+    id? : number ,
+    name : string,
+    structure : string ,
+    introduction1 : string ,
+    introduction2? : string ,
     mainImgs : string[],
     content : string,
     stayid : number,
-    rdid : RoomDetail | null,
-    reserveLink : string | null,
+    reserveLink? : string,
     lastModifiedAt : Date,
     createdAt : Date
 }
@@ -34,6 +46,7 @@ type RoomDetail = {
 }
 
 export type {
+    Stay,
     Option,
     Room,
     RoomDetail

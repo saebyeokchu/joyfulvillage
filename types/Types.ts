@@ -15,7 +15,7 @@ export type ImageArchive = {
 export type Cafe = {
     id? : number ,
     section? : CafeSection,
-    img? : string[] | null,
+    img? : null | string,
     content? : string | null,
     note? : string | null,
     lastModifiedAt? : Date ,

@@ -29,7 +29,7 @@ export default function ProgramPage(){
 
     const onClickGoToDetail = (program : Program) => {
         programContext.currentProgram.setProgram(program);
-        router.push("/program/detail");
+        router.push("/program/" + program.id);
     }
 
     
@@ -49,7 +49,7 @@ export default function ProgramPage(){
         //             { programs.length > 0 && programs.map( (program : Program, index : number) => 
         //                 <div key={`sokso-wrapper-${index}`} className="group flex flex-col h-full items-center text-center">
         //                     {/* image part */}
-        //                     <div className="w-80 h-64 border">
+        //                     <div className="w-80 h-64 border-0">
         //                         <Image  src={"/images/"+program.img}  width={350} height={230} alt={`sokso-main-image-${index}`} style={{width:350, height:230, objectFit:'cover'}} />
         //                         <p className="w-full h-8  bg-white flex cursor-pointer" onClick={()=>onClickGoToDetail(program)}>
         //                             <span className="mx-auto pt-2 text-xs">상세보기</span>
@@ -66,18 +66,18 @@ export default function ProgramPage(){
         //     </div>
         // </div>
 
-        <div className="border border-red-700" >
+        <div className="border-0 border-0-red-700 " >
             {/* Header */}
             <PageHeader src={"/images/book/3.jpeg"} title={"프로그램"} subTitle={"북스테이 도천'은 조이풀빌리지 1층에 위치해있으며 미디어를 잠시 멀리하며 책을 읽고 휴식을 즐길 수 있는 공간입니다. "} alt={"stay-header"} />
 
             {/* stay list */}
-            <div className="max-w-[85rem] mt-10 md:mt-0 mx-8 md:mx-auto grid gird-cols-1 items-center   justify-center md:grid-cols-3 gap-16 md:gap-12  pb-10  md:min-h-lvh">
+            <div className="container py-10 px-5 md:mx-auto grid grid-cols-1 items-start justify-center md:grid-cols-3 gap-5 md:gap-12">
                 { programs.length > 0 && programs.map( (program : Program, index : number) => (
                     <Card
                         key={`program-wrapper-${index}`}
                         name={program.name} 
-                        address={program.subName} 
-                        images={["/images/"+program.img]} 
+                        address={program.subName}     
+                        images={[program.img]} 
                         onClickImage={()=>onClickGoToDetail(program)} 
                         wrapperId={program.id!.toString()} 
                         alt={`program-wrapper-card-${index}`} >

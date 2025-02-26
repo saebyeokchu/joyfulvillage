@@ -1,13 +1,13 @@
 import { Pill } from "@/types/Types"
 
 const DefaultOption = ( { name, onClickFunction } : { name : string, onClickFunction : any } ) => 
-    <button onClick={onClickFunction} className="flex justify-center text-white w-14 h-7 items-center rounded-2xl bg-transparent" style={{color:'#4B5A62'}}>
+    <button onClick={onClickFunction} className="flex justify-center text-sm md:text-base text-white p-4 md:p-5 h-7 items-center rounded-3xl bg-transparent" style={{color:'#4B5A62'}}>
         {name}
     </button>
     
     
 const SelectedOption = ( { name } : { name : string } ) => 
-    <button className="flex justify-center text-white w-14 h-7 items-center rounded-2xl" style={{backgroundColor:'#4B5A62'}}>
+    <button className="flex justify-center text-sm md:text-base text-white p-4 md:p-5 h-7 items-center rounded-3xl" style={{backgroundColor:'#4B5A62'}}>
         {name}
     </button>
 
@@ -21,11 +21,11 @@ const OptionPills = ({
     currentPill : any
 }) => {
     return(
-        <div className="max-w-[85rem] mx-auto">
+        <div className="container mx-auto py-5 md:py-10 px-5 md:px-8">
             {/* 120 x 70 */}
-            <div className="flex flex-row space-x-3 py-10 px-8 md:px-0">
-                {pills.map((p : Pill) => (
-                    currentPill == p.targetVal ? <SelectedOption name={p.name} /> : <DefaultOption name={p.name} onClickFunction={p.onClickFunction}  /> 
+            <div className="flex flex-row space-x-3 ">
+                {pills.map((p : Pill, index : number) => (
+                    currentPill == p.targetVal ? <SelectedOption key={`selected-option-${index}`} name={p.name} />  : <DefaultOption  key={`default-option-${index}`}  name={p.name} onClickFunction={p.onClickFunction}  /> 
                 ))}
             </div>
         </div>

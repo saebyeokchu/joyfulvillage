@@ -200,7 +200,7 @@ export default function UpsertSokso({
 
                                             <div className="sm:col-span-8">
                                                 <div className="flex items-center gap-5">
-                                                        <input ref={nameRef} type="text" className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-yellow-500 focus:ring-yellow-500 disabled:opacity-50 disabled:pointer-events-none " placeholder="새로운 숙소 이름" />
+                                                        <input ref={nameRef} type="text" className="py-2 px-3 pe-11 block w-full border-0-gray-200 shadow-sm rounded-lg text-sm focus:border-0-yellow-500 focus:ring-yellow-500 disabled:opacity-50 disabled:pointer-events-none " placeholder="새로운 숙소 이름" />
                                                 </div>
                                             </div>
 
@@ -214,7 +214,7 @@ export default function UpsertSokso({
 
                                             <div className="sm:col-span-8">
                                                 <div className="flex items-center gap-5">
-                                                        <input ref={introductionRef} type="text" maxLength={70} className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-yellow-500 focus:ring-yellow-500 disabled:opacity-50 disabled:pointer-events-none " placeholder="짧은 숙소 소개글" />
+                                                        <input ref={introductionRef} type="text" maxLength={70} className="py-2 px-3 pe-11 block w-full border-0-gray-200 shadow-sm rounded-lg text-sm focus:border-0-yellow-500 focus:ring-yellow-500 disabled:opacity-50 disabled:pointer-events-none " placeholder="짧은 숙소 소개글" />
                                                 </div>
                                             </div>
 
@@ -226,7 +226,7 @@ export default function UpsertSokso({
 
                                             <div className="sm:col-span-8">
                                                 <div className="flex items-center gap-5">
-                                                        <input ref={reserveLinkRef} type="text" className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-yellow-500 focus:ring-yellow-500 disabled:opacity-50 disabled:pointer-events-none " placeholder="예약하기 클릭 시 연결링크" />
+                                                        <input ref={reserveLinkRef} type="text" className="py-2 px-3 pe-11 block w-full border-0-gray-200 shadow-sm rounded-lg text-sm focus:border-0-yellow-500 focus:ring-yellow-500 disabled:opacity-50 disabled:pointer-events-none " placeholder="예약하기 클릭 시 연결링크" />
                                                 </div>
                                             </div>
                                             

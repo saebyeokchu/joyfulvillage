@@ -4,13 +4,28 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import BasicHeader from "./header/Basic";
+import FlatHeader from "./header/Flat";
+import { useJoyfulContext } from "@/context/JoyfulContext";
+import { HeaderMenu } from "@/lib/enums";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
-  const webLogoWidth = 100;
-  const webMenuTextClass = "space-x-16 text-sm";
+
+  const mdFlatHeader = [HeaderMenu.inquiry,HeaderMenu.program,"/stay",HeaderMenu.cafe,"/admin"].find((url : string) => pathname.includes(url)) ;
+  const menuClicked : Record<HeaderMenu, boolean> = {
+    [ HeaderMenu.home ] : false,
+    [ HeaderMenu.about ] : false,
+    [ HeaderMenu.stay ] : false,
+    [ HeaderMenu.program ]  : false,
+    [ HeaderMenu.cafe ] : false,
+    [ HeaderMenu.booking ] : false,
+    [ HeaderMenu.inquiry ] : false,
+  }
+
+  menuClicked[pathname as HeaderMenu] = true;
 
   // Handle scroll effect (optional)
   useEffect(() => {
@@ -21,6 +36,7 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const onClickMobileMenu = () => setIsOpen(!isOpen);
 
   return (
     <header
@@ -28,34 +44,16 @@ const Header = () => {
         ${
           isScrolled ? "bg-opacity-90" : "bg-opacity-80"
         }`}
-    >
-      <div className={`container mx-auto px-4 lg:px-8`}>
-        <div className="flex  justify-between md:flex-col md:justify-center items-center py-4 md:pt-11 md:pb-6">
-          {/* Logo */}
-          {/* 44 37 */}
-          <Link href="/" className="flex items-center space-x-2 md:pb-9">
-            <Image className="flex md:hidden" src="/images/system/logo.png" alt="Joyful Village Logo Web" width={80} height={50} />
-            <Image className="hidden md:flex" src="/images/system/logo.png" alt="Joyful Village Logo Mobile" width={webLogoWidth} height={89} />
-          </Link>
-
-          {/* Desktop Navigation */}
-          <nav className={`hidden md:flex font-medium ${webMenuTextClass}`}>
-            <Link href="/about" className="hover:underline underline-offset-8">소개</Link>
-            <Link href="/stay" className="hover:underline underline-offset-8">스테이</Link>
-            <Link href="/program" className="hover:underline underline-offset-8">프로그램</Link>
-            <Link href="/cafe" className="hover:underline underline-offset-8">카페도천</Link>
-            <Link href="/booking" className="hover:underline underline-offset-8">실시간 예약</Link>
-            <Link href="/inquiry" className="hover:underline underline-offset-8">문의</Link>
-          </nav>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-xl focus:outline-none text-black"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            ☰
-          </button>
-        </div>
+    > 
+      <div className={`container mx-auto `}>
+        
+        { mdFlatHeader ?
+          // Flat header menu
+          <FlatHeader onClickMobileMenu={onClickMobileMenu} menuClicked={menuClicked} />
+           :
+          // Basic header menu
+          <BasicHeader onClickMobileMenu={onClickMobileMenu} menuClicked={menuClicked} />
+        }
       </div>
 
       {/* Mobile Navigation Menu */}
@@ -65,12 +63,12 @@ const Header = () => {
         }`}
       >
         <nav className="flex flex-col items-end pr-4 py-4 space-y-3 text-lg font-medium text-black ">
-          <Link href="/about" className="hover:underline underline-offset-8" onClick={() => setIsOpen(false)}>소개</Link>
-          <Link href="/stay" className="hover:underline underline-offset-8" onClick={() => setIsOpen(false)}>스테이</Link>
-          <Link href="/program" className="hover:underline underline-offset-8" onClick={() => setIsOpen(false)}>프로그램</Link>
-          <Link href="/cafe" className="hover:underline underline-offset-8" onClick={() => setIsOpen(false)}>카페도천</Link>
-          <Link href="/booking" className="hover:underline underline-offset-8" onClick={() => setIsOpen(false)}>실시간 예약</Link>
-          <Link href="/inquiry" className="hover:underline underline-offset-8" onClick={() => setIsOpen(false)}>문의</Link>
+          <Link href="/about" className={`${menuClicked[HeaderMenu.about] && "underline"} hover:underline underline-offset-8`} onClick={() => setIsOpen(false)}>소개</Link>
+          <Link href="/stay" className={`${menuClicked[HeaderMenu.stay] && "underline"} hover:underline underline-offset-8`} onClick={() => setIsOpen(false)}>스테이</Link>
+          <Link href="/program" className={`${menuClicked[HeaderMenu.program] && "underline"} hover:underline underline-offset-8`} onClick={() => setIsOpen(false)}>프로그램</Link>
+          <Link href="/cafe" className={`${menuClicked[HeaderMenu.cafe] && "underline"} hover:underline underline-offset-8`} onClick={() => setIsOpen(false)}>카페도천</Link>
+          <Link href="/booking" className={`${menuClicked[HeaderMenu.booking] && "underline"} hover:underline underline-offset-8`} onClick={() => setIsOpen(false)}>실시간 예약</Link>
+          <Link href="/inquiry" className={`${menuClicked[HeaderMenu.inquiry] && "underline"} hover:underline underline-offset-8`} onClick={() => setIsOpen(false)}>문의</Link>
         </nav>
       </div>
     </header>

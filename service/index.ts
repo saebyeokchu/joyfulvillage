@@ -1,5 +1,5 @@
 import * as authService from './authService';
-import * as homeServcie from './homeService';
+import * as HomeService from './HomeService';
 import * as qnaService from './qnaService';
 import * as programService from './programService';
 import * as soksoService from './soksoService';
@@ -8,7 +8,7 @@ import * as cafeService from './cafeService';
 import * as bizService from './bizService';
 
 export {
-    homeServcie,
+    HomeService,
     authService,
     qnaService,
     programService,

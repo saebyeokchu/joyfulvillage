@@ -1,11 +1,17 @@
-import { GrayRoundButton } from "../ui/Button";
+import { DimBackground } from "../ui";
 
 const Loading = ({
 }:{
-}) => <div className="relative max-w-[85rem] h-screen mx-auto  my-10">
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex text-center flex-col justify-center items-center space-y-3">
-        <p>Loading ...</p>
-    </div>
-</div>
+}) => (
+    <>
+        <DimBackground />
+        <div className="flex justify-center items-center w-full z-10 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-h-screen">
+            <div className="animate-spin inline-block size-6 border-[3px] border-current border-t-transparent text-yellow-600 rounded-full" role="status" aria-label="loading">
+                <span className="sr-only">Loading...</span>
+            </div>
+
+        </div>
+    </>
+)
 
 export default Loading;

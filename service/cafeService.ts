@@ -1,4 +1,4 @@
-import { CafeApi } from "@/lib/api";
+import { CafeApi } from "@/api";
 import { AxiosResponse, CafeSection} from "../lib/enums";
 import { Cafe } from "../types/Types";
 
@@ -17,11 +17,11 @@ async function getCafeSection(cafes : Cafe[], section : CafeSection){
 async function getAll(){
     return await CafeApi.GetAll().then(response => {
         if(response.status == AxiosResponse.Successful){
-            if(response.data){
-                response.data.map( ( data : any ) => {
-                    if(data.img) data.img = data.img.split(";")
-                });
-            }
+            // if(response.data){
+            //     response.data.map( ( data : any ) => {
+            //         if(data.img) data.img = data.img.split(";")
+            //     });
+            // }
             return response.data;
         }
     });

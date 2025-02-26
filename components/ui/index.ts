@@ -1,5 +1,5 @@
 import BreadCrumbs from "./BreadCrumbs";
-import Notice from "../layout/Notice";
+import Notice from "../layout/HeaderNotice";
 import DimBackground from "./DimBackground";
 import Card from "./Card";
 import Divider from "./Divider";

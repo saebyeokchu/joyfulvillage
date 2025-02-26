@@ -55,7 +55,7 @@ export default function CafePage(){
     }
     
     return (
-        <div className="border border-red-700" >
+        <div className="border-0 border-0-red-700" >
             {/* Header */}
             <PageHeader src={"/images/cafe/11.jpeg"} title={"카페"} subTitle={"'카페 도천'은 조이풀빌리지 1층에 위치하여 산과 들의 아름다운 풍경을 바라보며 차와 브런치를 즐길 수 있는 공간입니다."} alt={"cafe-header"} />
 
@@ -74,6 +74,7 @@ export default function CafePage(){
                      { cafeContent.length > 0 && cafeContent.filter((content : Cafe) => content.section==CafeSection.subTitle)[0]?.content}
                  </p>
 
+                <Divider text="카페도천 메뉴" />
                 
                 {/* menus */}
                 <div className="grid grid-cols-1 grid-rows-1 gap-x-4 gap-y-20 md:grid-cols-2 md:grid-rows-2 mt-10">
@@ -151,7 +152,7 @@ export default function CafePage(){
         //         }
 
         //         <div className=" mt-14 md:mt-28 flex justify-center text-center ">
-        //             <div className="w-full h-32 border border-red-600">
+        //             <div className="w-full h-32 border-0 border-0-red-600">
         //                 <p className="text-2xl mt-3">이쪽에 전화번호 연결 부분이 들어가는게 어떨지?</p>
         //             </div>
         //         </div>

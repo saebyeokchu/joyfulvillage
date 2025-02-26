@@ -1,6 +1,6 @@
 
 
-import { GetQnaData } from "@/lib/api/Qna";
+import { GetQnaData } from "@/api/Qna";
 import { AxiosResponse, HomeSection } from "../lib/enums";
 
 const getQnaList = async () =>{

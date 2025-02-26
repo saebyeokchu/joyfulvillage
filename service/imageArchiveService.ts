@@ -1,6 +1,6 @@
 
 
-import { ImageArchiveApi } from "@/lib/api";
+import { ImageArchiveApi } from "@/api";
 import { AxiosResponse } from "../lib/enums";
 import { getCurrentTimestamp } from "@/lib/common";
 

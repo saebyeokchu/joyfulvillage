@@ -14,11 +14,11 @@ export default function Middle({
     children: React.ReactNode;
   }>) {
     const { setIsAdmin, openEditModal } = useJoyfulContext();
-    const pathName = usePathname();
+    const pathname = usePathname();
 
     //define the excluded paths
-    const excludeHeaderPaths = ["/admin"]; // Add more if needed
-    const excludeFooterPaths = ["/admin", "/"]; // Hides footer on `/admin` & `/`
+    // const excludeHeaderPaths = []; // Add more if needed
+    const excludeFooterPaths = ["/"]; // Hides footer on `/admin` & `/`
 
     useEffect(() => {
       const adminLoginCompleted = localStorage.getItem("joyfuladminaccpedted");
@@ -26,8 +26,9 @@ export default function Middle({
     },[]);
 
     //dynamically check if header or footer should be displayed
-    const showHeader = !excludeHeaderPaths.some((path)=>pathName == path);
-    const showFooter = !excludeFooterPaths.some((path)=>pathName == path);
+    // const showHeader = !excludeHeaderPaths.some((path)=>pathName == path);
+    const showFooter = !excludeFooterPaths.some((path)=>pathname == path) && !pathname.includes("admin") ;
+    const showHeader = !["/admin"].find((url : string) => pathname.includes(url)) ;
 
     return(
         <div className={`bg-point ${openEditModal && 'overflow-hidden'}`} >

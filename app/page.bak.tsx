@@ -1,10 +1,10 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { GetHomeintrodcutionContent, GetHomeMainImgContent, GetHomeSpaceContent } from "../service/homeService";
+import { GetHomeintrodcutionContent, GetHomeMainImgContent, GetHomeSpaceContent } from "../service/HomeService";
 import { mobilePx } from "../lib/const";
 import { useJoyfulContext } from "@/context/JoyfulContext";
-import { GetHomeData } from "@/lib/api/Home";
+import { GetHomeData } from "@/api/Home";
 
 export default function Home(){
 
@@ -30,7 +30,7 @@ export default function Home(){
 
 
     return (
-        <div className="flex flex-col bg-point pb-16  border border-red-700 w-full" >
+        <div className="flex flex-col bg-point pb-16  border-0 border-0-red-700 w-full" >
             {/* <EditModal /> */}
 
             {/* main image */}
@@ -39,9 +39,9 @@ export default function Home(){
             </div>
 
             {/* main image text */}
-            {/* <div className={`container flex justify-self-center border border-slate-700 ${mobilePx} w-screen`}> */}
-            <div className={`border flex justify-center border-slate-700 w-full`}>
-                <div className={`container border border-red-700 ${mobilePx} text-center mt-24 text-sm md:text-xl md:mt-32`}>
+            {/* <div className={`container flex justify-self-center border-0 border-0-slate-700 ${mobilePx} w-screen`}> */}
+            <div className={`border-0 flex justify-center border-0-slate-700 w-full`}>
+                <div className={`container border-0 border-0-red-700 ${mobilePx} text-center mt-24 text-sm md:text-xl md:mt-32`}>
                     <div
                         dangerouslySetInnerHTML={{ __html: introdcutionContent }}
                     />
@@ -54,8 +54,8 @@ export default function Home(){
             </div>
             
             {/* introduction */}
-            <div className={`border flex justify-center border-slate-700 w-full`}>
-                <div className={`container border border-red-700 ${mobilePx} text-center mt-24 text-sm md:text-xl md:mt-32`}>
+            <div className={`border-0 flex justify-center border-0-slate-700 w-full`}>
+                <div className={`container border-0 border-0-red-700 ${mobilePx} text-center mt-24 text-sm md:text-xl md:mt-32`}>
                     <img 
                         src='/system/home/introduction.jpg' 
                         alt={""} 
@@ -66,8 +66,8 @@ export default function Home(){
             </div>
 
             {/* spaces */}
-            <div className={`border flex justify-center border-slate-700 w-full`}>
-                <div className={`container border border-red-700 ${mobilePx} text-center mt-24 text-sm md:text-xl md:mt-32`}>
+            <div className={`border-0 flex justify-center border-0-slate-700 w-full`}>
+                <div className={`container border-0 border-0-red-700 ${mobilePx} text-center mt-24 text-sm md:text-xl md:mt-32`}>
                     <div className="flex flex-col space-y-3">
                         {/* 숲스테이도천 */}
                         <div className="grid grid-cols-1 gap-5 md:grid-cols-12">

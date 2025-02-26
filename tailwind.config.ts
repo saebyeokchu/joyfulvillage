@@ -14,7 +14,8 @@ const config: Config = {
         foreground: "var(--foreground)",
       },
       fontFamily : {
-        sans: ['var(--font-maruburis)']
+        sans: ['var(--font-maruburis)'],
+        pretendard: ["Pretendard", "sans-serif"],
       }
     },
   },

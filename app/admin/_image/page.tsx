@@ -51,7 +51,7 @@ export default function ManageImage(){
 
                 <div className="grid grid-cols-3 gap-3">
                     { images.length > 0 && images.map((img : ImageArchive, index : number) => 
-                        <div className="border relative" key={`admin_image_${index}`}>
+                        <div className="border-0 relative" key={`admin_image_${index}`}>
                             <Image className="object-cover w-full h-80"  src={"/images/"+img.imgSrc} width={500} height={400} alt={`image-archive-${index}`} />
                             <p className="w-full flex cursor-pointer" >
                                 <span className="mx-auto h-8 pt-2 text-xs bg-green w-full text-center absolute bottom-0 text-white" onClick={()=>onClickDeleteImage(img)}>삭제하기</span>

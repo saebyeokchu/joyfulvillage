@@ -1,6 +1,7 @@
 "use client"
 
 import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useRef, useState } from "react";
+import { HeaderMenu } from "@/lib/enums";
 
 // Define the type for the context
 interface JoyfulContextType {
@@ -17,6 +18,7 @@ interface JoyfulContextType {
     setEditModalContent : Dispatch<SetStateAction<string>>;
     isAdminRef : any;
     openAdminLoading : boolean;
+    currHeaerMenu : HeaderMenu; 
 }
 
 // Create Context with a default undefined value to enforce proper usage
@@ -31,14 +33,25 @@ export function JoyfulContextProvider({ children }: { children: React.ReactNode 
     const editVal = useRef<any>();
     const isAdminRef = useRef(isAdmin);
     let openAdminLoading : boolean = false;
+    let currHeaerMenu : HeaderMenu = HeaderMenu.home;
 
     return (
         <JoyfulContext.Provider value={{
-            isAdmin, setIsAdmin, openEditModal, 
-            setOpenEditModal, editModalTitle, setEditModalTitle,
-             editVal, editOption, setEditOption,
-             editModalContent, setEditModalContent,
-             isAdminRef, openAdminLoading }} >
+            isAdmin, 
+            setIsAdmin, 
+            openEditModal, 
+            setOpenEditModal, 
+            editModalTitle, 
+            setEditModalTitle,
+            editVal, 
+            editOption, 
+            setEditOption,
+            editModalContent, 
+            setEditModalContent,
+            isAdminRef, 
+            openAdminLoading,
+            currHeaerMenu
+          }} >
             {children}
         </JoyfulContext.Provider>
     )

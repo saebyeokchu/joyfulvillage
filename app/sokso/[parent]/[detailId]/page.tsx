@@ -108,14 +108,14 @@ export default function SoksoDetailPage() {
 
             {/* 소개글 부분 - 웹 */}
             <div 
-                className="hidden  min-h-96 border-b-brown justify-between mx-12 mt-20 md:mx-44 md:grid md:grid-cols-3"
+                className="hidden  min-h-96 border-0-b-brown justify-between mx-12 mt-20 md:mx-44 md:grid md:grid-cols-3"
                 
             >
                 {/* 소개글 부분 */}
-                <div className="flex flex-col border border-red-600 col-span-2 ">
+                <div className="flex flex-col border-0 border-0-red-600 col-span-2 ">
                     <p className="text-xl font-bold">{currentSokso && currentSokso.name}</p>
                     <p className="text-lg mt-1">{currentSokso && currentSokso.introduction}</p>
-                    <p className="text-lg mt-4 border border-red-600">
+                    <p className="text-lg mt-4 border-0 border-0-red-600">
                         { detailSokso && <div
                             dangerouslySetInnerHTML={{ __html: detailSokso.content }}
                         /> }
@@ -123,7 +123,7 @@ export default function SoksoDetailPage() {
                 </div >
 
                 {/* 예약하기 버튼 */}
-                <div className="border border-blue-600 col-span-1 ">
+                <div className="border-0 border-0-blue-600 col-span-1 ">
                     {/* 링크가 있으면 링크 연결 없으면 모달처리 */}
 
                     {currentSokso && currentSokso.reserveLink  ?
@@ -168,11 +168,11 @@ export default function SoksoDetailPage() {
 
             {/* 소개글 부분 - 모바일 */}
             <div 
-                className="flex flex-col pb-16 border-b-brown justify-between mx-12 mt-16 md:mx-44 md:hidden"
+                className="flex flex-col pb-16 border-0-b-brown justify-between mx-12 mt-16 md:mx-44 md:hidden"
                 
             >
                  {/* 예약하기 버튼 */}
-                 <div className="border border-blue-600 col-span-1 ">
+                 <div className="border-0 border-0-blue-600 col-span-1 ">
                     {/* 링크가 있으면 링크 연결 없으면 모달처리 */}
 
                     {currentSokso && currentSokso.reserveLink  ?
@@ -215,10 +215,10 @@ export default function SoksoDetailPage() {
                 </div >
 
                 {/* 소개글 부분 */}
-                <div className="flex flex-col border border-red-600 col-span-2 mt-5">
+                <div className="flex flex-col border-0 border-0-red-600 col-span-2 mt-5">
                     <p className="text-xl font-bold">{currentSokso && currentSokso.name}</p>
                     <p className="text-lg mt-1">{currentSokso && currentSokso.introduction}</p>
-                    <p className="text-lg mt-4 border border-red-600">
+                    <p className="text-lg mt-4 border-0 border-0-red-600">
                         여기는 직접입력하는 부분
                     </p>
                 </div >

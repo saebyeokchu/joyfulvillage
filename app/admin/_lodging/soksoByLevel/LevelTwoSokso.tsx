@@ -76,7 +76,7 @@ export default function LevelTwoSokso({
         </div>
             <div className="flex flex-col space-y-3  mt-3">
             {soksos.filter(e=>e.level==2 && e.group==parseInt(parent)).map((sokso : Sokso)=>
-                <div key={`leveltwo-sokso-${sokso.id}`} className="w-2/3 border border-gray-200 rounded-lg hover:shadow-sm focus:outline-none " >
+                <div key={`leveltwo-sokso-${sokso.id}`} className="w-2/3 border-0 border-0-gray-200 rounded-lg hover:shadow-sm focus:outline-none " >
                     <div className="relative flex items-center overflow-hidden ">
                         <img className="w-32 sm:w-48 h-full absolute inset-0 object-cover rounded-s-lg" src={"/images/"+sokso.mainImg} alt="Blog Image" />
                         <div className="grow p-4 ms-32 sm:ms-48"> 

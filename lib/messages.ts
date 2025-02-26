@@ -17,7 +17,8 @@ enum GeneralError {
     'notValidInfo' = '유효한 정보가 아닙니다.',
     'verifyDeletion' = '을(를) 삭제하시겠습니까?',
     'fillTheAllTheForm' = '모든 정보를 입력하셔야 합니다.',
-    'proceed' = '저장되지 않은 정보가 있습니다. 그대로 진행하시겠습니까?'
+    'proceed' = '저장되지 않은 정보가 있습니다. 그대로 진행하시겠습니까?',
+    'fillTheInput' = '값을 입력해주세요.'
 }
 
 enum SoksoError {

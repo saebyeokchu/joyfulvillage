@@ -61,7 +61,7 @@ function SoksoList({
                     { soksos.length > 0 && soksos.map( (sokso : Sokso, index : number) => 
                         <div key={`sokso-wrapper-${index}`} className="group flex flex-col h-full items-center text-center">
                             {/* image part */}
-                            <div className="w-80 h-64 border">
+                            <div className="w-80 h-64 border-0">
                                 <Image className="object-cover" src={"/images/"+sokso.mainImg} width={350} height={230} alt={`sokso-main-image-${index}`} />
                                 <p className="w-full h-8 flex cursor-pointer" >
                                     <span className="mx-auto pt-2 text-xs bg-white w-1/2" onClick={()=>sokso.reserveLink && commonService.OpenWindow(sokso.reserveLink)}>예약하기</span>

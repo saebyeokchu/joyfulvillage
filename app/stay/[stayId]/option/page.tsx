@@ -6,13 +6,12 @@ import { useParams, useRouter } from "next/navigation";
 import { StayPillOption } from "@/lib/enums";
 import { Options } from "@/lib/tempData";
 
-import OptionPills from "../component/OptionPills";
 import { 
-    StayHeader, 
     StayWrapper
 } from "../../component";
 import { StayType } from "@/types";
 import { GrayRoundButton } from "@/components/ui/Button";
+import { PageHeader, OptionPills } from "@/components/layout";
 
 
 export default function StayOptions(){
@@ -63,25 +62,30 @@ export default function StayOptions(){
     
     return(
         
-        <div className="border border-red-700 pb-10" >
+        <div className="border-0 border-0-red-700 pb-10" >
 
-            <StayHeader 
-                src={"/images/barbecue3.jpeg"} 
-                title={`여기 수정 옵션`} 
-                subTitle={`아래 옵션을 통해 숲에서 더 풍성한 추억을 쌓아보세요`} 
-                alt={"soop-option-header"} /> 
-            
+            {/* Header */}
+            <PageHeader src={"/images/barbecue3.jpeg"} title={"옵션"} subTitle={"아래 옵션을 통해 숲에서 더 풍성한 추억을 쌓아보세요."} alt={"soop-option-header"} />
+
             {/* pills */}
-            <OptionPills option={StayPillOption.option} onClickFunction={()=>router.push(`/stay/${stayId}/rooms`)} />
+            <OptionPills pills={[{
+                targetVal : StayPillOption.rooms,
+                name : '객실',
+                onClickFunction : ()=>router.push(`/stay/${stayId}/rooms`),
+            }, {
+                targetVal : StayPillOption.option,
+                name : '옵션',
+                onClickFunction : ()=>router.push(`/stay/${stayId}/option`),
+            }]} currentPill={StayPillOption.option} />
 
             {/* stay list */}
             {/*  items-center justify-center  mb-10   */}
-            <div className="max-w-[85rem] mx-8 md:mx-auto grid gird-cols-1 md:grid-cols-3  gap-16 md:gap-12 mb-10">
+            <div className="container md:mx-auto grid gird-cols-1 items-center   justify-center md:grid-cols-3 gap-12 px-5 md:px-8">
                 {renderedOptions}
             </div>
 
              {/* return button */}
-             <div className="mt-10 flex justify-end border border-red-400 max-w-[85rem]  mx-8 md:mx-auto">
+             <div className="container px-5 md:mx-auto mt-10 border-0 border-red-400 flex justify-end">
                 <GrayRoundButton btnName={"목록으로"} onClickFunction={handleReturnClick}/>
             </div>
            

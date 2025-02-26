@@ -5,7 +5,7 @@ export default function Slider() {
         <div data-hs-carousel='{
             "isAutoPlay": true,
             "loadingClasses": "opacity-0",
-            "dotsItemClasses": "hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 cursor-pointer"
+            "dotsItemClasses": "hs-carousel-active:bg-blue-700 hs-carousel-active:border-0-blue-700 size-3 cursor-pointer"
         }' className="relative">
         <div className="hs-carousel relative overflow-hidden bg-white w-full min-h-72 lg:h-screen">
             <div className="fill hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0 ">

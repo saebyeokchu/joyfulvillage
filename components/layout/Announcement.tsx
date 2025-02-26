@@ -39,10 +39,10 @@ export default function Announcement(){
                 </div>
 
                 <div className="text-center sm:text-start flex sm:justify-end sm:items-center gap-x-3 md:gap-x-4">
-                    <a onClick={closeAnnouncement} className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-full border border-transparent bg-yellow-600 text-white hover:bg-yellow-700 focus:outline-none focus:bg-yellow-700 disabled:opacity-50 disabled:pointer-events-none" href="#">
+                    <a onClick={closeAnnouncement} className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-full border-0 border-0-transparent bg-yellow-600 text-white hover:bg-yellow-700 focus:outline-none focus:bg-yellow-700 disabled:opacity-50 disabled:pointer-events-none" href="#">
                     닫기
                     </a>
-                    {/* <a className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-full border border-gray-800 text-gray-800 hover:border-gray-500 hover:text-gray-500 focus:outline-none focus:text-gray-500 disabled:opacity-50 disabled:pointer-events-none dark:border-white dark:text-white dark:hover:text-neutral-300 dark:hover:border-neutral-300 dark:focus:text-neutral-300 dark:focus:border-neutral-300" href="#">
+                    {/* <a className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-full border-0 border-0-gray-800 text-gray-800 hover:border-0-gray-500 hover:text-gray-500 focus:outline-none focus:text-gray-500 disabled:opacity-50 disabled:pointer-events-none dark:border-0-white dark:text-white dark:hover:text-neutral-300 dark:hover:border-0-neutral-300 dark:focus:text-neutral-300 dark:focus:border-0-neutral-300" href="#">
                     Buy now
                     </a> */}
                 </div>

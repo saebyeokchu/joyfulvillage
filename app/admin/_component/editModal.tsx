@@ -155,7 +155,7 @@ export default function EditModal(){
                         <h3 className="font-bold ">
                         {joyfulContext.editModalTitle}
                         </h3>
-                        <button type="button" onClick={closeEditModal} className="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent hover:bg-point-darker focus:outline-none focus:bg-point-darker disabled:opacity-50 disabled:pointer-events-none " aria-label="Close" data-hs-overlay="#hs-basic-modal">
+                        <button type="button" onClick={closeEditModal} className="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border-0 border-0-transparent hover:bg-point-darker focus:outline-none focus:bg-point-darker disabled:opacity-50 disabled:pointer-events-none " aria-label="Close" data-hs-overlay="#hs-basic-modal">
                         <span className="sr-only">Close</span>
                         <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M18 6 6 18"></path>
@@ -168,7 +168,7 @@ export default function EditModal(){
                             <p className="mt-1">
                                 <input ref={joyfulContext.editVal} type="file" id="img" name="img" accept={`image/${imageType}`} className="block cursor-pointer w-full  
                                     file:mr-4 file:py-2 file:px-4
-                                    file:rounded-full file:border-0
+                                    file:rounded-full file:border-0-0
                                     file:bg-yellow-50 file:text-yellow-700
                                     hover:file:bg-yellow-100
                                 "/>

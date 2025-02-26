@@ -39,7 +39,7 @@ export default function Loading(){
                     { soksos.length > 0 && soksos.map( (sokso : Sokso, index : number) => 
                         <div key={`sokso-wrapper-${index}`} className="group flex flex-col h-full items-center text-center">
                             {/* image part */}
-                            <div className="w-80 h-64 border">
+                            <div className="w-80 h-64 border-0">
                                 <Image  src={"/images/"+sokso.mainImg}  width={350} height={230} alt={`sokso-main-image-${index}`} style={{width:350, height:230, objectFit:'cover'}} />
                                 <p className="w-full h-8  bg-white flex cursor-pointer" onClick={()=>router.push(`/sokso/${sokso.id}`)}>
                                     <span className="mx-auto pt-2 text-xs">상세보기</span>

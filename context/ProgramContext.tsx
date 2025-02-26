@@ -12,6 +12,7 @@ interface ReserveState {
 // Define the type for the context
 interface ProgramContextType {
   currentProgram: ProgramClass;
+  targetProgram: ProgramClass;
 }
 
 // Create Context with a default undefined value to enforce proper usage
@@ -20,9 +21,10 @@ const ProgramContext = createContext<ProgramContextType | undefined>(undefined);
 // Provider Component
 export function ProgramContextProvider({ children }: { children: ReactNode }) {
   const currentProgram : ProgramClass = new ProgramClass();
+  const targetProgram : ProgramClass = new ProgramClass();
 
   return (
-    <ProgramContext.Provider value={{ currentProgram }}>
+    <ProgramContext.Provider value={{ currentProgram, targetProgram }}>
       {children}
     </ProgramContext.Provider>
   );

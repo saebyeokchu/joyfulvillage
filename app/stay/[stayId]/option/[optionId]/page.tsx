@@ -10,12 +10,12 @@ import { Options } from "@/lib/tempData";
 import { GrayRoundButton } from "@/components/ui/Button";
 import NotFound from "@/components/layout/NotFound";
 import { StayHeader } from "@/app/stay/component";
-import { ImagePopUp, Loading } from "@/components/layout";
+import { ImagePopUp, Loading, PageHeader } from "@/components/layout";
 
 const OptionDetailWrapper = ({option, index, onClickImage} : {option : StayType.Option , index : number, onClickImage : any}) => 
-<div className={`w-full flex-shrink-0 border border-red-500 flex justify-center`} key={`option-detail-wrapper-${index}`}>
-    <div className="grid grid-cols-1 md:grid-cols-2  w-[810px] border border-purple-500">
-        <div className="relative w-full h-72 border cursor-pointer overflow-hidden" onClick={onClickImage}>
+<div className={`w-full flex-shrink-0 border-0 border-0-red-500 flex justify-center`} key={`option-detail-wrapper-${index}`}>
+    <div className="grid grid-cols-1 md:grid-cols-2  w-[810px] border-0 border-0-purple-500">
+        <div className="relative w-full h-72 border-0 cursor-pointer overflow-hidden" onClick={onClickImage}>
             <Image 
                 src={option.mainImg[0]}
                 alt={`option1-detail-${index}`}
@@ -84,7 +84,7 @@ export default function OptionDetail(){
 
     const renderedImages = useMemo(() => {
         return currentOption?.contentImgs.map((src : string, index : number) => (
-        <div key={`content-image-${index}`} className="w-[300px] md:w-[810px] h-[300px] md:h-[600px] flex-shrink-0 relative border border-green-500 overflow-hidden">
+        <div key={`content-image-${index}`} className="w-[300px] md:w-[810px] h-[300px] md:h-[600px] flex-shrink-0 relative border-0 border-0-green-500 overflow-hidden">
             <Image 
                 src={src}
                 alt={`content-image-${index}`}
@@ -92,7 +92,7 @@ export default function OptionDetail(){
                 style={{ objectFit: "cover" }}
             />
         </div>
-    ))}, [router, index]);
+    ))}, [currentOption, index]);
 
 
     if(!currentOption) return <Loading />
@@ -119,16 +119,12 @@ export default function OptionDetail(){
  
     return(
         
-        <div className="border border-red-700 pb-10" >
-
-            <StayHeader 
-                src={currentOption.contentImgs[0]} 
-                title={currentOption.name} 
-                subTitle={currentOption.introduction} 
-                alt={"option1-detail-header"} /> 
+        <div className="border-0 border-0-red-700 pb-10" >
+            {/* Header */}
+            <PageHeader src={currentOption.contentImgs[0]} title={currentOption.name} subTitle={currentOption.introduction} alt={"option1-detail-header"} />
             
             {/* stay list */}
-            <div className="relative max-w-[85rem] mx-8 md:mx-auto  h-72  mt-10 overflow-hidden border border-green-500   ">
+            <div className="relative container  md:mx-auto  h-72  mt-10 overflow-hidden border-0 border-0-green-500   ">
                 {/* image slider */}
                 <div
                     className="transition-transform duration-1000 ease-in-out w-full flex flex-row group"
@@ -175,16 +171,16 @@ export default function OptionDetail(){
                 </div>
             </div>
 
-            <hr className="max-w-[85rem] mt-10 mx-8 md:mx-auto" style={{border:'1px solid #4B5A62'}}/>
+            {/* <hr className="max-w-[85rem] mt-10 mx-8 md:mx-auto" style={{border:'1px solid #4B5A62'}}/> */}
 
             {/* content images */}
-            <div className="max-w-[85rem] mt-10 mx-8 md:mx-auto border space-y-10 border-red-500 flex flex-col items-center justify-center">
+            <div className="container mt-10 mx-auto border-0 space-y-10 border-0-red-500 flex flex-col items-center justify-center">
                 {renderedImages}
             </div>
 
 
             {/* return button */}
-            <div className="max-w-[85rem] mx-8 md:mx-auto mt-10 flex justify-end border border-red-500">
+            <div className="container px-5 md:mx-auto mt-10 border-0 border-red-400 flex justify-end">
                 <GrayRoundButton btnName={"목록으로"} onClickFunction={handleReturnClick}/>
             </div>
            

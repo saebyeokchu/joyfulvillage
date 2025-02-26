@@ -1,6 +1,6 @@
 
 
-import { SoksoApi } from "@/lib/api";
+import { SoksoApi } from "@/api";
 import { StringDivider } from "../lib/const";
 import { AxiosResponse } from "../lib/enums";
 import { Sokso } from "@/types/sokso";

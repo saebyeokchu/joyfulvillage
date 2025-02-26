@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { AxiosResponse, HomeSection } from "@/lib/enums";
 import { findDuplicateAfterValues, isStrValid } from "@/lib/common";
 import { getQnaList } from "@/service/qnaService";
-import { DeleteQnaData, EditBiz, GetKakao } from "@/lib/api/Biz";
-import { UpdateQna } from "@/lib/api/Qna";
+import { DeleteQnaData, EditBiz, GetKakao } from "@/api/Biz";
+import { UpdateQna } from "@/api/Qna";
 import { CustomNumberInput, CustomTextInput, DisabledEditButton, EditButton, FilledBadge } from "@/components/ui";
 import { EditBox } from "../_component";
 import Preview from "@/components/layout/Preview";
@@ -240,7 +240,7 @@ export default function ManageInquiry(){
                         <h3 id="hs-basic-modal-label" className="font-bold ">
                         질문 추가하기
                         </h3>
-                        <button type="button" className="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent hover:bg-point-darker focus:outline-none focus:bg-point-darker disabled:opacity-50 disabled:pointer-events-none " onClick={()=>setOpenAddQna(false)}>
+                        <button type="button" className="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border-0 border-0-transparent hover:bg-point-darker focus:outline-none focus:bg-point-darker disabled:opacity-50 disabled:pointer-events-none " onClick={()=>setOpenAddQna(false)}>
                         <span className="sr-only">Close</span>
                         <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M18 6 6 18"></path>
@@ -271,7 +271,7 @@ export default function ManageInquiry(){
                         <h3 id="hs-basic-modal-label" className="font-bold ">
                         {editTarget.id}번째 질문 수정하기
                         </h3>
-                        <button type="button" className="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent hover:bg-point-darker focus:outline-none focus:bg-point-darker disabled:opacity-50 disabled:pointer-events-none " onClick={()=>setOpenEditQna(false)}>
+                        <button type="button" className="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border-0 border-0-transparent hover:bg-point-darker focus:outline-none focus:bg-point-darker disabled:opacity-50 disabled:pointer-events-none " onClick={()=>setOpenEditQna(false)}>
                         <span className="sr-only">Close</span>
                         <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M18 6 6 18"></path>
@@ -301,7 +301,7 @@ export default function ManageInquiry(){
                         <h3 id="hs-basic-modal-label" className="font-bold ">
                         질문 순서 변경하기
                         </h3>
-                        <button type="button" className="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent hover:bg-point-darker focus:outline-none focus:bg-point-darker disabled:opacity-50 disabled:pointer-events-none " onClick={()=>setOpenEditSort(false)}>
+                        <button type="button" className="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border-0 border-0-transparent hover:bg-point-darker focus:outline-none focus:bg-point-darker disabled:opacity-50 disabled:pointer-events-none " onClick={()=>setOpenEditSort(false)}>
                         <span className="sr-only">Close</span>
                         <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M18 6 6 18"></path>
