@@ -18,36 +18,6 @@ body {
   font-family: "MaruBuri-Regular";
 }
 
-/* color */
-.bg-point {
-  background-color: #F1EBDD;
-}
-
-.bg-point-hover:hover {
-  background-color: #c9c3b1;
-}
-
-.bg-point-darker {
-  background-color: #c9c3b1;
-}
-
-/* text */
-.text-point {
-  color : #746E60;
-}
-
-.text-green {
-  color : #6E8653;
-}
-
-.bg-green {
-  background-color: #6E8653;
-}
-
-.bg-brown {
-  background-color: #746E60;
-}
-
 /* border */
 .border-green {
   border-color : #6E8653;

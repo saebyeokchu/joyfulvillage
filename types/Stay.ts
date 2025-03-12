@@ -1,39 +1,46 @@
+import { LayoutType } from "@/lib/enums"
+
 type Option = {
-    id : number | null,
+    id? : number,
     name : string,
     introduction : string ,
-    mainImg : string[],
+    mainImgs : string[],
     content : string,
-    contentImgs : string[],
-    lastModifiedAt : Date,
-    createdAt : Date
+    stay_id : number,
+    lastModifiedAt? : Date,
+    createdAt? : Date
 }
 
 //stay -> room -> rommdetail
 
 type Stay = {
-    id : number | null,
+    id? : number | null,
     name : string,
     address: string,
-    introduction : string,
-    mainImgs: string[],
+    introduction1 : string,
+    introduction2? : string,
+    mainImgs: string[] ,
     optionAvailable : boolean,
-    lastModifiedAt: Date,
-    createdAt: Date
+    layoutType : LayoutType,
+    lastModifiedAt?: Date,
+    createdAt?: Date
 }
 
 type Room = {
-    id? : number ,
+    id? : number | null,
     name : string,
     structure : string ,
     introduction1 : string ,
     introduction2? : string ,
     mainImgs : string[],
     content : string,
-    stayid : number,
+    stay_id : number,
+    btnName : string,
+    layout : LayoutType,
     reserveLink? : string,
-    lastModifiedAt : Date,
-    createdAt : Date
+    reserveNumber? : string,
+    lastModifiedAt? : Date,
+    createdAt? : Date
 }
 
 type RoomDetail = {
@@ -41,6 +48,7 @@ type RoomDetail = {
     topImages : string[],
     contentImages : string[],
     content : string,
+
     lastModifiedAt : Date,
     createdAt : Date
 }

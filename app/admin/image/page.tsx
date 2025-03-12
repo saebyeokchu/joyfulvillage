@@ -9,6 +9,9 @@ import AddNewImage from "./AddNewImage";
 import { EditButton } from "@/components/ui";
 import { IndigoRoundButton } from "@/components/ui/Button";
 import AdminWrapper from "../component/AdminWrapper";
+import { getFetcher } from "@/lib/fetcher";
+import { DeleteHomeImages } from "@/lib/url";
+import { imgAddress } from "@/lib/const";
 
 
 export default function ManageImage(){
@@ -33,12 +36,27 @@ export default function ManageImage(){
 
     const onClickDeleteImage = async ( targetImage : ImageArchive ) => {
         if(targetImage.id){
-            if(window.confirm(targetImage.imgSrc +GeneralError.verifyDeletion)){
+            if(window.confirm(targetImage.imgSrc + GeneralError.verifyDeletion)){
                 await imageArchiveService.deleteByImageName(targetImage.id, targetImage.imgSrc).then((response : ImageArchive[]) => setImages(response));
             }
         }else{
             window.alert("유효한 이미지가 아닙니다. 잠시 후 다시 시도하여 주세요.");
 
+        }
+    }
+
+    
+    const onClickDeleteImageBak = async ( targetImage : ImageArchive) => {
+        if(window.confirm("해당하는 이미지" + GeneralError.verifyDeletion)){
+            try {
+                const data = await getFetcher(DeleteHomeImages + targetImage.id);
+                console.log(data);
+                window.alert(GeneralError.success);
+                location.reload();
+              } catch (error) {
+                console.error(error);
+                window.alert(GeneralError.unknownError+GeneralError.tryLater);
+              }
         }
     }
 
@@ -52,7 +70,7 @@ export default function ManageImage(){
                 <div className="grid grid-cols-3 gap-12 mt-3">
                     { images.length > 0 && images.map((img : ImageArchive, index : number) => 
                         <div className="border-0 relative" key={`admin_image_${index}`}>
-                            <Image className="object-cover w-full h-80"  src={"/images/"+img.imgSrc} width={500} height={400} alt={`image-archive-${index}`} />
+                            <Image className="object-cover w-full h-80"  loader={()=>imgAddress + img.imgSrc} src={imgAddress + img.imgSrc} width={500} height={400} alt={`image-archive-${index}`} />
                             <p className="w-full flex cursor-pointer" >
                                 <span className="mx-auto h-8 pt-2 text-xs bg-joyful-indigo w-full text-center absolute bottom-0 text-white" onClick={()=>onClickDeleteImage(img)}>삭제하기</span>
                             </p>

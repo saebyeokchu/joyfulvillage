@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 
 import { Program } from "@/types/Types";
@@ -15,69 +15,81 @@ import { useProgramContext } from "@/context/ProgramContext";
 import AdminWrapper from "../../component/AdminWrapper";
 import { GrayRoundButton, IndigoRoundButton } from "@/components/ui/Button";
 import { CustomTextArea } from "@/components/ui/CustomInput";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { imgAddress } from "@/lib/const";
+import { Loading } from "@/components/layout";
 
 
-export default function UpsertProgram(){
+function UpsertContent(){
     const [content, setContent] = useState<string>("");
-    const [program, setProgram] = useState(new ProgramClass());
+    const [imgSrc, setImgSrc] = useState<string>("");
     const [openImageLibrary, setOpenImageLibrary] = useState(false);
 
-    const programContext = useProgramContext();
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const programId = searchParams.get('programId');
 
-    const targetProgram = useMemo(()=>{
-        if(programContext.targetProgram.isValidProgram()){
-            program.setProgram(programContext.targetProgram);
-            setProgram(program);
-            setContent(programContext.targetProgram.content);
+    const nameRef = useRef<any>(null);
+    const subNameRef = useRef<any>(null);
+    const introductionRef = useRef<any>(null);
+
+    const {data, error, mutate} = programService.GetById(programId);
+    console.log(data);
+    
+    useEffect(()=>{
+        if(data){
+            setContent(data.content);
+            setImgSrc(data.img)
         }
-    },[programContext.targetProgram])
+    },[data])
 
-    console.log(targetProgram);
+    if(programId && !data){
+        return <div className="h-screen"><Loading /></div>
+    }
 
-    const onTextInputChange = (event : any, column : string) => {
-        const value = event.target.value;
-        if(isStrValid(value) && program){
-            if(column == "name"){
-                program.name = value;
-            }else if(column == "subName"){
-                program.subName = value;
-            }
-
-            setProgram(program);
+    const isValidProgram = () => {
+        if(nameRef.current && subNameRef.current && introductionRef.current){
+            return isStrValid(nameRef.current.value) && isStrValid(subNameRef.current.value) && isStrValid(introductionRef.current.value) && isStrValid(content) && isStrValid(imgSrc);
         }
+
+        return false;
     }
 
     const onClickUpsertProgram = async () => {
-        
-        //모든 정보 입력확인
-        if(content && isStrValid(content)){
-            program.content = content;
-        }
-
-        if(program.isValidProgram()){
-            console.log("[onClickUpsertProgram]",program.getProgram());
-
-            await programService.upsert(program.getProgram()).then((response : any)=>{
-                if(response) {
-                    window.alert(GeneralError.success);
-                    onClickListProgram();
-                }else{
-                    window.alert(GeneralError.unknownError+GeneralError.tryLater);
+        setIsLoading(true);
+        if(nameRef.current && subNameRef.current && introductionRef.current)
+            if(isValidProgram()){
+                console.log("[onClickUpsertProgram]");
+                const targetProgram  : Program = {
+                    id: ( data && data.id ) || null,
+                    name: nameRef.current.value,
+                    subName: subNameRef.current.value,
+                    introduction: introductionRef.current.value,
+                    img: imgSrc,
+                    content: content
                 }
-            });
-        }else{
-            window.alert(GeneralError.fillTheAllTheForm);
-        }
+
+                await programService.upsert(targetProgram).then((response : any)=>{
+                    if(response) {
+                        window.alert(GeneralError.success);
+                        onClickListProgram();
+                    }else{
+                        window.alert(GeneralError.unknownError+GeneralError.tryLater);
+                    }
+                });
+            }else{
+                window.alert(GeneralError.fillTheAllTheForm);
+            }
+            setIsLoading(false);
+       
 
     } 
 
     const onClickAddAction = (imgSrc : string) => {
-        if(program){
-            program.img = "/images/"+imgSrc;
-            return true;
-        }
+        setImgSrc(imgSrc);
+        return true;
     }
 
     const onClickOpenImageLibrary = () => {
@@ -88,57 +100,80 @@ export default function UpsertProgram(){
 
     return (
         <>
-            <AdminWrapper>
-                <div className="flex flex-row space-x-3 justify-end">
-                    <IndigoRoundButton onClickFunction={onClickListProgram} btnName={"취소하기"} />
-                    <IndigoRoundButton onClickFunction={onClickUpsertProgram} btnName={"저장하기"} />
+            <div className="container mx-auto pt-10">
+                <div className="flex justify-between w-full">
+                    <div className="text-3xl font-bold font-pretendard">프로그램 </div>
+                    <div className="flex flex-row space-x-3 justify-end">
+                        <IndigoRoundButton onClickFunction={onClickListProgram} btnName={"취소하기"} />
+                        <IndigoRoundButton onClickFunction={onClickUpsertProgram} btnName={"저장하기"} />
+                    </div>
                 </div>
+
+                <p className="hover:underline cursor-pointer hover:font-bold" onClick={()=>router.refresh()}>내용수정란이 정상적으로 로드되지 않았을때 여기를 눌러 새로고침 해주세요.</p>
                 
-                <div className="flex flex-row rounded-3xl">
-                    <div className="flex flex-col space-y-3 pr-5">
-                        <p className=" mt-5 ">이름(20자까지)</p>
-                        <CustomTextInput
-                            maxLength={20}
-                            inputVal={program.id && program.name || ''} 
-                            placeholder={""} 
-                            textRef={undefined} 
-                            onChangeFunction={(event : any)=>onTextInputChange(event,"name")} 
-                        />
+                
+                {isLoading ? <div className="h-screen">
+                    <Loading />
+                </div> : 
+                <div className="flex flex-col border-0 border-red-500">
+                    <div className="grid grid-cols-2 gap-12 border-0 border-red-500">
+                        <div>
+                            <p className=" mt-5 ">이름(20자까지)</p>
+                            <CustomTextInput
+                                maxLength={20}
+                                inputVal={(data && data.name) || ''} 
+                                placeholder={""} 
+                                textRef={nameRef} 
+                            />
 
-                        <p className=" mt-5">한 줄 설명(60자까지)</p>
-                        <CustomTextArea  
-                            maxLength={60}
-                            inputVal={program.id && program.subName || ''} 
-                            placeholder={""} 
-                            textRef={undefined} 
-                            onChangeFunction={(event : any)=>onTextInputChange(event,"subName")} />
+                            <p className=" mt-5 ">한 줄 설명(40자까지/카드 중간부분)</p>
+                            <CustomTextInput
+                                maxLength={40}
+                                inputVal={(data &&  data.subName) || ''} 
+                                placeholder={""} 
+                                textRef={subNameRef} 
+                            />
 
-                        <p className=" mt-5">대표 이미지 설정</p>
-                        { program && program.img ?
-                        <IndigoRoundButton btnName={"수정하기"} onClickFunction={onClickOpenImageLibrary} />
-                        :
-                        <IndigoRoundButton onClickFunction={onClickOpenImageLibrary} btnName={"이미지 설정하기"} /> }
-                        <Image 
-                            src={ ( program && program.img ) || '/images/system/no-image.png'}
-                            width={250}
-                            height={350}
-                            alt="upsert-main-img"
-                            className="object-cover"
-                        />
+                            <p className=" mt-5">소개(카드 맨 아래부분)</p>
+                            <CustomTextArea  
+                                inputVal={(data && data.introduction )|| ''} 
+                                placeholder={""} 
+                                textRef={introductionRef} 
+                            />
+                        </div>
+                        <div>
+                            <p className=" mt-5">대표 이미지 설정</p>
+                            { imgSrc ?
+                            <IndigoRoundButton btnName={"수정하기"} onClickFunction={onClickOpenImageLibrary} />
+                            :
+                            <IndigoRoundButton onClickFunction={onClickOpenImageLibrary} btnName={"이미지 설정하기"} />}
+                            { imgSrc && <Image 
+                                loader={ ()=> (imgAddress + imgSrc  || '/images/system/no-image.png' )}
+                                src={ (imgAddress + imgSrc  || 'system/no-image.png' )}
+                                width={250}
+                                height={250}
+                                alt="upsert-main-img"
+                                className="object-cover mt-5"
+                            /> }
+                        </div>
                     </div>
                     
-                    <div className="col-span-2 flex flex-col space-y-3  flex-1">
+                    <div className="flex flex-col space-y-3  ">
                         <p className=" mt-5">프로그램 내용</p>
                         <Wysiwyg content={content} setContent={setContent} isImageAllowed={true} height={600} />
                     </div>
-                </div>
-            </AdminWrapper>
-            {/* <div className="mt-3 flex flex-row space-x-3">
-                <EditButton onClickFunction={onClickListProgram} btnName={"취소하기"} />
-                <EditButton onClickFunction={onClickUpsertProgram} btnName={"저장하기"} />
-            </div> */}
+                </div> }
+            </div>
             
             { openImageLibrary && <ImageLibraryModal onClickCloseModal={() => setOpenImageLibrary(false)} onClickAddAction={onClickAddAction} />}
         </>
     )
 } 
+
+export default function UpsertProgram(){
+    return(
+        <Suspense>
+            <UpsertContent />
+        </Suspense>
+    )
+}

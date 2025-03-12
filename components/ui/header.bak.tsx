@@ -1,6 +1,5 @@
 "use client"
 
-import { header_mega_menus } from "@/lib/const";
 import { MegaMenu, Title } from "@/types/Types";
 import { useJoyfulContext } from "@/context/JoyfulContext";
 import Link from "next/link";
@@ -99,7 +98,7 @@ export default function Header(){
                 <div className="grow">
                   <div className="flex flex-col md:flex-row md:justify-end md:items-center gap-0.5 md:gap-1">
 
-                      { header_mega_menus.map((menu : MegaMenu, index : number) => {
+                      {/* { header_mega_menus.map((menu : MegaMenu, index : number) => {
 
                         if(menu.subTitle){
                           return DropDownMenu(menu, index);
@@ -117,7 +116,7 @@ export default function Header(){
                             </a>
                           )
                         }
-                      })}
+                      })} */}
                       
                       {
                         joyfulContext.isAdmin && 

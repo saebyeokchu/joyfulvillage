@@ -12,6 +12,7 @@ import Preview from "@/components/layout/Preview";
 import AdminWrapper from "../component/AdminWrapper";
 import { IndigoRoundButton } from "@/components/ui/Button";
 import { FilledIndigoBadge } from "@/components/ui/Badge";
+import { GeneralError } from "@/lib/messages";
 
 export default function CafeInquiry(){
     const [ order, setOrder ]= useState<any>([]);
@@ -62,7 +63,8 @@ export default function CafeInquiry(){
     const editInquiryData = async () => {
         await EditBiz(longRef.current.value, lnagRef.current.value, addressTextRef.current.value).then(response=>{
             if(response.status==AxiosResponse.Successful){
-                window.alert("수정되었습니다.");
+                window.alert(GeneralError.success);
+                openEditModal(false);
             }
         });
     }
@@ -77,7 +79,7 @@ export default function CafeInquiry(){
                 
                 await UpdateQna({id : editTarget.id, question : question.value, answer : answer.value}).then(response=>{
                     if(response.status==AxiosResponse.Successful){
-                        window.alert("수정되었습니다.");
+                        window.alert(GeneralError.success);
                         setQnaList(response.data);
                         openEditModal(false);
                     }
@@ -112,6 +114,8 @@ export default function CafeInquiry(){
                         setQnaList(response.data);
                         question.value = "";
                         answer.value = "";
+                        setOpenAddQna(false);
+                        getInquriyData();
                     }
                 });
             }
@@ -226,18 +230,18 @@ export default function CafeInquiry(){
                         { qnaList.length >= 10 && <small>최대 질문갯수는 10개입니다.</small> }
 
                         <div className="flex flex-rol space-x-2">
-                            <IndigoRoundButton onClickFunction={()=>setOpenEditSort(true)} btnName={"질문 순서 관리하기"} />
+                            <FilledIndigoBadge onClickFunction={()=>setOpenEditSort(true)} name={"질문 순서 관리하기"} />
                             <div aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-basic-modal" data-hs-overlay="#hs-basic-modal">
                                 { qnaList.length >= 10 ?
                                 <>
                                     <DisabledEditButton  btnName={"질문 추가하기"}/> 
                                     </>
-                                    : <IndigoRoundButton onClickFunction={()=>setOpenAddQna(true)} btnName={"질문 추가하기"}/>
+                                    : <FilledIndigoBadge onClickFunction={()=>setOpenAddQna(true)} name={"질문 추가하기"}/>
                                 }
                             </div>
                         </div>
 
-                        {qnaList.map( ( qna : any, index : number ) => {
+                        { qnaList && qnaList.map( ( qna : any, index : number ) => {
                             return(
                                 <div className="mt-4" key={`qnaList-Show-${index}`}>
                                     <p className="font-bold flex flex-row space-x-2"><span>질문 {index+1}</span>
@@ -286,8 +290,8 @@ export default function CafeInquiry(){
                                     <CustomTextInput placeholder={"답변"} textRef={answerRef} />
                                 </div>
                                 <div className="mt-3 w-full flex justify-center space-x-3">
-                                    <EditButton onClickFunction={()=>setOpenAddQna(false)} btnName={"닫기"} />
-                                    <EditButton onClickFunction={()=>addNewQna()} btnName={"질문 추가하기"} />
+                                    <FilledIndigoBadge onClickFunction={()=>setOpenAddQna(false)} name={"닫기"} />
+                                    <FilledIndigoBadge onClickFunction={()=>addNewQna()} name={"질문 추가하기"} />
                                 </div>
                             </div>
                             </div>

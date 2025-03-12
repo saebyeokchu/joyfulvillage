@@ -2,12 +2,38 @@
 
 import { useEffect, useRef, useState } from "react";
 import useSWR from "swr";
-import { AdminApiAddress } from "@/lib/const";
+import { AdminApiAddress, imgAddress } from "@/lib/const";
 import { Loading, SomeErrorPage } from "@/components/layout";
 import { useRouter } from "next/navigation";
 import { HomeType } from "@/types";
+import Image from "next/image";
+import { GetHomeImages } from "@/lib/url";
+import { homeService } from "@/service";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
+const MEDIA_URL = process.env.NEXT_PUBLIC_MEDIA_URL || "http://localhost:8000/media/"; 
+const imageUrl = `${MEDIA_URL}2025_02_27_23_36_32.jpg`;
+
+function SmoothImage({ d, index, currentIndex }: { d: any; index: number; currentIndex: number }) {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+
+  return (
+    <Image
+      loader={() => imgAddress+d.imgSrc}
+      key={index}
+      alt={`image-${index}`}
+      src={imgAddress+d.imgSrc}
+      placeholder="blur"
+      blurDataURL="/images/cover-imange.jpg"
+      fill
+      onLoad={() => setIsLoaded(true)}
+      className={`absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+        index === currentIndex && isLoaded ? "opacity-100" : "opacity-0"
+      }`}
+    />
+  );
+}
 
 export default function Home() {
   const [index, setIndex] = useState(0);
@@ -17,13 +43,16 @@ export default function Home() {
 
   // SWR: Using a static key and disabling revalidateOnFocus
   const { data, error } = useSWR<HomeType.Home[]>(
-    `${AdminApiAddress}/home/get/`,
+    GetHomeImages,
     fetcher,
     {
       revalidateOnFocus: false,
       dedupingInterval: 60000,
     }
   );
+
+
+  console.log(data);
 
   // Auto-play logic
   const handleNext = () => {
@@ -52,12 +81,14 @@ export default function Home() {
   };
 
   useEffect(() => {
-    setAutoPlay();
-    return () => clearInterval(intervalRef.current!);
+    if (data && data.length > 1) {
+      setAutoPlay();
+      return () => clearInterval(intervalRef.current!);
+    }
   }, [data]);
 
   if (!data) {
-    return <Loading />;
+    return <></>;
   }
 
   if (error) {
@@ -71,30 +102,23 @@ export default function Home() {
       {/* Main image */}
       <div className="absolute inset-0 flex items-center justify-center">
         {data.map((d: HomeType.Home, i: number) => (
-          <img
-            key={i}
-            src={d.imgSrc}
-            alt=""
-            className={`absolute w-full h-full object-cover transition-opacity ease-in-out duration-1000 ${
-              i === index ? "opacity-100" : "opacity-0"
-            }`}
-          />
+          <SmoothImage key={i} d={d} index={i} currentIndex={index} />
         ))}
       </div>
 
-      <button
+      { data.length > 1 && <button
         className="absolute left-4 top-1/2 -translate-y-1/2 text-white p-3 rounded-full text-3xl"
         onClick={handlePrev}
       >
         ❮
-      </button>
+      </button> }
 
-      <button
+      { data.length > 1 && <button
         className="absolute right-4 top-1/2 -translate-y-1/2 text-white p-3 rounded-full text-3xl"
         onClick={handleNext}
       >
         ❯
-      </button>
+      </button> }
     </div>
   );
 }

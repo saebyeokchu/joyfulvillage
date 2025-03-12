@@ -26,6 +26,7 @@ export type Program = {
     id : number | null ,
     name : string,
     subName : string,
+    introduction : string,
     img : string,
     content : string,
     lastModifiedAt? : Date ,

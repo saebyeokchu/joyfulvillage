@@ -8,9 +8,10 @@ import { cafeService, soksoService } from "../../service";
 import { Cafe } from "../../types/Types";
 import { CafeOption, CafeSection } from "../../lib/enums";
 import { ImagePopUp, OptionPills, PageHeader } from "@/components/layout";
-import { BelowArrow } from "@/lib/svgs";
+import { BelowArrow, CafeLogo } from "@/lib/svgs";
 import { GrayRoundButton, IndigoRoundButton } from "@/components/ui/Button";
 import { OpenWindow } from "@/lib/common";
+import { imgAddress } from "@/lib/const";
 
 // 숙소전체보기
 export default function CafePage(){
@@ -21,6 +22,7 @@ export default function CafePage(){
     const [ menus, setMenus ] = useState<Cafe[]>([]);
     const [ specials, setSpecials ] = useState<Cafe[]>([]);
     const [ naverorderlink, setNaverorderlink ] = useState<string>("");
+    const [index, setIndex] = useState(1); // Start at first cloned slide
 
     const [ option, setOption ] = useState<CafeOption>(CafeOption.cafe);
 
@@ -98,25 +100,30 @@ export default function CafePage(){
     return (
         <div className="border-0 border-0-red-700 " >
             {/* Header */}
-            <PageHeader src={"/images/cafe/11.jpeg"} title={"카페"} subTitle={subTitle} alt={"cafe-header"} />
+            <PageHeader src={"/images/cafe-cover.png"} title={"카페"} subTitle1={subTitle} alt={"cafe-header"} />
 
             {/* stay list md:mt-0 mx-8 my-10  md:mx-auto */}
-            <div className="py-20 flex flex-col items-center justify-center border-0 border-red-500">
+            <div className="py-10 md:py-20 flex flex-col items-center justify-center border-0 border-red-500">
 
                 {/* logo and introduction */}
-                <div className="container mx-auto  flex flex-col text-center justify-center items-center space-y-3">
+                <div className="container flex flex-col text-center justify-center items-center space-y-3 px-5 md:mx-auto">
                    <div className="text-xl">조이풀빌리지</div>
-                   <Image width={300} height={80} src={"/images/system/logo_cafe.png"} alt={"cafe-dochen-logo"} />
-                   <div className="text-xl pt-8">
+                   <div className="hidden md:block">
+                        <CafeLogo width={300} height={80} />
+                   </div>
+                   <div className="block md:hidden">
+                    <CafeLogo width={200} height={80} />
+                   </div>
+                   <div className="text-base md:text-xl md:pt-8">
                     {subTitle}
                    </div>
                 </div>
 
                 {/* cafe images */}
-                <div className="relative mt-20 ">
+                <div className="relative  hidden md:block mt-10 md:mt-20">
                     {/* Desktop Arrow Buttons – hidden on mobile */}
                     <button
-                        className="hidden md:block absolute left-0 top-1/2 transform -translate-y-1/2 z-10"
+                        className=" absolute left-0 top-1/2 transform -translate-y-1/2 z-10"
                         onClick={handlePrev}
                         aria-label="Previous"
                     >
@@ -125,7 +132,7 @@ export default function CafePage(){
                         </svg>
                     </button>
                     <button
-                        className="hidden md:block absolute right-0 top-1/2 transform -translate-y-1/2 z-10"
+                        className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10"
                         onClick={handleNext}
                         aria-label="Next"
                     >
@@ -137,21 +144,57 @@ export default function CafePage(){
                     {/* Image slider container */}
                     <div
                         ref={sliderRef}
-                        className="flex w-full h-96 space-x-3 overflow-x-hidden scroll-smooth overflow-hidden"
+                        className="flex w-full h-96 space-x-3 overflow-x-hidden scroll-smooth overflow-hidden "
                     >
                         {mainImgs.map((d : Cafe, index : number) => (
-                            d.img && <Image key={`cafe-image-${index}`} width={600} height={400} className="object-cover" src={d.img} alt="" />
+                            d.img && <Image key={`cafe-image-${index}`} width={600} height={400} className="object-cover" src={imgAddress +  d.img} loader={()=>imgAddress +  d.img} alt="" />
                         ))}
                     </div>
-                    </div>
+                    
+                </div>
+
+                {/* Mobile images */}
+                <div className="block md:hidden relative w-full h-60 overflow-hidden mx-auto mt-20 md:mt-10">
+                <div
+                    className="flex transition-transform duration-500 ease-in-out"
+                    style={{
+                    transform: `translateX(-${index * 100}%)`,
+                    }}
+                >
+                    {mainImgs.map((d: Cafe, i: number) => (
+                    d.img && (
+                        <div key={`cafe-image-mobile-${i}`} className="relative w-full h-60 flex-shrink-0">
+                        <Image
+                            loader={()=>imgAddress + d.img}
+                            src={imgAddress + d.img}
+                            alt=""
+                            fill
+                            className="object-cover"
+                        />
+                        </div>
+                    )
+                    ))}
+                </div>
+
+                {/* Dot indicators */}
+                <div className="flex absolute bottom-4 left-1/2 transform -translate-x-1/2 space-x-2">
+                    {mainImgs.map((_, i) => (
+                    <button
+                        key={`dot-${i}`}
+                        className={`h-3 w-3 rounded-full transition-all duration-300 ${index === i ? "bg-white" : "bg-gray-400"}`}
+                        onClick={() => setIndex(i)}
+                    ></button>
+                    ))}
+                </div>
+                </div>
 
                 {/* menus */}
-                <div className="container mx-auto mt-20 border-0 border-red-500">
-                    <div className=" grid gird-cols-1 justify-center md:grid-cols-3 gap-12 border-0 border-gray-600">
-                        <div className="w-[390px] border-0 border-gray-600 overflow-hidden ">
-                            <div className="relative w-[390px] h-[270px] border border-gray-600 overflow-hidden">
+                <div className="container mt-10 py-10 px-5 md:mx-auto grid grid-cols-1 items-start justify-center md:grid-cols-3 gap-7 md:gap-12">
+                    {/* <div className=" grid gird-cols-1 justify-center md:grid-cols-3 gap-12 border-0 border-gray-600"> */}
+                        <div className="w-full border-0 border-gray-600 overflow-hidden ">
+                            <div className="relative w-full h-[270px] border-0 border-gray-600 overflow-hidden">
                                 <Image 
-                                    src="/images/system/menu.png"  
+                                    src="/images/cafe-menu.png"  
                                     alt="cafe-menu"
                                     fill
                                     style={{ objectFit: "cover" }}
@@ -167,9 +210,11 @@ export default function CafePage(){
                             </div>
                         </div>
                         {specials.map((special : Cafe, index : number) => (
-                            <div  className="w-[390px]"  key={`cafe-special-${index}`}>
-                                <div className="relative w-[390px] h-[270px] border-0 border-gray-600 overflow-hidden">
-                                <Image style={{ objectFit: "cover" }} src={special.img ?? ''} fill alt="cafe-signature" className="border-0 border-red-500" />
+                            <div   key={`cafe-special-${index}`}>
+                                <div className="relative w-full h-[270px] border-0 border-gray-600 overflow-hidden">
+                                <Image
+                                    loader={ ()=> special.img? imgAddress + special.img : ''}
+                                style={{ objectFit: "cover" }} src={ special.img? imgAddress + special.img : ''} fill alt="cafe-signature" className="border-0 border-red-500" />
                                 </div>
                                 <div className="text-3xl font-bold font-pretendard text-joyful-indigo mt-5">
                                     {special.note}
@@ -190,18 +235,18 @@ export default function CafePage(){
                             이번 시즌의 수제청은 ‘대추꿀생강청’입니다. 대추의 달콤함과 생강의 매운맛, 꿀의 부드러움이 어우러져 건강하고 따뜻한 맛을 전해줍니다.
                             </div>
                         </div> */}
-                    </div>
+                    {/* </div> */}
                 </div>
 
                 {/* arrows */}
-                <div className="flex flex-col space-y-3 mt-20">
+                {/* <div className="flex flex-col space-y-3 mt-5 md:mt-10">
                     <BelowArrow />
                     <BelowArrow />
                     <BelowArrow />
-                </div>
+                </div> */}
                 
                 {/* go to naver */}
-                <IndigoRoundButton className="mt-10" btnName={"네이버 주문"} onClickFunction={()=>OpenWindow(naverorderlink)} />
+                {/* <IndigoRoundButton className="mt-10" btnName={"네이버 주문"} onClickFunction={()=>OpenWindow(naverorderlink)} /> */}
 
 
                  {/* Modal overlay for expanded image slider */}

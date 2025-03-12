@@ -45,7 +45,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${maruburis.variable} font-sans text-point ` }> 
+      <body className={`${maruburis.variable} font-sans text-joyful-indigo  ` }> 
         <ContextProviders>
           <Middle>
             {children}

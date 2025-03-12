@@ -44,19 +44,21 @@ const CustomTextArea = (
         onChange={onChangeFunction} 
         ref={textRef}  
         rows={5} 
-        className="w-full border-0 shadow rounded p-2 mt-2" 
+        className="w-full border shadow rounded p-2 mt-2" 
         defaultValue={inputVal} 
         placeholder={placeholder} 
     />
 
 const FileInput = ({ imgRef, csProps, onChangeFunction, acceptStr, width } : { csProps? : string, imgRef : any, onChangeFunction? : any, acceptStr? : string, width?:number }) => 
-<input ref={imgRef} type="file" id="img" name="img" accept={acceptStr || 'image/jpg'} 
+<input ref={imgRef} type="file" id="img" name="img" accept={acceptStr || 'image/*'} 
     onChange={onChangeFunction}
     className={`{${csProps} block cursor-pointer ${width || 'w-full'} 
         file:mr-4 file:py-2 file:px-4
         file:rounded-full file:border
         file:bg-joyful-indigo file:text-blue-950 file:cursor-pointer
     `}/>;
+
+
 
 export {
     CustomTextInput,

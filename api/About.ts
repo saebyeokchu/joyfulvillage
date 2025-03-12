@@ -2,20 +2,24 @@ import axios from "axios";
 import { AdminApiAddress } from "../lib/const";
 import { UploadImageWithDeletion } from "./File";
 import { HomeSection } from "../lib/enums";
+import { DeleteAboutDataById, UpsertAboutData } from "@/lib/url";
+import { getFetcher, postJsonFetcher } from "@/lib/fetcher";
 
-export async function GetHomeData(){
-    return await axios.get(`${AdminApiAddress}/home/get/`);
+export async function Upsert(postData : any){
+    console.log("[api.about.upsert]", postData);
+    try {
+        return postJsonFetcher([UpsertAboutData, postData]);
+    } catch (error) {
+        return false;
+    }
 }
 
-export async function GetHomeDataBySection(section : string){
-    return await axios.get(`${AdminApiAddress}/home/get-by-section/?section=`+section);
-}
-
-export async function UpdateHomeData(section : number, contents : string){
-    console.log(section,":",contents);
-    return await axios.post(`${AdminApiAddress}/home/update/contents/`,{
-        section,
-        contents 
-    });
+export async function DeleteById(id : number){
+    console.log("[api.about.delete]");
+    try {
+        return getFetcher(DeleteAboutDataById+id)
+    } catch (error) {
+        return false;
+    }
 }
 

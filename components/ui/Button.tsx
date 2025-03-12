@@ -78,7 +78,7 @@ const IndigoRoundButton = ({
 }) => (
     <button 
         onClick={onClickFunction} 
-        className={clsx(`flex justify-center text-sm md:text-base text-white w-fit p-4 md:p-5 h-7 items-center rounded-3xl`, className)}
+        className={clsx(`flex justify-center text-sm md:text-base text-white w-fit p-4 md:p-5 h-7 items-center rounded-3xl hover:bg-indigo-950`, className)}
         style={{backgroundColor:'#4B5A62'}}>
         {btnName}
     </button>

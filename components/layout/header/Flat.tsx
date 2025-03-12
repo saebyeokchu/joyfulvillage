@@ -2,18 +2,23 @@ import Link from "next/link";
 import Image from "next/image";
 import DesktopNavigation from "./component/DesktopNavigation";
 import { HeaderMenu } from "@/lib/enums";
+import HeaderLogos from "./component/Logo";
 
-const FlatHeader = ({onClickMobileMenu, menuClicked}:{onClickMobileMenu : any, menuClicked : Record<HeaderMenu, boolean>}) => (
-  <div className={`flex justify-between md:justify-center md:text-center md:items-center md:flex-col py-4  md:py-7 px-5 `}>
+const FlatHeader = ({onClickMobileMenu, menuClicked}:{onClickMobileMenu : any, menuClicked : Record<HeaderMenu, boolean>}) => {
+  const onClickMenu = () => {
+
+  }
+
+  return (
+  <div className={`relative px-5 md:px-0  container md:mx-auto flex py-4 md:py-7 justify-between md:justify-center md:text-center md:items-center md:flex-col h-[66px]`}>
             {/* Logo */}
             {/* 44 37 */}
-            <Link href="/" className="md:absolute md:left-8 flex items-center space-x-2 ">
-              <Image className="flex md:hidden" src="/images/system/logo_without_undertext.png" alt="Joyful Village Logo Mobile" width={84} height={50} />
-              <Image className="hidden md:flex " src="/images/system/logo_without_undertext.png" alt="Joyful Village Logo Web" width={117} height={33} />
+            <Link href="/" className="md:absolute md:left-10 flex items-center space-x-2 ">
+              <HeaderLogos width={117} height={33} />
             </Link>
 
             {/* Desktop Navigation */}
-            <DesktopNavigation menuClicked={menuClicked}/>
+            <DesktopNavigation menuClicked={menuClicked} />
 
             {/* Mobile Menu Button */}
             <button
@@ -23,5 +28,5 @@ const FlatHeader = ({onClickMobileMenu, menuClicked}:{onClickMobileMenu : any, m
               ☰
             </button>
           </div>
-)
+)}
 export default FlatHeader;

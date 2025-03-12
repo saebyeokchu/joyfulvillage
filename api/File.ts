@@ -6,6 +6,7 @@ export async function UploadImageWithDeletion(formData : FormData){
         return await fetch(`${AdminApiAddress}/upload-img-with-deletion/`, {
           method: "POST",
           body: formData,
+          credentials: 'include',
         }).then(response => {
             console.log("response : " , response);
             return response.ok;

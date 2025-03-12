@@ -36,6 +36,6 @@ const config: Config = {
         permanent: true, // Set to `true` for SEO-friendly 301 redirect
       },
     ];
-  },
+  }
 };
 export default config;

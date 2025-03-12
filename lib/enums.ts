@@ -49,6 +49,13 @@ enum HomeSection{
     'spacecafeCotnent'
 }
 
+enum AboutSection {
+    joyful,
+    soop,
+    book,
+    cafe
+}
+
 enum CafeOption {
     cafe,
     menu,
@@ -78,14 +85,21 @@ enum StayPillOption {
     option
 } 
 
+enum LayoutType {
+    room,
+    option
+}
+
 export {
     EditOption,
     AdminHeaderMenu,
     HeaderMenu,
+    AboutSection,
     HomeSection,
     CafeOption,
     CafeSection,
     BizSection,
     AxiosResponse,
-    StayPillOption
+    StayPillOption,
+    LayoutType
 }

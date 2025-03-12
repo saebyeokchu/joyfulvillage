@@ -18,11 +18,6 @@ export default function Footer(){
     const [instaUrl, setInstalUrl]=useState<string>("");
     const [youtubeUrl, setYoutubeUrl]=useState<string>("");
 
-    //call kakaomap
-    useEffect(() => {
-        getKakaoInfo()
-          }, []);
-    
           
     const getKakaoInfo = async () => {
         await Get().then(response => {
@@ -66,59 +61,46 @@ export default function Footer(){
     
           
     return(
-        <footer className="py-5 lg:py-10 bg-joyful-indigo text-white " >
-            <div className={`container px-5 md:mx-auto border-0 border-yellow-700`}>
-                <div className="grid gap-12 md:*:gap-6 md:grid-cols-8 ">
+        <footer className="py-5 lg:py-10 bg-joyful-indigo text-white font-pretendard" >
+            <div className={`container px-5 md:px-16 py-10 md:py-0 md:mx-auto flex flex-col md:flex-row space-y-10 md:space-y-0 justify-between border-0 border-yellow-700`}>
 
-                    <div className="col md:col-span-3">
-                        <a className="flex-none text-xl   focus:outline-none focus:opacity-80" href="#" aria-label="투웰브 마운틴즈">
-                            {/* <img src="/twelve-logo.png" width="100vh"/> */}
-                            <div id="footerKakaoMap" className="border-0 border-0-slate-500 text-sm text-black w-full h-36 p-3">kakaomap</div>
-                        </a>
-                        <div className="text-sm flex flex-col space-y-3 mt-4 md:text-base">
-                            <div>
-                                <span className="font-bold">조이풀빌리지</span> {addressText}
-                            </div>
-                            <div>월요일 - 토요일 10:00 - 18:00 일요일 off</div>
+                <div className="flex flex-col md:flex-row border-0 border-red-500 md:space-x-20 space-y-10 md:space-y-0">
+                    <div className="text-sm flex flex-col space-y-3 md:text-base">
+                        <div className="flex flex-row gap-y-2 gap-x-2">
+                            <span>조이풀빌리지</span>
+                            <span>경상북도 영덕군 남정뮨 산정로 320</span>
+                        </div>
+                        <div>월요일 - 토요일 10:00 - 18:00 일요일 off</div>
+                        <div className="flex flex-row gap-y-2 gap-x-2">
+                            <a href="/login/admin" >관리자 로그인</a>
+                            <span>© 2024 Powered by Sharelife</span>
                         </div>
                     </div>
 
-                    <div className="col md:col-span-3">
-                        <div className="text-sm flex flex-col gap-y-3">
-                            <div className="flex flex-col md:flex-row gap-y-2 md:gap-x-2">
-                                <span>(주)투웰브마운틴즈</span>
-                                <span>사업자등록번호 898-87-02686</span>
-                            </div>
-                            <div className="flex flex-row gap-x-2">
-                                <Instagram />
-                                <span className="cursor-pointer" onClick={()=>OpenWindow(InstagramHayoungingLink)}>@hayoungin7</span>
-                                <span className="cursor-pointer " onClick={()=>OpenWindow(InstagramJoyfulLink)}>@joyvil_company</span>
-                            </div>
-                            <div className="flex flex-row gap-x-2">
-                                <NaverBlog />
-                                <span className="cursor-pointer " onClick={()=>OpenWindow(NaverBlogTweleveMountLink)}>@(주)투웰브마운틴즈</span>
-                            </div>
+                    <div className="text-sm flex flex-col space-y-3 md:text-base ">
+                        <div className="flex flex-row gap-y-2 gap-x-2">
+                            <span>(주)투웰브마운틴즈</span>
+                            <span>사업자등록번호 898-87-02686</span>
+                        </div>
+                        <div className="flex fflex-row gap-y-2 gap-x-2">
+                            <Instagram />
+                            <span className="cursor-pointer" onClick={()=>OpenWindow(InstagramHayoungingLink)}>@hayoungin7</span>
+                            <span className="cursor-pointer ml-4" onClick={()=>OpenWindow(InstagramJoyfulLink)}>@joyvil_company</span>
+                        </div>
+                        <div className="flex flex-row gap-y-2 gap-x-2">
+                            <NaverBlog />
+                            <span className="cursor-pointer " onClick={()=>OpenWindow(NaverBlogTweleveMountLink)}>@(주)투웰브마운틴즈</span>
                         </div>
                     </div>
-
-                    <div className="col md:col-span-1  md:col-start-8 flex flex-col h-full space-y-3 md:justify-between items-start md:items-end">
-                        <Image src="/images/system/footer/1.png" width={139} height={30} alt="footer logo1" />
-                        <Image src="/images/system/footer/2.png" width={100} height={30} alt="footer logo2" />
-                        <Image src="/images/system/footer/3.png" width={119} height={25} alt="footer logo3" />
-                        <Image src="/images/system/footer/4.png" width={73} height={20} alt="footer logo4" />
-                    </div>
-
                 </div>
 
-                <div className="hidden lg:flex flex-row text-start justify-start w-full gap-x-2 md:mt-3 text-xs" >
-                    <div className="text-sm ">
-                        <a href="/login/admin" className="">관리자 로그인</a>
-                    </div>
-                    <div > | </div>
-                    <div className="text-sm">
-                        © 2024 Powered by Sharelife
-                    </div>
+                <div className="flex flex-col border-0 border-red-500 space-y-5 md:items-end">
+                    <Image src="/images/footer1.png" width={139} height={30}  alt="footer logo1" />
+                    <Image src="/images/footer2.png" width={100} height={30} alt="footer logo2" />
+                    <Image src="/images/footer3.png" width={119} height={25} alt="footer logo3" />
+                    <Image src="/images/footer4.png" width={73} height={20} alt="footer logo4" />
                 </div>
+
             </div>
         </footer>
     )

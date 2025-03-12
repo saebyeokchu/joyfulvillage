@@ -4,6 +4,8 @@ import { AxiosResponse } from "../../lib/enums";
 import { GetQnaData } from "@/api/Qna";
 import { StayHeader } from "../stay/component";
 import { GetKakao } from "@/api/Biz";
+import { imgAddress } from "@/lib/const";
+import { PageHeader } from "@/components/layout";
 
 declare global {
     interface Window {
@@ -66,7 +68,7 @@ export default function Inquiry(){
                 setQnaList(response.data);
                 
                 let i = 0;
-                const openDiv : boolean[] = [true];
+                const openDiv : boolean[] = [false];
 
                 for(i=1;i<response.data.length;i++){
                     openDiv.push(false);
@@ -79,7 +81,7 @@ export default function Inquiry(){
 
     const onClickQuestion = (index: number) => {
         // Create a new array where only the clicked index is true, others false.
-        const newOpenAnswerDiv = openAnswerDiv.map((_, i) => i === index);
+        const newOpenAnswerDiv = openAnswerDiv.map((_, i) => !openAnswerDiv[index] && i === index);
         setOpenAnswerDiv(newOpenAnswerDiv);
       };
     
@@ -88,31 +90,41 @@ export default function Inquiry(){
     return(
         <div className=" border-0 border-0-red-700 " >
             {/* Header */}
-            <StayHeader src={"/images/outside/5.jpg"} title={""} subTitle={""} alt={"inquiry-header"} />
+            <PageHeader src={"/images/inquiry-cover.png"} title={""} subTitle1={""} alt={"inquiry-header"} />
 
             {/* inquiry list */}
-            <div className="container py-10 px-8 md:mx-auto w-full border-0 border-0-purple-500 gap-16 md:gap-12 md:min-h-lvh flex flex-col justify-center items-center text-center">
+            <div className="container py-24 px-8 md:mx-auto w-full border-0 border-0-purple-500 md:min-h-lvh flex flex-col space-y-20 md:space-y-24 justify-center items-center text-center">
                 <div className="w-full md:w-[810px] flex flex-col border-0 border-0-red-500"> 
                     <h2 className="font-bold text-xl md:leading-tight font-pretendard text-joyful-indigo">자주 묻는 질문</h2>
-                    <div >
+                    <div className="pt-16 flex flex-col space-y-10">
                             {
                             // transition-all duration-500 ease-in-out
                             qnaList.map((qna : any, index : number) => {
                                 return(
-                                    <div key={index} className="flex flex-col my-5 py-5 border-0-b border-0-b-gray-300 space-y-3">
+                                    <div key={index} className=" border-0-b border-0-b-gray-300 ">
                                         <div
-                                            className="text-lg font-bold flex flex-row justify-between cursor-pointer"
+                                            className="text-lg flex flex-row justify-between cursor-pointer"
                                             onClick={() => onClickQuestion(index)}
                                         > 
-                                            <div>Q. {qna.question}</div>
-                                            <div>{openAnswerDiv[index] ? "-" : "+"}</div>
+                                            <div className="break-words text-sm">Q. {qna.question}</div>
+                                            <div>{openAnswerDiv[index] ?
+                                                <svg width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(180)" >
+                                                    <path d="M0.215427 0.705986C-0.0718095 0.979698 -0.0718094 1.42099 0.215427 1.6947L5.08673 6.33661C5.31535 6.55446 5.68465 6.55446 5.91327 6.33661L10.7846 1.6947C11.0718 1.42099 11.0718 0.979697 10.7846 0.705986C10.4973 0.432275 10.0342 0.432275 9.747 0.705986L5.49707 4.7502L1.24714 0.700402C0.96576 0.432277 0.496802 0.432276 0.215427 0.705986Z" fill="#D6D6D6"/>
+                                                </svg>
+                                                :
+                                                <svg width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M0.215427 0.705986C-0.0718095 0.979698 -0.0718094 1.42099 0.215427 1.6947L5.08673 6.33661C5.31535 6.55446 5.68465 6.55446 5.91327 6.33661L10.7846 1.6947C11.0718 1.42099 11.0718 0.979697 10.7846 0.705986C10.4973 0.432275 10.0342 0.432275 9.747 0.705986L5.49707 4.7502L1.24714 0.700402C0.96576 0.432277 0.496802 0.432276 0.215427 0.705986Z" fill="#D6D6D6"/>
+                                                </svg>
+                                            }</div>
+                                            
+
                                         </div>
                                         <div
-                                            className={`flex text-start overflow-hidden  ${
-                                            openAnswerDiv[index] ? "max-h-96" : "max-h-0"
+                                            className={`flex text-start overflow-hidden text-sm  ${
+                                            openAnswerDiv[index] ? "h-fit" : "h-0"
                                             }`}
                                         >
-                                            <div className="pt-2">A. {qna.answer}</div>
+                                            <div className="pt-2 break-words">A. {qna.answer}</div>
                                         </div>
                                     </div>
                                 )
@@ -121,6 +133,8 @@ export default function Inquiry(){
                         
                     </div>
                 </div>
+
+                <hr className="w-full md:w-[810px] h-1" style={{backgroundColor:"$E6E2D8"}}/>
 
                 <div className="w-full md:w-[810px] h-min-[64px] ">
                         <h2 className="text-xl font-bold  md:leading-tight font-pretendard text-joyful-indigo">오시는 길</h2>

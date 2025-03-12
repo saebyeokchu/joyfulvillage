@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import Image from "next/image"
 
 import { StayType } from "@/types";
+import { imgAddress } from "@/lib/const";
 
 export default function ImagePopUp({
     images,
@@ -61,7 +62,8 @@ export default function ImagePopUp({
                     {images.map((src: string, index : number) => (
                     <div key={`modal-${index}`} className="w-full flex-shrink-0 relative">
                         <Image 
-                        src={src}
+                        loader={()=>imgAddress +src}
+                        src={imgAddress + src}
                         alt={`modal-image-${index}`}
                         fill
                         style={{ objectFit: "contain" }}

@@ -1,38 +1,13 @@
 services:
-  db:
-    image: postgres:15
-    ports:  
-     - "5432:5432"
-    volumes:
-      - pg-data:/home/ec2-user/prod/pg-data
-    restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 1234
-      POSTGRES_DB: joyful-village
-
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: pgadmin4
-    restart: always
-    ports:
-      - "5433:80"
-    environment:
-      PGADMIN_DEFAULT_EMAIL: cuu2252@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: 1234
-    volumes:
-      - pgadmin-data:/home/ec2-user/prod/pgadmin-data
-
-
-  editor-front:
+  front:
     image: cuu2253/joyful-village:latest
     ports:
       - "3000:3000"
     restart: always
-    container_name: joyful-village-front
-
-volumes:
-  pg-data:
-        external: true
-  pgadmin-data:
-        external: true
+    container_name: front
+    depends_on:
+      - back
+    environment:
+      - NEXT_PUBLIC_API_URL=http://43.200.1.5
+      - NEXT_PUBLIC_MEDIA_URL=http://43.200.1.5/media/  # Use backend URL for media access
+    # ❌ Removed media-storage volume (Frontend does NOT need it)

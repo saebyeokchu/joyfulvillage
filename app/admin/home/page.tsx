@@ -1,17 +1,16 @@
 "use client"
-import { Card } from "@/components/ui";
-import AdminWrapper from "../component/AdminWrapper";
 import { useState } from "react";
 import Image from "next/image";
 import { IndigoRoundButton } from "@/components/ui/Button";
-import { ImageLibraryModal } from "../_component";
 import useSWR from "swr";
 import { HomeType } from "@/types";
-import { AdminApiAddress } from "@/lib/const";
+import { AdminApiAddress, imgAddress } from "@/lib/const";
 import { AddHomeImages, DeleteHomeImages, GetHomeImages } from "@/lib/url";
 import { Loading, NotFound, SomeErrorPage } from "@/components/layout";
 import { useRouter } from "next/navigation";
 import { GeneralError } from "@/lib/messages";
+import AdminWrapper from "../component/AdminWrapper";
+import { ImageLibraryModal } from "../_component";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -43,9 +42,8 @@ export default function EditHome(){
     };
 
     async function onClickAddAction(imgSrc : string) {
-        //image 선택했을때 추가하기
         try {
-            const data = await fetcher(AddHomeImages + "/images/"+imgSrc);
+            const data = await fetcher(AddHomeImages + imgSrc);
             console.log(data);
           } catch (error) {
             console.error(error);
@@ -56,6 +54,12 @@ export default function EditHome(){
     }
 
     const onClickDeleteImg = async (id : number) => {
+        //최소갯수는 1개
+        if(data.length == 1){
+            window.alert("홈 이미지는 최소 1개여야 합니다.");
+            return;
+        }
+        
         if(window.confirm("해당하는 이미지" + GeneralError.verifyDeletion)){
             try {
                 const data = await fetcher(DeleteHomeImages + id);
@@ -77,14 +81,14 @@ export default function EditHome(){
                     {/* <IndigoRoundButton onClickFunction={() => setOpenImageLibrary(true)}  btnName={"저장하기"} />  */}
                 </div>
                 <div className="grid grid-cols-3 gap-12 mt-3">
-                    { data.length > 0 && data.map((d : HomeType.Home, i : number) => 
+                    { data && data.length > 0 && data.map((d : HomeType.Home, i : number) => 
                         <div className="border-0 relative h-64" key={`admin_image_${i}`}>
-                            <Image className="object-cover " fill src={d.imgSrc}  alt={`home-image-${i}`} />
+                            <Image className="object-cover " fill src={imgAddress + d.imgSrc} loader={()=>imgAddress + d.imgSrc}  alt={`home-image-${i}`} />
                             <p className="w-full flex cursor-pointer" onClick={()=>onClickDeleteImg(d.id)}>
                                 <span className="mx-auto h-8 pt-2 text-xs bg-joyful-indigo w-full text-center absolute bottom-0 text-white" >삭제하기</span>
                             </p>
                         </div>
-                    )}
+                    ) }
                 </div>
             </AdminWrapper>
 

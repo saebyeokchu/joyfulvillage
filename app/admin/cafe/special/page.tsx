@@ -20,7 +20,7 @@ import { CafeSection } from "@/lib/enums";
 import { getFetcher, postFetcher, postJsonFetcher } from "@/lib/fetcher";
 import { isStrValid } from "@/lib/common";
 import { ImageLibraryModal } from "../../_component";
-import { NoImgSrc } from "@/lib/const";
+import { imgAddress, NoImgSrc } from "@/lib/const";
 
 
 export default function ManageProgram(){
@@ -117,15 +117,21 @@ export default function ManageProgram(){
     }
 
     const onClickAddAction = (imgSrc : string) => {
-        setTargetImgSrc("/images/"+imgSrc);
+        setTargetImgSrc(imgSrc);
         return true;
+    }
+
+    const onClickAddBtn = () => {
+        setTargetSpecial(null);
+        setTargetImgSrc(null);
+        setIsOpenSpecialModal(true);
     }
 
 
     return (
         <>
         <AdminWrapper>
-           <CafeWrapper subTitle={"스페셜 메뉴 관리하기"}buttons={[{onClickFunction : ()=>setIsOpenSpecialModal(true), btnName : "추가하기"}]}>
+           <CafeWrapper subTitle={"스페셜 메뉴 관리하기"}buttons={[{onClickFunction :onClickAddBtn, btnName : "추가하기"}]}>
                 {undefined}
            </CafeWrapper>
             <div className="grid grid-cols-3 gap-12 mt-3">
@@ -172,7 +178,7 @@ export default function ManageProgram(){
                         <div>
                             <p>스페셜 메뉴 사진</p>
                             <IndigoRoundButton btnName={"선택하기"} onClickFunction={()=>setOpenImageLibrary(true)} />
-                            <Image className="mt-3" height={180} width={200} src={targetImgSrc || NoImgSrc} alt={""} />
+                            <Image loader={()=>imgAddress + (targetImgSrc ?? NoImgSrc )} className="mt-3" height={180} width={200} src={imgAddress + (targetImgSrc ?? NoImgSrc )} alt={""} />
                         </div>
                         <div>
                             <p>스페셜 메뉴 이름</p>

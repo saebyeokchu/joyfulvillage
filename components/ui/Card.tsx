@@ -1,7 +1,9 @@
 "use client"
 
+import { imgAddress } from "@/lib/const";
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { Loading } from "../layout";
 
 const Card = ({
   name, 
@@ -11,19 +13,28 @@ const Card = ({
   onClickImage,
   wrapperId,
   alt,
-  bgColor = 'bg-transparent'
+  bgColor = 'bg-transparent',
+  hideImg = false,
 } : Readonly<{
   name: string;
   address: string;
   children: React.ReactNode; 
   images: string[];
-  onClickImage: React.MouseEventHandler<HTMLDivElement>;
+  onClickImage: any;
   wrapperId: string;
   alt: string;
   bgColor?: string;
+  hideImg? : boolean
 }>) => {
   const [index, setIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(false); //click loading
   const totalSlides = images.length;
+
+  const onClickCardImg = () => {
+    setIsLoading(true);
+    onClickImage();
+    setIsLoading(false);
+  }
 
   // Wrap each image in a container that fills 100% of the slider width
   const renderedOptions = useMemo(() => {
@@ -33,12 +44,15 @@ const Card = ({
         className="relative w-full h-full flex-shrink-0 overflow-hidden"
       >
         <Image
-          onClick={onClickImage}
+          onClick={onClickCardImg}
           fill
           className="object-cover cursor-pointer duration-1000 transition-all ease-in-out hover:scale-105 hover:opacity-50"
-          src={src}
+          src={imgAddress + src}
+          loader={()=>imgAddress + src}
           alt={alt || "stay1"}
           priority
+          placeholder="blur"
+          blurDataURL="/images/cover-image.jpg"
         />
       </div>
     ));
@@ -52,10 +66,14 @@ const Card = ({
     setIndex((prevIndex) => (prevIndex + 1) % totalSlides);
   };
 
+  if(isLoading){
+    return <div className="h-screen"><Loading /></div>
+  }
+
   return ( 
-    <div className={`md:h-fit border-0 ${bgColor}`} key={`stay-${wrapperId}`}>
+    <div className={`md:h-fit border-0 border-red-500 ${bgColor}`} key={`stay-${wrapperId}`}>
       {/* Slider Container */}
-      <div className="relative w-full h-[200px] md:h-[270px] overflow-hidden group border-0 border-green-500">
+      {!hideImg && <div className="relative w-full h-[200px] md:h-[270px] overflow-hidden group border-0 border-green-500">
         {/* Slider Inner Container */}
         <div
           className="relative transition-transform duration-1000 ease-in-out h-full w-full flex"
@@ -91,7 +109,7 @@ const Card = ({
         )}
 
         {/* Dot Indicators for Mobile */}
-        <div className="absolute flex md:hidden bottom-4 left-1/2 transform -translate-x-1/2 space-x-2">
+        {images.length > 1 && <div className="absolute flex md:hidden bottom-4 left-1/2 transform -translate-x-1/2 space-x-2">
           {images.map((_, idx) => (
             <button
               key={`dot-${idx}`}
@@ -99,15 +117,15 @@ const Card = ({
               className={`w-3 h-3 rounded-full ${index === idx ? "bg-white" : "bg-gray-500"}`}
             ></button>
           ))}
-        </div>
-      </div>
+        </div>}
+      </div>}
 
-      <div className="mt-5 text-joyful-indigo">
+      <div className="mt-3 text-joyful-indigo">
         <p className="font-bold text-xl font-pretendard">{name}</p>
-        <p className="mt-4 text-sm  font-pretendard">{address}</p>
+        <p className="mt-1 text-xs  font-pretendard">{address}</p>
 
-        <div className="mt-8 max-w-[427px] korean-text text-sm/5">
-        {children}
+        <div className="mt-5 max-w-[427px] korean-text text-sm/6">
+          {children}
         </div>
     </div>
     </div>

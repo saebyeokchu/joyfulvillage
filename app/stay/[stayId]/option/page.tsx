@@ -11,26 +11,24 @@ import {
 } from "../../component";
 import { StayType } from "@/types";
 import { GrayRoundButton } from "@/components/ui/Button";
-import { PageHeader, OptionPills } from "@/components/layout";
+import { PageHeader, OptionPills, BackButtonWrapper, SomeErrorPage, Loading } from "@/components/layout";
+import { Card } from "@/components/ui";
+import { optionService } from "@/service";
 
 
 export default function StayOptions(){
     const router = useRouter();
     const params = useParams();
+    const [isLoading, setIsLoading] = useState(false);
     const { stayId } = params;
 
-    const [options, setOptions] = useState<StayType.Option[]>([]);
-    
+    const { options, optionsError, optionsMutate  } = optionService.GetByStayId(stayId as string);
 
-    useEffect(()=>{
-        init();
-    },[]);
-
-    const init = () => {
-        if(typeof(stayId) == 'string'){ //url check
-            console.log("[stayId] : ", stayId);
-            setOptions(Options);
-        }
+    if (optionsError) {
+        console.log(optionsError)
+        return (
+            <SomeErrorPage onClickFunction={() => router.push("/admin")} error={optionsError.message} />
+        );
     }
 
     const handleOptionClick = useCallback((optionId: string | undefined) => {
@@ -45,48 +43,50 @@ export default function StayOptions(){
 
     const renderedOptions = useMemo(() => {
         return options.map((option : StayType.Option, index : number) => (
-            <StayWrapper
+            <Card
                 key={`option-list-${index}`} // Ensure each element has a unique key
                 name={option.name}
                 address={option.introduction}
-                images={option.mainImg}
+                images={option.mainImgs}
                 wrapperId={index.toString()} // Ensure each element has a unique id
                 onClickImage={() => handleOptionClick(option.id?.toString())}
                 alt={"option"+index.toString()}
             >
                 <div dangerouslySetInnerHTML={{__html: option.content}} />
-            </StayWrapper>
+            </Card>
         ));
     }, [options, handleOptionClick])
 
     
     return(
         
-        <div className="border-0 border-0-red-700 pb-10" >
+        isLoading ? <div className="h-screen"><Loading /></div> : <div className="border-0 border-0-red-700 pb-10" >
 
             {/* Header */}
-            <PageHeader src={"/images/barbecue3.jpeg"} title={"옵션"} subTitle={"아래 옵션을 통해 숲에서 더 풍성한 추억을 쌓아보세요."} alt={"soop-option-header"} />
+            <PageHeader src={"/images/cover-program.png"} title={"옵션"} subTitle1={"아래 옵션을 통해 숲에서 더 풍성한 추억을 쌓아보세요."} alt={"soop-option-header"} />
 
             {/* pills */}
             <OptionPills pills={[{
                 targetVal : StayPillOption.rooms,
                 name : '객실',
-                onClickFunction : ()=>router.push(`/stay/${stayId}/rooms`),
+                onClickFunction : ()=>{ setIsLoading(true); router.push(`/stay/${stayId}/rooms`); },
             }, {
                 targetVal : StayPillOption.option,
                 name : '옵션',
-                onClickFunction : ()=>router.push(`/stay/${stayId}/option`),
+                onClickFunction : ()=>{ setIsLoading(true); router.push(`/stay/${stayId}/option`); },
             }]} currentPill={StayPillOption.option} />
 
             {/* stay list */}
             {/*  items-center justify-center  mb-10   */}
-            <div className="container md:mx-auto grid gird-cols-1 items-center   justify-center md:grid-cols-3 gap-12 px-5 md:px-8">
+            <div className={`container md:mx-auto grid gird-cols-1  md:grid-cols-3 gap-x-5 gap-y-14 px-5 md:px-14 }`}>
                 {renderedOptions}
             </div>
 
+            {/* div className="container py-10 px-5 md:mx-auto grid grid-cols-1 items-start justify-center md:grid-cols-3 gap-5 md:gap-12"> */}
+
              {/* return button */}
-             <div className="container px-5 md:mx-auto mt-10 border-0 border-red-400 flex justify-end">
-                <GrayRoundButton btnName={"목록으로"} onClickFunction={handleReturnClick}/>
+            <div className="mt-10">
+                <BackButtonWrapper btnName={"목록으로"} onBtnClickFunction={handleReturnClick} />
             </div>
            
         </div>

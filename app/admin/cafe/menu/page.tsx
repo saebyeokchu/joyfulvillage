@@ -72,11 +72,11 @@ export default function CafeMenu(){
                 <CafeWrapper subTitle="메뉴판 이미지 수정하기" buttons={[{onClickFunction : onClickEditBtn, btnName : "저장하기"}]}>
                     <FileInput imgRef={imgRef} />
                     <small>메뉴판 이미지는 캐시를 사용합니다. 반영되기까지 다소 시간이 소요되니 기다리시거나 캐시를 삭제하여 주세요.</small>
-                    <Image src="/images/system/menu.png" alt="cafe-dochecn-menu" width={400} height={300} className="mt-3 hover:scale-105 hover:opacity-50 cursor-pointer duration-1000 ease-in-out transition-all" onClick={()=>setIsModalOpen(true)}/>
+                    <Image src="/images/cafe-menu.png" alt="cafe-dochecn-menu" width={400} height={300} className="mt-3 hover:scale-105 hover:opacity-50 cursor-pointer duration-1000 ease-in-out transition-all" onClick={()=>setIsModalOpen(true)}/>
                 </CafeWrapper>
             </AdminWrapper>
            
-            {isModalOpen && <ImagePopUp images={["/images/system/menu.png"]} onCloseModal={()=>setIsModalOpen(false)} />}
+            {isModalOpen && <ImagePopUp images={["/images/cafe-menu.png" ]} onCloseModal={()=>setIsModalOpen(false)} />}
             
         </>
     )

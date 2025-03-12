@@ -15,11 +15,11 @@ import { getFetcher } from "@/lib/fetcher";
 import { Loading, SomeErrorPage } from "@/components/layout";
 import { useRouter } from "next/navigation";
 import { ImageLibraryModal } from "../../_component";
+import { imgAddress } from "@/lib/const";
 
 
 export default function CafeIntroduction(){
     const [ cafeContent, setCafeContent ] = useState<Cafe[]>([]);
-    const [ images , setImages ] = useState<string[]>([]);
     const [ openImageLibrary , setImageLibrary ] = useState<boolean>(false);
     const router = useRouter();
 
@@ -48,11 +48,9 @@ export default function CafeIntroduction(){
 
     const onClickAddAction = async (imgSrc : string) => {
         //make image string with string divider
-        images.push("/images/"+imgSrc);
-        setImages(images);
         const response = await cafeService.create({
             section : CafeSection.mainImgs,
-            img : "/images/"+imgSrc
+            img : imgSrc
         });
 
         console.log("onClickAddAction", response);
@@ -67,11 +65,8 @@ export default function CafeIntroduction(){
     const onClickDeleteImage = async (id : number | undefined) => {
         if(id){
             if(window.confirm("해당 이미지" + GeneralError.verifyDeletion)){
-                // images.splice(images.indexOf(imgSrc), 1);
-                // setImages(images);
-                console.log("delete iamges : ",images);
                 try {
-                    const data = await getFetcher(DeleteCafeDataById + id);
+                    await getFetcher(DeleteCafeDataById + id);
                     mutate();
                   } catch (error) {
                     window.alert(GeneralError.unknownError + " " + GeneralError.tryLater)
@@ -98,7 +93,7 @@ export default function CafeIntroduction(){
                                     <div className="border-0 relative bg-white h-[300px]" key={`manage_cafe_mainimg_${index}`}>
                                         {d.img && typeof d.img === 'string' && (
                                             <>
-                                                <Image src={d.img} fill alt={`image-archive-${index}`} className="object-cover" />
+                                                <Image loader={()=>imgAddress + d.img} src={imgAddress + d.img} fill alt={`image-archive-${index}`} className="object-cover" />
                                                 <p className="w-full flex cursor-pointer absolute bottom-0" >
                                                     <span className="mx-auto h-8 pt-2 text-xs bg-joyful-indigo w-full text-center  text-white" onClick={()=>onClickDeleteImage(d.id)}>삭제하기</span>
                                                 </p>

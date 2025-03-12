@@ -8,6 +8,7 @@ import { useProgramContext } from '@/context/ProgramContext';
 import { BreadCrumbs } from '@/components/ui';
 import { Loading, PageHeader } from '@/components/layout';
 import { IndigoRoundButton } from '@/components/ui/Button';
+import { imgAddress } from '@/lib/const';
 
 interface Props {
     htmlString: string;
@@ -42,6 +43,7 @@ function DetailContent() {
           info.content = sanitizedHtml;
 
           setInfo(info);
+          window.scrollTo(0, 0);
           //내용 parse하기
         }
       },[])
@@ -63,17 +65,17 @@ function DetailContent() {
       //   };
 
       if(!programId) {
-        return <Loading />
+        return <div className='h-screen'><Loading /></div>
       }
   
       return(
         info && 
           <div className="border-0 border-0-red-700 " >
+            
               {/* head breadcrumble */}
               {/* <BreadCrumbs crumbs={[{title:'프로그램',link:'/program'}, {title:info.name,link:'/program'}]} /> */}
             {/* Header */}
-            <PageHeader src={info.img} title={info.name} subTitle={info.subName} alt={"program-detail-header"} />
-
+            <PageHeader src={imgAddress + info.img} title={info.name} subTitle1={info.subName} alt={"program-detail-header"} />
               
             {/* title */}
             {/* <nav className="flex flex-col justify-center align-middle">
@@ -82,11 +84,17 @@ function DetailContent() {
             </nav> */}
 
             {/* content */}
-            <div className="container py-10 px-5 md:mx-auto ">
-              <div
-                  dangerouslySetInnerHTML={{ __html: info.content }}
-              />
-
+            <div className="container py-10 px-5 md:px-14 md:mx-auto ">
+              { info.id == 1 && <video className='h-full w-full' controls>
+                <source src="/videos/dochen-soop.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video> }
+              <div className='flex flex-row justify-center'>
+                <div
+                  className='pt-3'
+                    dangerouslySetInnerHTML={{ __html: info.content }}
+                />
+              </div>
               {/* return button */}
               <div className="mt-10 flex justify-end border-0 border-0-red-400 max-w-[85rem] mx-8 md:mx-auto">
                   <IndigoRoundButton btnName={"목록으로"} onClickFunction={handleReturnClick}/>

@@ -24,11 +24,18 @@ const upload = async (newFileImage : any) =>{
                 
     //확장자 필요
     const newImageName = thisImgName + "." + fileExtender;
-    return await ImageArchiveApi.Upload(formData).then(( response : any ) => {
-        if(response.status == AxiosResponse.Successful){
-            return newImageName;
-        }
-    });
+    const response : any = await ImageArchiveApi.Upload(formData);
+
+    if(response.status == AxiosResponse.Successful){
+        return newImageName;
+    }
+    // console.log("imageArchieveService uplaod response : ", uploadResult);
+    // .then(( response : any ) => {
+    //     console.log("imageArchieveService uplaod response : ", response);
+    //     if(response.status == AxiosResponse.Successful){
+    //         return newImageName;
+    //     }
+    // });
 }
 
 const deleteByImageName = async (id : number, imageName : string) =>{

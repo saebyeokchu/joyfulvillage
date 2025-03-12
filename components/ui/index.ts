@@ -3,6 +3,8 @@ import Notice from "../layout/HeaderNotice";
 import DimBackground from "./DimBackground";
 import Card from "./Card";
 import Divider from "./Divider";
+import Switch from "./Switch";
+import CardWrapper from "./CardWrapper";
 import { 
     CustomTextInput,
     CustomNumberInput,
@@ -19,12 +21,14 @@ import {
     FilledBadgeGreen,
     OutlineBadgeGreen
 } from "./Badge";
+import Spinner from "./Spinner";
 
 export {
     BreadCrumbs,
     Notice,
     DimBackground,
     Card,
+    CardWrapper,
     CustomTextInput,
     CustomNumberInput,
     FileInput,
@@ -35,5 +39,7 @@ export {
     OutlineBadge,
     FilledBadgeGreen,
     OutlineBadgeGreen,
-    Divider
+    Divider,
+    Spinner,
+    Switch
 }

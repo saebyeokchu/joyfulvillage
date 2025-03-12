@@ -1,6 +1,9 @@
 import { ProgramApi } from "@/api";
 import { AxiosResponse } from "../lib/enums";
 import { Program } from "../types/Types";
+import useSWR from "swr";
+import { getFetcher } from "@/lib/fetcher";
+import { GetAboutById, GetAllProgram, GetProgramById } from "@/lib/url";
 
 
 async function getAll(){
@@ -9,6 +12,21 @@ async function getAll(){
             return response.data;
         }
     });
+}
+
+const GetAll = () => {
+    return useSWR<Program[]>(
+        GetAllProgram,
+        getFetcher
+    );
+}
+
+
+const GetById = (id : any) => {
+    return useSWR<Program>(
+        GetProgramById + id,
+        getFetcher
+    );
 }
 
 async function create(program : Program){
@@ -52,6 +70,9 @@ const deleteById = async (id : number) : Promise<boolean | undefined> =>{
 }
 
 export {
+    GetAll,
+    GetById,
+    
     getAll,
     create,
     update,

@@ -13,6 +13,7 @@ export class ProgramClass {
     private _id: number | null;
     private _name: string;
     private _subName: string;
+    private _introduction: string;
     private _img: string;
     private _content: string;
     private _lastModifiedAt: Date;
@@ -22,6 +23,7 @@ export class ProgramClass {
         this._id = null;
         this._name  = '';
         this._subName  = '';
+        this._introduction  = '';
         this._img  = '';
         this._content = '';
         this._lastModifiedAt = new Date();
@@ -33,6 +35,7 @@ export class ProgramClass {
             id : this.id ,
             name : this.name,
             subName : this.subName,
+            introduction : this.introduction,
             img : this.img,
             content : this.content,
         }
@@ -48,7 +51,7 @@ export class ProgramClass {
     }
 
     public isValidProgram(){
-        return isStrValid(this.name) && isStrValid(this.subName) && isStrValid(this.img) && isStrValid(this.content);
+        return isStrValid(this.name) && isStrValid(this.subName) && isStrValid(this.img) && isStrValid(this.content) && isStrValid(this.introduction);
     }
 
     public get id(): number | null {
@@ -72,6 +75,13 @@ export class ProgramClass {
     }
     public set subName(value: string) {
         this._subName = value;
+    }
+
+    public get introduction(): string {
+        return this._introduction;
+    }
+    public set introduction(value: string) {
+        this._introduction = value;
     }
    
     public get img(): string {

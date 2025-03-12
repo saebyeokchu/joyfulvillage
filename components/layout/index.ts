@@ -9,6 +9,7 @@ import BackButtonWrapper from "./BackButtonWrapper";
 import HeaderNotice from "./HeaderNotice";
 import ContentModal from "./ContentModal";
 import SomeErrorPage from "./SomeErrorPage";
+import RoomsLayout from "./RoomsLayout";
 
 export {
     NotFound,
@@ -21,5 +22,6 @@ export {
     BackButtonWrapper,
     HeaderNotice,
     ContentModal,
-    SomeErrorPage
+    SomeErrorPage,
+    RoomsLayout
 }

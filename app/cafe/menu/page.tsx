@@ -9,7 +9,7 @@ import { OptionPills, PageHeader } from "@/components/layout";
 import { Cafe } from "@/types/Types";
 import { CafeOption, CafeSection } from "@/lib/enums";
 import { cafeService } from "@/service";
-import { StringDivider } from "@/lib/const";
+import { imgAddress, StringDivider } from "@/lib/const";
 import MobileSlider from "@/components/layout/MobileSlider";
 
 // 숙소전체보기
@@ -57,7 +57,7 @@ export default function CafePage(){
     return (
         <div className="border-0 border-0-red-700" >
             {/* Header */}
-            <PageHeader src={"/images/cafe/11.jpeg"} title={"카페"} subTitle={"'카페 도천'은 조이풀빌리지 1층에 위치하여 산과 들의 아름다운 풍경을 바라보며 차와 브런치를 즐길 수 있는 공간입니다."} alt={"cafe-header"} />
+            <PageHeader src={ "cafe/11.jpeg" } title={"카페"} subTitle1={"'카페 도천'은 조이풀빌리지 1층에 위치하여 산과 들의 아름다운 풍경을 바라보며 차와 브런치를 즐길 수 있는 공간입니다."} alt={"cafe-header"} />
 
             {/* stay list */}
             <div className="max-w-[85rem] my-10 md:mt-0 mx-8 md:mx-auto items-center   justify-center  gap-16 md:gap-12">

@@ -5,3 +5,29 @@
 .bg-joyful-indigo {
     background-color: #4B5A62;
 }
+
+/* color */
+.bg-point {
+    background-color: #FFFBF2;
+  }
+  
+  .bg-point-hover:hover {
+    background-color: #c9c3b1;
+  }
+  
+  .bg-point-darker {
+    background-color: #c9c3b1;
+  }
+  
+  /* text */
+  .text-green {
+    color : #6E8653;
+  }
+  
+  .bg-green {
+    background-color: #6E8653;
+  }
+  
+  .bg-brown {
+    background-color: #746E60;
+  }
