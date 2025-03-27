@@ -23,6 +23,7 @@ export default function Middle({
     useEffect(() => {
       const adminLoginCompleted = localStorage.getItem("joyfuladminaccpedted");
       setIsAdmin(adminLoginCompleted == AdminCode);
+      window.scrollTo(0, 0);
     },[]);
 
     //dynamically check if header or footer should be displayed

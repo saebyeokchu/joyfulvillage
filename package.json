@@ -21,6 +21,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-spring": "^9.7.4",
+    "react-swipeable": "^7.0.2",
     "swr": "^2.3.2"
   },
   "devDependencies": {

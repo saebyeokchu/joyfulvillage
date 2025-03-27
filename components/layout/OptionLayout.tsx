@@ -12,9 +12,9 @@ import { optionService } from "@/service";
 
 //saebyeok 여기 로직 보충 필요
 const OptionDetailWrapper = ({option, index, onClickImage} : {option : StayType.Option , index : number, onClickImage : any}) => 
-<div className={`w-full flex-shrink-0 border-0 border-0-red-500 flex justify-center`} key={`option-detail-wrapper-${index}`}>
-    <div className="grid grid-cols-1 md:grid-cols-2  w-[810px] border-0 border-0-purple-500">
-        <div className="relative w-full h-72 border-0 cursor-pointer overflow-hidden" onClick={onClickImage}>
+<div className={`w-full flex-shrink-0 borde-0 border-0-red-500 flex justify-center `} key={`option-detail-wrapper-${index}`}>
+    <div className="grid grid-cols-1 md:grid-cols-2  w-full md:w-[810px] border-0 border-0-purple-500 px-10 md:px-0">
+        <div className="hidden md:block relative w-full h-[270px] border-0 cursor-pointer overflow-hidden" onClick={onClickImage}>
             <Image 
                 loader={()=>imgAddress + option.mainImgs[0]}
                 src={imgAddress + option.mainImgs[0]}
@@ -24,11 +24,11 @@ const OptionDetailWrapper = ({option, index, onClickImage} : {option : StayType.
                 style={{ objectFit: "cover" }}
             />
         </div>
-        <div className="flex flex-col ml-4" >
-            <p className="text-xl font-bold font-pretendard">{option.name}</p>
-            <p className="font-pretendard mt-3">{option.introduction}</p>
+        <div className="flex flex-col md:ml-4 " >
+            <p className="text-xl font-bold font-arita">{option.name}</p>
+            <p className="font-arita mt-3">{option.introduction}</p>
             <div className="mt-6 text-gray-500">
-                <div dangerouslySetInnerHTML={{__html: option.content}} />
+                <div dangerouslySetInnerHTML={{__html: option.content || ''}} />
             </div>
         </div>
     </div>
@@ -39,12 +39,15 @@ const OptionLayout = ({
   optionId,
   options,
   handleReturnClick,
+  showBtn,
 }:{
   optionId : string,
   options : StayType.Option[],
-  handleReturnClick : any
+  handleReturnClick : any,
+  showBtn : boolean
  
 }) => {
+  const router = useRouter();
     // Always call hook to set index
     const [index, setIndex] = useState(0);
     const [targetOptionId, setTargetOptionId] = useState(typeof optionId === "string" ? parseInt(optionId) : 0);
@@ -80,7 +83,7 @@ const OptionLayout = ({
         ? targetOption.mainImgs.map((src: string, i: number) => (
             <div
               key={`content-image-${i}`}
-              className="w-[300px] md:w-[810px] h-[300px] md:h-[600px] flex-shrink-0 relative overflow-hidden"
+              className="w-full md:w-[810px] h-[300px] md:h-[600px] flex-shrink-0 relative overflow-hidden"
             >
               <Image
                 loader={()=>imgAddress + src}
@@ -119,9 +122,17 @@ const OptionLayout = ({
     // Determine loading state without returning early
     const NoTargetOption = !targetOption;
 
-    if(NoTargetOption){
-      return <SomeErrorPage onClickFunction={handleReturnClick} error={"잘못된 접근입니다."} />
+    if(NoTargetOption ){
+      return <div className="h-screen"><Loading/></div>;
     }
+
+    const onClickPageHeaderBtn = () => {
+      if(targetOption.reserveLink){
+          router.push(targetOption.reserveLink === "realtime" ? '/booking' : targetOption.reserveLink);
+      }else{
+          window.alert(targetOption.reserveNumber+"로 문의주세요." );
+      }
+  }
   
     return (
       <div className="border-0 pb-20">
@@ -132,10 +143,14 @@ const OptionLayout = ({
               title={targetOption.name}
               subTitle1={targetOption.introduction}
               alt={"option1-detail-header"}
+              showBtn={showBtn}
+              // 실시간 예약으로 이동하거나 네이버로 이동
+              btnName={targetOption.reserveLink ? "예약하기" : "문의하기"}
+              onClickBtn={onClickPageHeaderBtn} 
             />
   
             {/* Stay list */}
-            <div className="relative container  py-20 px-5 md:px-14 md:mx-auto h-72 mt-10 overflow-hidden">
+            <div className="relative container  py-20 px-0 md:px-14 md:mx-auto h-72 overflow-hidden">
               <div
                 className="transition-transform duration-1000 ease-in-out w-full flex flex-row group"
                 style={{ transform: `translateX(-${index * 100}%)` }}
@@ -146,7 +161,7 @@ const OptionLayout = ({
               {/* Left arrow */}
               {index !== 0 && (
                 <div
-                  className="hidden md:block cursor-pointer absolute left-0 top-1/2 translate-y-5"
+                  className="hidden md:block cursor-pointer absolute left-14 top-1/2 translate-y-5"
                   onClick={handlePrev}
                 >
                   <svg
@@ -165,7 +180,7 @@ const OptionLayout = ({
               {/* Right arrow */}
               {index !== totalSlides - 1 && (
                 <div
-                  className="hidden md:block cursor-pointer absolute right-0 top-1/2 translate-y-5"
+                  className="hidden md:block cursor-pointer absolute right-14 top-1/2 translate-y-5"
                   onClick={handleNext}
                 >
                   <svg
@@ -188,7 +203,7 @@ const OptionLayout = ({
               )}
   
               {/* Dot indicators (mobile) */}
-              <div className="absolute flex md:hidden bottom-4 left-1/2 transform -translate-x-1/2 space-x-2">
+              <div className="hidden absolute bottom-4 left-1/2 transform -translate-x-1/2 space-x-2">
                 {options[index].mainImgs.map((_: any, i: number) => (
                   <button
                     key={`option-dot-${i}`}
@@ -200,7 +215,7 @@ const OptionLayout = ({
             </div>
   
             {/* Content images */}
-            <div className="container mt-20 px-5 md:px-14 mx-auto flex flex-col items-center justify-center space-y-10">
+            <div className="container mt-20 px-10 md:px-14 mx-auto flex flex-col items-center justify-center space-y-10">
               {renderedImages}
             </div>
   

@@ -41,6 +41,14 @@ export default function RoomLayout({
         return <SomeErrorPage onClickFunction={() => router.push("/")} error={"잘못된 접근입니다."} />
     }
 
+    const onClickPageHeaderBtn = () => {
+        if(targetRoom.reserveLink){
+            router.push(targetRoom.reserveLink === "realtime" ? '/booking' : targetRoom.reserveLink);
+        }else{
+            window.alert(targetRoom.reserveNumber+"로 문의주세요." );
+        }
+    }
+
 
     return(
         <div className="border-0 border-0-red-700 pb-20" >
@@ -51,8 +59,8 @@ export default function RoomLayout({
                 alt={"stay-room-detail-header"}
                 showBtn={true}
                 // 실시간 예약으로 이동하거나 네이버로 이동
-                btnName={targetRoom.btnName}
-                onClickBtn={() => router.push(targetRoom.reserveLink || '/booking')} subTitle1={""}            />}
+                btnName={targetRoom.reserveLink ? "예약하기" : "문의하기"}
+                onClickBtn={onClickPageHeaderBtn} subTitle1={""}            />}
 
             {/* content */}
             <div className="container flex flex-col space-y-11 w-full  pt-20 px-5 md:px-14 md:mx-auto  justify-center border-0 border-red-700 text-joyful-indigo ">

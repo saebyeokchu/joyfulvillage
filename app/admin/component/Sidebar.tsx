@@ -41,8 +41,6 @@ const AdminMenuList = ({
 export default function Sidebar() {
     const pathname = usePathname();
 
-    console.log(usePathname(), usePathname() != '/')
-
     return (
         <div id="hs-application-sidebar" className="
         w-64 h-100
@@ -71,11 +69,14 @@ export default function Sidebar() {
                             카페도천
                         </Link>
                         <ul className={`w-full ${pathname.includes("cafe") ? "flex" : "hidden" } flex-col items-start ps-4 gap-y-3.5 text-sm text-gray-800 rounded-lg mt-3 `}>
-                            <Link className={`${pathname.includes("introduction") && "underline" } hover:underline`} href={"/admin/cafe/introduction"} >소개글</Link>
-                            <Link className={`${pathname.includes("image") && "underline" } hover:underline`} href={"/admin/cafe/image"}>이미지</Link>
-                            <Link className={`${pathname.includes("menu") && "underline" } hover:underline`} href={"/admin/cafe/menu"}>메뉴판</Link>
+                            {/* <Link className={`${pathname.includes("introduction") && "underline" } hover:underline`} href={"/admin/cafe/introduction"} >소개글</Link> */}
+                            <Link className={`${pathname.includes("image") && "underline" } hover:underline`} href={"/admin/cafe/image"}>대표 이미지</Link>
+                            {/* <Link className={`${pathname.includes("menu") && "underline" } hover:underline`} href={"/admin/cafe/menu"}>메뉴판</Link> */}
                             <Link className={`${pathname.includes("special") && "underline" } hover:underline`} href={"/admin/cafe/special"}>스페셜 메뉴</Link>
-                            <Link className={`${pathname.includes("naverorderlink") && "underline" } hover:underline`} href={"/admin/cafe/naverorderlink"}>네이버 주문 링크</Link>
+                            <Link className={`${pathname.includes("/coffee") && "underline" } hover:underline`} href={"/admin/cafe/coffee"}>커피 메뉴</Link>
+                            <Link className={`${pathname.includes("non-coffee") && "underline" } hover:underline`} href={"/admin/cafe/non-coffee"}>논커피 메뉴</Link>
+                            <Link className={`${pathname.includes("dessert") && "underline" } hover:underline`} href={"/admin/cafe/dessert"}>디저트 & 브런치 메뉴</Link>
+                            <Link className={`${pathname.includes("tea") && "underline" } hover:underline`} href={"/admin/cafe/tea"}>티 메뉴</Link>
                         </ul>
                     </li>
 

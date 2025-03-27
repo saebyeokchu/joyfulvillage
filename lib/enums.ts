@@ -66,7 +66,11 @@ enum CafeSection {
     mainImgs,
     menus,
     specials,
-    naverorderlink
+    naverorderlink,
+    coffee,
+    noncoffee,
+    dessert,
+    tea
 }
 
 enum BizSection {
@@ -90,6 +94,11 @@ enum LayoutType {
     option
 }
 
+enum ReserveInfoType {
+    reserve,
+    inquiry
+}
+
 export {
     EditOption,
     AdminHeaderMenu,
@@ -101,5 +110,6 @@ export {
     BizSection,
     AxiosResponse,
     StayPillOption,
-    LayoutType
+    LayoutType,
+    ReserveInfoType
 }

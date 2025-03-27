@@ -5,8 +5,7 @@ import useSWR from "swr";
 
 const processData = (data : any) => data.map((d: any) => ({
   ...d,
-  mainImg: typeof d.mainImg === 'string' ? d.mainImg.split(";") : d.mainImg,
-  contentImgs: typeof d.contentImgs === 'string' ? d.contentImgs.split(";") : d.contentImgs,
+  mainImgs: typeof d.mainImgs === 'string' ? d.mainImgs.split(";") : d.mainImgs
 }))
 
 const GetById  = (id : any) => {

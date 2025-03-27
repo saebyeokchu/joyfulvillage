@@ -30,6 +30,7 @@ export default function Wysiwyg({
           "hr",
           "font",
           "fontsize",
+          "fontColor",
           "|",
           "outdent",
           "indent",

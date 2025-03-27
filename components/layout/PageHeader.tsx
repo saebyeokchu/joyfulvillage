@@ -14,8 +14,8 @@ const PageHeader = ({
 }:{
     src : string,
     title : string,
-    subTitle1 : string,
-    subTitle2? : string,
+    subTitle1 : string | undefined | null,
+    subTitle2? : string | undefined | null,
     alt : string,
     showBtn? : boolean,
     btnName? : string,
@@ -44,7 +44,6 @@ const PageHeader = ({
 
     return (
         <div className="relative w-full  border-0 border-0-red-700 "  >
-
             {/* Header Text Section (Positioned Below) p-5 md:p-8*/} 
             <div
                 className={`bg-cover bg-center border-0 border-red-500 h-[446px] ${isLoaded ? "opacity-100" : "opacity-0"}`}
@@ -55,11 +54,11 @@ const PageHeader = ({
                     <div className="flex flex-col md:flex-row md:space-x-6">
                         <p className="text-2xl font-bold md:text-5xl md:font-normal">{title}</p>
                         {/* md screen sub title */}
-                        <p className={`hidden md:block text-sm ${!subTitle2 && 'mt-5'}  md:text-base md:font-bold font-pretendard`}>
+                        <p className={`hidden md:block text-sm ${!subTitle2 && 'mt-5'}  md:text-base md:font-bold font-arita`}>
                             {subTitle1} {subTitle2 && <><br />{subTitle2}</> }
                         </p>
                         {/* sm screen sub title */}
-                        <p className="block md:hidden text-sm mt-2  md:text-base md:font-bold font-pretendard">
+                        <p className="block md:hidden text-sm mt-2  md:text-base md:font-bold font-arita">
                             {subTitle1} {subTitle2}
                         </p>
                     </div>
@@ -95,7 +94,7 @@ const PageHeader = ({
             {/* <div className="flex md:hidden justify-center text-start w-full h-[350px]" style={{ backgroundImage: `url(${src})` }}>
                 <div className="absolute bottom-0 left-0 right-0 container mx-auto border-2 border-yellow-500 p-5 md:p-8 text-white">
                     <p className="text-2xl font-bold md:font-normal ">{title}</p>
-                    <p className="text-base mt-2 md:mt-5 md:text-lg  font-pretendard">{subTitle}</p>
+                    <p className="text-base mt-2 md:mt-5 md:text-lg  font-arita">{subTitle}</p>
                 </div>
             </div> */}
 

@@ -62,8 +62,8 @@ export default function ImagePopUp({
                     {images.map((src: string, index : number) => (
                     <div key={`modal-${index}`} className="w-full flex-shrink-0 relative">
                         <Image 
-                        loader={()=>imgAddress +src}
-                        src={imgAddress + src}
+                        loader={()=>src}
+                        src={src}
                         alt={`modal-image-${index}`}
                         fill
                         style={{ objectFit: "contain" }}

@@ -52,7 +52,7 @@ export default function StayOptions(){
                 onClickImage={() => handleOptionClick(option.id?.toString())}
                 alt={"option"+index.toString()}
             >
-                <div dangerouslySetInnerHTML={{__html: option.content}} />
+                <div dangerouslySetInnerHTML={{__html: option.content || ''}} />
             </Card>
         ));
     }, [options, handleOptionClick])

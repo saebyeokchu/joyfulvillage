@@ -15,7 +15,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
-  const mdFlatHeader = [HeaderMenu.inquiry,HeaderMenu.program,"/stay",HeaderMenu.cafe,"/admin","/about"].find((url : string) => pathname.includes(url)) ;
+  const mdFlatHeader = [HeaderMenu.inquiry,HeaderMenu.program,"/stay",HeaderMenu.cafe,"/admin","/about","/booking"].find((url : string) => pathname.includes(url)) ;
   const menuClicked : Record<HeaderMenu, boolean> = {
     [ HeaderMenu.home ] : false,
     [ HeaderMenu.about ] : false,

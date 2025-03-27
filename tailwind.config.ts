@@ -16,6 +16,7 @@ const config: Config = {
       fontFamily : {
         sans: ['var(--font-maruburis)'],
         pretendard: ["Pretendard", "sans-serif"],
+        arita: ['var(--font-arita)', 'sans-serif'],
       }
     },
   },

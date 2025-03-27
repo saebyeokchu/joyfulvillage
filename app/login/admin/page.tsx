@@ -65,11 +65,15 @@ export default function Login() {
 
         //이메일 추후 비밀처리
         const result = await authService.getAuth(emailAuthCodeRef.current?.value);
-        console.log(result);
-        if(result.status == 200){
-            // window.alert("인증번호 전송이 완료되었습니다.");
+
+        if(result.status == 200 && result.data){
             localStorage.setItem("joyfuladminaccpedted","logginedasadmin");
             router.push("/admin");
+        }else{
+            window.alert("인증번호가 일치하지 않습니다. "+GeneralError.tryLater);
+            if (emailAuthCodeRef.current) {
+                emailAuthCodeRef.current.value = null;
+            }
         }
 
         joyfulContext.openAdminLoading = false;

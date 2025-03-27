@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Card, CardWrapper } from "@/components/ui";
 import { Loading, PageHeader, SomeErrorPage } from "@/components/layout";
@@ -8,10 +8,17 @@ import { StayType } from "@/types";
 import useSWR from "swr";
 import { GetAllStay } from "@/lib/url";
 import { getFetcher } from "@/lib/fetcher";
+import { headerInfoService } from "@/service";
+import { imgAddress } from "@/lib/const";
+import { GeneralError } from "@/lib/messages";
 
 export default function ManageStay() {
   const router = useRouter();
-  const { data, error, mutate } = useSWR<any[]>(GetAllStay, getFetcher);
+
+  const [headerImgSrc, setHeaderImgSrc] = useState<string>("");
+
+  const { data, error: dataError } = useSWR<any[]>(GetAllStay, getFetcher);
+  const { headerInfo, isLoading, isError: headerError } = headerInfoService.GetById("stay");
 
   // Always call useMemo, even if data is not ready
   const processedData = useMemo(() => {
@@ -24,17 +31,24 @@ export default function ManageStay() {
       : [];
   }, [data]);
 
+  useEffect(() => {
+    if(headerInfo?.imgSrc){
+        setHeaderImgSrc(headerInfo.imgSrc);
+    }
+}, [headerInfo]);
+
+
   // Check for error and loading state AFTER all hooks are called
-  if (error) {
+  if (dataError || headerError || !data || !headerInfo) {
     return (
       <SomeErrorPage
-        onClickFunction={() => router.push("/admin")}
-        error={error.message}
+        onClickFunction={() => router.push("/")}
+        error={dataError?.message || headerError?.message || GeneralError.unknownError}
       />
     );
   }
 
-  if (!data) {
+  if (isLoading) {
     return (
       <div className="h-screen">
         <Loading />
@@ -42,13 +56,17 @@ export default function ManageStay() {
     );
   }
 
+  
+
+
   return (
     <div className="border-0 border-0-red-700">
       {/* Header */}
       <PageHeader
-        src={"/images/stay-cover.png"}
+        src={imgAddress + headerImgSrc}
         title={"스테이"}
-        subTitle1={"조이풀빌리지는 자연 속에서 누리는 다양한 형태의 숙소를 제공합니다."}
+        subTitle1={headerInfo.introduction1}
+        subTitle2={headerInfo.introduction2}
         alt={"stay-header"}
       />
 

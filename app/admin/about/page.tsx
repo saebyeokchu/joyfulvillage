@@ -1,16 +1,15 @@
 "use client"
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import useSWR from "swr";
 
 import { IndigoRoundButton } from "@/components/ui/Button";
 import { GeneralError } from "@/lib/messages";
 import { Loading, SomeErrorPage } from "@/components/layout";
 import { Card } from "@/components/ui";
-import useSWR from "swr";
 import { AboutType } from "@/types/About";
 import { GetAllAbout } from "@/lib/url";
 import { getFetcher } from "@/lib/fetcher";
-import { useAboutContext } from "@/context/AboutContext";
 import { AboutApi } from "@/api";
 import AdminWrapper from "../component/AdminWrapper";
 
@@ -69,6 +68,7 @@ export default function ManageAbout(){
                             alt={""}
                             bgColor="bg-white p-5"
                             hideImg={d.title==="joyful"}
+                            showBorder={true}
                         >
                             
                             <div className="flex flex-row space-x-3 justify-center">

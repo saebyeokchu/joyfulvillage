@@ -26,9 +26,10 @@ export default function EditHome(){
 
     if (!data) {
         return <AdminWrapper>
-            <Loading />
+            <SomeErrorPage onClickFunction={() => router.refresh()} error={GeneralError.loadingError} btnName="다시 시도하기" />
         </AdminWrapper>;
     }
+    
 
     if (error) {
         return (

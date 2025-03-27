@@ -110,7 +110,7 @@ export default function ImageLibraryModal({
                 </ContentModal>
                 : 
                 <ContentModal>
-                    <div className="flex justify-between px-4 pt-4 font-pretendard text-joyful-indigo">
+                    <div className="flex justify-between px-4 pt-4 font-arita text-joyful-indigo">
                         <h3 className="font-bold text-2xl">
                             이미지 라이브러리
                         </h3>
@@ -122,7 +122,7 @@ export default function ImageLibraryModal({
                         </svg>
                         </button>
                     </div>
-                    <div className="px-4 pb-4 overflow-y-auto font-pretendard">
+                    <div className="px-4 pb-4 overflow-y-auto font-arita">
                         <div className="flex flex-row space-x-2 mt-3">
                             {option == "라이브러리" ? <IndigoRoundButton btnName={"라이브러리"} /> : <IndigoOutlineRoundButton btnName={"라이브러리"} onClickFunction={()=>setOption("라이브러리")}/> }
                             {option == "업로드" ? <IndigoRoundButton btnName={"업로드"} /> : <IndigoOutlineRoundButton btnName={"업로드"} onClickFunction={()=>setOption("업로드")} /> }
@@ -131,7 +131,17 @@ export default function ImageLibraryModal({
                         { option == "라이브러리" && <div className="grid grid-cols-3 gap-3 mt-3">
                             { images.length > 0 && images.map((img : ImageArchive, index : number) => 
                                 <div className="border-0 relative" key={`admin_image_${index}`}>
-                                    <Image loader={()=>imgAddress+img.imgSrc} className="object-cover w-full h-40" src={imgAddress+img.imgSrc} width={500} height={400} alt={`image-archive-${index}`} />
+                                    <Image 
+                                        loader={()=>imgAddress+img.imgSrc} 
+                                        className="object-cover w-full h-40" 
+                                        src={imgAddress+img.imgSrc} 
+                                        width={500} 
+                                        height={400} 
+                                        alt={`image-archive-${index}`}
+                                        loading="lazy"
+                                        placeholder="blur"
+                                        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkAAIAAAoAAv/lxKUAAAAASUVORK5CYII="
+                                        />
                                     <p className="w-full flex cursor-pointer" onClick={()=>onClickSelectImg(img.imgSrc)}>
                                         <span className="mx-auto h-8 pt-2 text-xs bg-joyful-indigo w-full text-center absolute bottom-0 text-white" >선택하기</span>
                                     </p>

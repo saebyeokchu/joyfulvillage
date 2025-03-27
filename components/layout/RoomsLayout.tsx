@@ -58,7 +58,7 @@ export default function RoomsLayout({
                 onClickImage={()=>router.push(`/stay/${stayId}/rooms/${room.id}`)} 
                 alt="stay-1-1"
             >
-                {stayName != "숲스테이도천" && room.introduction1}
+                {stayName && !stayName.startsWith("숲스테이") && room.introduction1}
             </Card> 
         ));
     }, [router, processedData]);

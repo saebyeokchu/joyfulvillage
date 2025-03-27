@@ -4,18 +4,25 @@ import { useRouter } from "next/navigation";
 import Image from "next/image"
 
 import { Program } from "../../types/Types";
-import { programService } from "../../service";
+import { headerInfoService, programService } from "../../service";
 import { BreadCrumbs, Card, CardWrapper } from "@/components/ui";
 import { useProgramContext } from "@/context/ProgramContext";
 import { Loading, PageHeader } from "@/components/layout";
+import { imgAddress } from "@/lib/const";
 
 // 숙소전체보기
 export default function ProgramPage(){
+    const [headerImgSrc, setHeaderImgSrc] = useState<string>("");
+
     const router = useRouter();
     const programContext = useProgramContext();
-    const [isLoading, setIsLoading] = useState(false);
 
     const [ programs, setPrograms ] = useState<Program[]>([]);
+
+    const onClickGoToDetail = (program : Program) => {
+        programContext.currentProgram.setProgram(program);
+        router.push("/program/" + program.id);
+    }
 
     // useEffect(() => {
     //     init();
@@ -29,10 +36,17 @@ export default function ProgramPage(){
     //     });
     //     setIsLoading(false);
     // }
-
+    const { headerInfo, isLoading, isError } = headerInfoService.GetById("program");
     const {data, error, mutate} = programService.GetAll();
 
-    console.log(data);
+    useEffect(() => {
+        if (headerInfo) {  
+            if(headerInfo.imgSrc){
+                setHeaderImgSrc(headerInfo.imgSrc);
+            }
+        }
+    }, [headerInfo]);
+
     
     useEffect(()=>{
         if(data){
@@ -44,19 +58,36 @@ export default function ProgramPage(){
         return <div className="h-screen"><Loading /></div>
     }
 
-    const onClickGoToDetail = (program : Program) => {
-        setIsLoading(true);
-        programContext.currentProgram.setProgram(program);
-        router.push("/program/" + program.id);
-        setIsLoading(false);
+
+    if (isLoading) {
+    return (
+        <div className="h-screen">
+        <Loading />
+        </div>
+    );
     }
+
+
+    
+  if (!headerInfo ) {
+    return (
+      <div className="h-screen">
+        {undefined}
+      </div>
+    );
+  }
 
     
     return (
-        isLoading ? <div className="h-screen"><Loading /></div> : 
-        <div className="border-0 border-0-red-700 " >
+        <div className="border-0 border-0-red-700 min:h-[2036px]" >
             {/* Header */}
-            <PageHeader src={"/images/cover-program.png"} title={"프로그램"} subTitle1={"조이풀 빌리지의 경험을 풍부하게 만드는 프로그램 입니다."} alt={"program-header"} />
+            <PageHeader
+                src={imgAddress + headerImgSrc}
+                title={"프로그램"}
+                subTitle1={headerInfo.introduction1}
+                subTitle2={headerInfo.introduction2}
+                alt={"program-header"}
+            />
 
             {/* stay list */}
             <CardWrapper>
@@ -68,7 +99,8 @@ export default function ProgramPage(){
                         images={[program.img]} 
                         onClickImage={()=>onClickGoToDetail(program)} 
                         wrapperId={program.id!.toString()} 
-                        alt={`program-wrapper-card-${index}`} >
+                        alt={`program-wrapper-card-${index}`}
+                         >
                         {program.introduction}
                     </Card>
                 ))}             

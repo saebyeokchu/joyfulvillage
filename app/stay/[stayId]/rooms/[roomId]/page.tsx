@@ -20,6 +20,8 @@ const RoomToOptionType = (rooms : StayType.Room[]) : StayType.Option[] => {
             introduction : room.introduction2 ? room.introduction1 + " " + room.introduction2 : room.introduction1,
             mainImgs : room.mainImgs,
             content : room.content,
+            reserveLink : room.reserveLink,
+            reserveNumber : room.reserveNumber,
             stay_id : room.stay_id,
         }
     })
@@ -66,7 +68,7 @@ export default function RoomDetail(){
         return <div className="h-screen"><Loading /></div>
     }
 
-    console.log(targetRoom);
+    console.log("targetRoom",targetRoom);
 
     return(
         targetRoom.layout == LayoutType.room ? <RoomLayout 
@@ -79,6 +81,7 @@ export default function RoomDetail(){
                 optionId={roomId} 
                 options={RoomToOptionType(processedData)} 
                 handleReturnClick={handleReturnClick} 
+                showBtn={true}
             />
         // <div className="border-0 border-0-red-700 pb-16" >
         //     {/* Header */}

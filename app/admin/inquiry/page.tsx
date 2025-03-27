@@ -13,6 +13,7 @@ import AdminWrapper from "../component/AdminWrapper";
 import { IndigoRoundButton } from "@/components/ui/Button";
 import { FilledIndigoBadge } from "@/components/ui/Badge";
 import { GeneralError } from "@/lib/messages";
+import UpsertHeaderInfo from "../component/UpsertHeaderInfo";
 
 export default function CafeInquiry(){
     const [ order, setOrder ]= useState<any>([]);
@@ -20,6 +21,7 @@ export default function CafeInquiry(){
     const [ openAddQna, setOpenAddQna ]= useState<boolean>(false);
     const [ openEditQna, setOpenEditQna ]= useState<boolean>(false);
     const [ openEditSort, setOpenEditSort ]= useState<boolean>(false);
+    const [ openEditHeader, setOpenEditHeader] = useState(false);
     const [ editTarget, setEditTarget ]= useState<any>(null);
     const address : string = "주소 경상북도 영덕군 남정면 산정로 320";
     const [qnaList, setQnaList ] = useState<any>([]);
@@ -64,7 +66,10 @@ export default function CafeInquiry(){
         await EditBiz(longRef.current.value, lnagRef.current.value, addressTextRef.current.value).then(response=>{
             if(response.status==AxiosResponse.Successful){
                 window.alert(GeneralError.success);
-                openEditModal(false);
+                setEditTarget(null);
+                setOpenAddQna(false);
+                setOpenEditQna(false);
+                setOpenEditSort(false);
             }
         });
     }
@@ -81,7 +86,10 @@ export default function CafeInquiry(){
                     if(response.status==AxiosResponse.Successful){
                         window.alert(GeneralError.success);
                         setQnaList(response.data);
-                        openEditModal(false);
+                        setEditTarget(null);
+                        setOpenAddQna(false);
+                        setOpenEditQna(false);
+                        setOpenEditSort(false);
                     }
                 });
             }
@@ -198,6 +206,7 @@ export default function CafeInquiry(){
                 <div className="flex flex-row justify-between mt-3">
                     <p className="text-xl font-semibold">문의하기</p>
                     <div className="flex flex-row space-x-3">
+                    <IndigoRoundButton onClickFunction={()=>setOpenEditHeader(true)} btnName={"맨 위쪽 헤더 수정하기"} />
                         <IndigoRoundButton onClickFunction={editInquiryData}  btnName={"저장하기"} /> 
                     </div>
                     
@@ -370,6 +379,9 @@ export default function CafeInquiry(){
                             </div>
                         </div>
                     </div> }
+
+            {openEditHeader && <UpsertHeaderInfo onCloseModal={() => setOpenEditHeader(false)} headerInfoName={"inquiry"} />} 
+
         </>
     )
 }

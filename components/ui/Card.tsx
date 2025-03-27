@@ -15,6 +15,7 @@ const Card = ({
   alt,
   bgColor = 'bg-transparent',
   hideImg = false,
+  showBorder = false
 } : Readonly<{
   name: string;
   address: string;
@@ -24,7 +25,8 @@ const Card = ({
   wrapperId: string;
   alt: string;
   bgColor?: string;
-  hideImg? : boolean
+  hideImg? : boolean;
+  showBorder ?: boolean;
 }>) => {
   const [index, setIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(false); //click loading
@@ -38,7 +40,8 @@ const Card = ({
 
   // Wrap each image in a container that fills 100% of the slider width
   const renderedOptions = useMemo(() => {
-    return images.map((src: string, idx: number) => (
+    console.log(images);
+    return images && images.length > 0 ? images.map((src: string, idx: number) => (
       <div 
         key={`stay-image-${idx}`} 
         className="relative w-full h-full flex-shrink-0 overflow-hidden"
@@ -50,12 +53,13 @@ const Card = ({
           src={imgAddress + src}
           loader={()=>imgAddress + src}
           alt={alt || "stay1"}
-          priority
+          // priority
+          loading="lazy"
           placeholder="blur"
-          blurDataURL="/images/cover-image.jpg"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkAAIAAAoAAv/lxKUAAAAASUVORK5CYII="
         />
-      </div>
-    ));
+      </div> 
+    )) : [];
   }, [images, onClickImage, alt]);
 
   const handlePrev = () => {
@@ -71,7 +75,7 @@ const Card = ({
   }
 
   return ( 
-    <div className={`md:h-fit border-0 border-red-500 ${bgColor}`} key={`stay-${wrapperId}`}>
+    <div className={`md:h-fit ${showBorder && 'border border-slate-500'} ${bgColor}`} key={`stay-${wrapperId}`}>
       {/* Slider Container */}
       {!hideImg && <div className="relative w-full h-[200px] md:h-[270px] overflow-hidden group border-0 border-green-500">
         {/* Slider Inner Container */}
@@ -121,8 +125,8 @@ const Card = ({
       </div>}
 
       <div className="mt-3 text-joyful-indigo">
-        <p className="font-bold text-xl font-pretendard">{name}</p>
-        <p className="mt-1 text-xs  font-pretendard">{address}</p>
+        <p className="font-bold text-xl font-arita">{name}</p>
+        <p className="mt-1 text-xs  font-arita">{address}</p>
 
         <div className="mt-5 max-w-[427px] korean-text text-sm/6">
           {children}

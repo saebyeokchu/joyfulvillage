@@ -5,8 +5,10 @@ type Option = {
     name : string,
     introduction : string ,
     mainImgs : string[],
-    content : string,
+    content : string | null,
     stay_id : number,
+    reserveLink? : string,
+    reserveNumber? : string,
     lastModifiedAt? : Date,
     createdAt? : Date
 }
@@ -21,7 +23,6 @@ type Stay = {
     introduction2? : string,
     mainImgs: string[] ,
     optionAvailable : boolean,
-    layoutType : LayoutType,
     lastModifiedAt?: Date,
     createdAt?: Date
 }
@@ -35,7 +36,6 @@ type Room = {
     mainImgs : string[],
     content : string,
     stay_id : number,
-    btnName : string,
     layout : LayoutType,
     reserveLink? : string,
     reserveNumber? : string,

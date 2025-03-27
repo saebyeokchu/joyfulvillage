@@ -49,7 +49,13 @@ const ReplaceImg = `${AdminApiAddress}/imageArchive/replace/`;
 
 //program
 const GetProgramById = `${AdminApiAddress}/program/get_by_id/?id=`;
-const GetAllProgram = `${AdminApiAddress}/program/getAll/`
+const GetAllProgram = `${AdminApiAddress}/program/getAll/`;
+
+
+//header
+const GetAllHeaderInfo = `${AdminApiAddress}/header_info/getAll/`;
+const GetHeaderInfoById = `${AdminApiAddress}/header_info/get_info_by_id/?id=`;
+const UpsertHeaderInfoData = `${AdminApiAddress}/header_info/upsert/`;
 
 export {
     GetAboutById,
@@ -90,5 +96,9 @@ export {
     ReplaceImg,
 
     GetProgramById,
-    GetAllProgram
+    GetAllProgram,
+
+    GetAllHeaderInfo,
+    GetHeaderInfoById,
+    UpsertHeaderInfoData
 }

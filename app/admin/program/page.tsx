@@ -5,20 +5,18 @@ import { MouseEvent, useEffect, useState } from "react"
 
 import { Program } from "@/types/Types";
 import { programService } from "@/service";
-import { ProgramClass } from "@/class/ProgramClass";
-import ListProgram from "./_component/List";
-import UpsertProgram from "./upsert/page";
 import AdminWrapper from "../component/AdminWrapper";
 import { IndigoRoundButton } from "@/components/ui/Button";
 import { GeneralError } from "@/lib/messages";
 import { Loading } from "@/components/layout";
 import { Card } from "@/components/ui";
-import { useProgramContext } from "@/context/ProgramContext";
+import UpsertHeaderInfo from "../component/UpsertHeaderInfo";
 
 
 export default function ManageProgram(){
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
+    const [ openEditHeader, setOpenEditHeader] = useState(false);
 
     const {data, error, mutate} = programService.GetAll();
     console.log(data);
@@ -53,6 +51,7 @@ export default function ManageProgram(){
     return (
         <AdminWrapper>
             <div className="flex flex-row space-x-3 justify-end">
+                <IndigoRoundButton onClickFunction={()=>setOpenEditHeader(true)} btnName={"맨 위쪽 헤더 수정하기"} />
                 <IndigoRoundButton onClickFunction={() => router.push(`/admin/program/upsert`)} btnName={"추가하기"} />
             </div>
             { isLoading ? <Loading /> :
@@ -67,6 +66,7 @@ export default function ManageProgram(){
                             wrapperId={program.id!.toString()} 
                             alt={""}
                             bgColor="bg-white p-5"
+                            showBorder={true}
                         >
                             {program.introduction}
                             <div className="flex flex-row space-x-3 justify-center mt-5">
@@ -95,6 +95,7 @@ export default function ManageProgram(){
                 )}
             </div>
             }            
+            {openEditHeader && <UpsertHeaderInfo onCloseModal={() => setOpenEditHeader(false)} headerInfoName={"program"} />} 
 
         </AdminWrapper>
     )

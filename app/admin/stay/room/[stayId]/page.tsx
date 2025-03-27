@@ -76,7 +76,9 @@ export default function ManageRoom(){
                             wrapperId={d.id!.toString()} 
                             alt={""}
                             bgColor="bg-white p-5"
+                            showBorder={true}
                         >
+                            {d.introduction1} {d.introduction2}
                             <div className="flex flex-row space-x-1 justify-center">
                                 <FilledIndigoBadge onClickFunction={()=>onClickEditBtn(d)} name={"수정하기"} />
                                 <FilledIndigoBadge onClickFunction={()=>onClickDeleteBtn(d.id)} name={"삭제하기"} />

@@ -6,12 +6,15 @@ import { cafeService } from "@/service";
 import { Cafe } from "@/types/Types";
 import AdminWrapper from "../component/AdminWrapper";
 import CafeWrapper from "./component/CafeWrapper";
+import { IndigoRoundButton } from "@/components/ui/Button";
+import UpsertHeaderInfo from "../component/UpsertHeaderInfo";
 
 export default function ManageCafe(){
     const [ selectedSection, setSelectedSection ]= useState<CafeSection>(CafeSection.subTitle);
     const [ cafeContent, setCafeContent ] = useState<Cafe[]>([]);
     const [ menus , setMenus ] = useState<Cafe[]>([]);
     const [ specials , setSpecials ] = useState<Cafe[]>([]);
+    const [ openEditHeader, setOpenEditHeader] = useState(false);
 
     const subTitleRef = useRef<any>(null);
 
@@ -71,7 +74,7 @@ export default function ManageCafe(){
         <>
             <AdminWrapper>
                 <CafeWrapper subTitle={""}>
-                    {''}
+                    <IndigoRoundButton onClickFunction={()=>setOpenEditHeader(true)} btnName={"맨 위쪽 헤더 수정하기"} />
                 {/* <div className="mt-3 flex flex-col space-y-7">
                     <div className="flex flex-col space-y-2">
                         <p className="text-xl font-semibold">카페 도천 소개글</p>
@@ -115,6 +118,7 @@ export default function ManageCafe(){
             </div> */}
 
             {/* middle section */}
+            {openEditHeader && <UpsertHeaderInfo onCloseModal={() => setOpenEditHeader(false)} headerInfoName={"cafe"} />} 
             
         </>
     )

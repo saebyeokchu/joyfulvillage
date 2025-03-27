@@ -4,110 +4,186 @@ import Image from "next/image"
 import { useEffect, useRef, useState } from "react";
 
 import { useRouter } from "next/navigation";
-import { cafeService, soksoService } from "../../service";
+import { cafeService, headerInfoService, soksoService } from "../../service";
 import { Cafe } from "../../types/Types";
 import { CafeOption, CafeSection } from "../../lib/enums";
-import { ImagePopUp, OptionPills, PageHeader } from "@/components/layout";
-import { BelowArrow, CafeLogo } from "@/lib/svgs";
-import { GrayRoundButton, IndigoRoundButton } from "@/components/ui/Button";
-import { OpenWindow } from "@/lib/common";
+import { ImagePopUp, Loading, OptionPills, PageHeader } from "@/components/layout";
+import { BelowArrow, CafeLogo, LeftArrow, RightArrow } from "@/lib/svgs";
 import { imgAddress } from "@/lib/const";
+import SectionSlider from "./component/SectionSlider";
+
+const ImageTag = ({
+    index,
+    src,
+    width = 810,
+    height = 489
+} : {
+    index : number,
+    src : string,
+    width? : number ,
+    height? : number ,
+}) => (
+    <Image //400 X 250
+        key={`cafe-image-${index}`} 
+        width={width} 
+        height={height} 
+        className="object-cover" 
+        src={src} 
+        loader={()=>src} 
+        alt=""
+        loading="lazy"
+        placeholder="blur"
+        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkAAIAAAoAAv/lxKUAAAAASUVORK5CYII="
+        />
+)
+
+const FillImageTag = ({
+    index,
+    src,
+} : {
+    index : number,
+    src : string,
+}) => (
+    <Image //400 X 250
+        fill
+        key={`cafe-image-${index}`} 
+        className="object-cover" 
+        src={src} 
+        loader={()=>src} 
+        alt=""
+        loading="lazy"
+        placeholder="blur"
+        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkAAIAAAoAAv/lxKUAAAAASUVORK5CYII="
+        />
+)
 
 // 숙소전체보기
 export default function CafePage(){
-    const router = useRouter();
+    const [headerImgSrc, setHeaderImgSrc] = useState<string>("");
     const [ cafeContent, setCafeContent ] = useState<Cafe[]>([]);
-    const [ subTitle, setSubTitle ] = useState<string>("");
     const [ mainImgs, setMainImgs ] = useState<Cafe[]>([]);
     const [ menus, setMenus ] = useState<Cafe[]>([]);
     const [ specials, setSpecials ] = useState<Cafe[]>([]);
-    const [ naverorderlink, setNaverorderlink ] = useState<string>("");
-    const [index, setIndex] = useState(1); // Start at first cloned slide
-
-    const [ option, setOption ] = useState<CafeOption>(CafeOption.cafe);
-
-    const [isModalOpen,setIsModalOpen] = useState<boolean>(false);
+    const [ coffee, setCoffee ] = useState<Cafe | null>(null);
+    const [ nonCoffee, setNonCoffee ] = useState<Cafe | null>(null);
+    const [ dessert, setDessert ] = useState<Cafe | null>(null);
+    const [ tea, setTea ] = useState<Cafe | null>(null);
 
     // Create a ref for the slider container
   const sliderRef = useRef<HTMLDivElement>(null);
 
-  // Desktop arrow handlers – they call scrollBy on the container
-  const handlePrev = () => {
-    if (sliderRef.current) {
-      sliderRef.current.scrollBy({
-        left: -1000, // adjust as needed
-        behavior: "smooth",
-      });
-    }
-  };
+  const init = () => {
+    cafeService.getAll().then(response => {
+        console.log(response);
+        setCafeContent(response);
 
-  const handleNext = () => {
-    if (sliderRef.current) {
-      sliderRef.current.scrollBy({
-        left: 1000, // adjust as needed
-        behavior: "smooth",
-      });
-    }
-  };
+        // //set sub title
+        // let temp : any = response.filter((content : Cafe) => content.section==CafeSection.subTitle);
+        // console.log("cafe subtitle : ", temp);
+        // if(temp.length > 0){
+        //     setSubTitle(temp[0].content);
+        // }
+        
+        //set main imgs
+        let temp = response.filter((content : Cafe) => content.section==CafeSection.mainImgs);
+        if(temp.length > 0){
+            setMainImgs(temp);
+            console.log("mainImgs : ", temp);
+        }
 
-    useEffect(()=>{
+        //set menus
+        temp = response.filter((content : Cafe) => content.section==CafeSection.menus);
+        if(temp.length > 0){
+            setMenus(temp);
+        }
+
+        //set specials
+        temp = response.filter((content : Cafe) => content.section==CafeSection.specials);
+        if(temp.length > 0){
+            setSpecials(temp);
+        }
+
+         //set coffee
+         temp = response.filter((content : Cafe) => content.section==CafeSection.coffee);
+         if(temp.length > 0){
+            setCoffee(temp[0]);
+         }
+
+
+         //set coffee
+         temp = response.filter((content : Cafe) => content.section==CafeSection.noncoffee);
+         if(temp.length > 0){
+            setNonCoffee(temp[0]);
+         }
+
+         //set coffee
+         temp = response.filter((content : Cafe) => content.section==CafeSection.dessert);
+         if(temp.length > 0){
+            setDessert(temp[0]);
+         }
+
+         //set tea
+         temp = response.filter((content : Cafe) => content.section==CafeSection.tea);
+         if(temp.length > 0){
+            setTea(temp[0]);
+         }
+ 
+
+   
+    });
+}
+
+  
+  useEffect(()=>{
         init();
     },[]);
 
-    useEffect(()=>{
-        console.log(cafeContent);
-    });
 
-    const init = () => {
-        cafeService.getAll().then(response => {
-            console.log(response);
-            setCafeContent(response);
+    const { headerInfo, isLoading, isError } = headerInfoService.GetById("cafe");
 
-            //set sub title
-            let temp : any = response.filter((content : Cafe) => content.section==CafeSection.subTitle);
-            console.log("cafe subtitle : ", temp);
-            if(temp.length > 0){
-                setSubTitle(temp[0].content);
+    useEffect(() => {
+        if (headerInfo) {  
+            if(headerInfo.imgSrc){
+                setHeaderImgSrc(headerInfo.imgSrc);
             }
-            
-            //set main imgs
-            temp = response.filter((content : Cafe) => content.section==CafeSection.mainImgs);
-            if(temp.length > 0){
-                setMainImgs(temp);
-                console.log("mainImgs : ", temp);
-            }
+        }
+    }, [headerInfo]);
 
-            //set menus
-            temp = response.filter((content : Cafe) => content.section==CafeSection.menus);
-            if(temp.length > 0){
-                setMenus(temp);
-            }
-
-            //set specials
-            temp = response.filter((content : Cafe) => content.section==CafeSection.specials);
-            if(temp.length > 0){
-                setSpecials(temp);
-            }
-
-            //set naver order link
-            temp = response.filter((content : Cafe) => content.section==CafeSection.naverorderlink);
-            if(temp.length > 0){
-                setNaverorderlink(temp[0].content);
-            }
-        });
-    }
+    if (isLoading) {
+        return (
+            <div className="h-screen">
+            <Loading />
+            </div>
+        );
+        }
+    
+    
+        
+      if (!headerInfo ) {
+        return (
+          <div className="h-screen">
+            {undefined}
+          </div>
+        );
+      }
+  
     
     return (
         <div className="border-0 border-0-red-700 " >
             {/* Header */}
-            <PageHeader src={"/images/cafe-cover.png"} title={"카페"} subTitle1={subTitle} alt={"cafe-header"} />
-
+            <PageHeader
+                src={imgAddress + headerImgSrc}
+                title={"카페도천"}
+                subTitle1={headerInfo.introduction1}
+                subTitle2={headerInfo.introduction2}
+                alt={"cafe-header"}
+            />
+            
             {/* stay list md:mt-0 mx-8 my-10  md:mx-auto */}
-            <div className="py-10 md:py-20 flex flex-col items-center justify-center border-0 border-red-500">
+            <div className="py-10 md:pt-24 md:pb-32 flex flex-col items-center justify-center border-0 border-red-500">
 
                 {/* logo and introduction */}
                 <div className="container flex flex-col text-center justify-center items-center space-y-3 px-5 md:mx-auto">
-                   <div className="text-xl">조이풀빌리지</div>
                    <div className="hidden md:block">
                         <CafeLogo width={300} height={80} />
                    </div>
@@ -115,225 +191,42 @@ export default function CafePage(){
                     <CafeLogo width={200} height={80} />
                    </div>
                    <div className="text-base md:text-xl md:pt-8">
-                    {subTitle}
+                    {/* {subTitle} */}
+                    <p>'카페 도천'은 조이풀빌리지 2층에 위치하여 산과 들의</p>
+                    <p>아름다운 풍경을 바라보며 차와 브런치를 즐길 수 있는 공간입니다.</p>
                    </div>
                 </div>
 
-                {/* cafe images */}
-                <div className="relative  hidden md:block mt-10 md:mt-20">
-                    {/* Desktop Arrow Buttons – hidden on mobile */}
-                    <button
-                        className=" absolute left-0 top-1/2 transform -translate-y-1/2 z-10"
-                        onClick={handlePrev}
-                        aria-label="Previous"
-                    >
-                        <svg width="43" height="43" viewBox="0 0 43 43" fill="none"  xmlns="http://www.w3.org/2000/svg" style={{ filter: "drop-shadow(2px 2px 2px rgba(0,0,0,0.5))" }}>
-                        <path d="M25.5 9.5L13 22L25.5 34.5" stroke="#fff" strokeWidth={5} />
-                        </svg>
-                    </button>
-                    <button
-                        className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10"
-                        onClick={handleNext}
-                        aria-label="Next"
-                    >
-                        <svg width="43" height="43" viewBox="0 0 43 43" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ filter: "drop-shadow(2px 2px 2px rgba(0,0,0,0.5))" }}>
-                        <path d="M17.5 33.5L30 21L17.5 8.5" stroke="#fff" strokeWidth={5} />
-                        </svg>
-                    </button>
+                <div className="flex flex-col px-5 space-y-7 mt-16 md:mt-20">
+                    { mainImgs.map( (data : Cafe, index:number)  => data.img && <ImageTag key={`cafe-main-img-${index}`} index={0} src={data.img} /> ) }
+                </div>
 
-                    {/* Image slider container */}
-                    <div
-                        ref={sliderRef}
-                        className="flex w-full h-96 space-x-3 overflow-x-hidden scroll-smooth overflow-hidden "
-                    >
-                        {mainImgs.map((d : Cafe, index : number) => (
-                            d.img && <Image key={`cafe-image-${index}`} width={600} height={400} className="object-cover" src={imgAddress +  d.img} loader={()=>imgAddress +  d.img} alt="" />
-                        ))}
+                <div className="mt-16 md:mt-32 text-center border-0 border-red-500 place-items-center">
+                    <div className="text-xl">
+                        카페도천만의 수제청
                     </div>
-                    
+                    <div className="text-sm w-96 mt-4 border-0 border-red-500 break-words">
+                        카페 도천에서는 매 시즌마다 특별한 수제청을 선보입니다. 100% 자연 재료로 정성껏 만든 수제청, 도천에서만 느낄 수 있는 특별한 맛을 경험해 보세요.
+                        이번 시즌의 수제청은 ‘대추꿀생강청’ 입니다. 대추의 달콤함과 생강의 매운맛, 꿀의 부드러움이 어우러져 건강하고 따뜻한 맛을 전해줍니다.
+                    </div>
+                    <div className="flex flex-col space-y-7 mt-11 px-5">
+                        <ImageTag index={3} src={"/images/cafe1.png"} />
+                    </div>
                 </div>
 
-                {/* Mobile images */}
-                <div className="block md:hidden relative w-full h-60 overflow-hidden mx-auto mt-20 md:mt-10">
-                <div
-                    className="flex transition-transform duration-500 ease-in-out"
-                    style={{
-                    transform: `translateX(-${index * 100}%)`,
-                    }}
-                >
-                    {mainImgs.map((d: Cafe, i: number) => (
-                    d.img && (
-                        <div key={`cafe-image-mobile-${i}`} className="relative w-full h-60 flex-shrink-0">
-                        <Image
-                            loader={()=>imgAddress + d.img}
-                            src={imgAddress + d.img}
-                            alt=""
-                            fill
-                            className="object-cover"
-                        />
-                        </div>
-                    )
-                    ))}
+                <div className="mt-16 md:mt-40 text-center border-0 border-red-500 place-items-center">
+                    <div className="text-xl font-semibold">
+                        카페도천의 메뉴
+                    </div>
+                    <div className="mt-12 border-0 border-red-500  px-5 md:px-0 grid grid-cols-1 md:grid-cols-2 md:grid-rows-1 md:gap-x-4 gap-y-16 md:gap-y-20 md:w-[800px]">
+                        {coffee && <SectionSlider title={"COFFEE"} menus={coffee.content || ""} images={coffee.img?.split(";").map(e=>imgAddress+e) || ["/images/cafe-empty.png"]} />}
+                        {nonCoffee && <SectionSlider title={"NON COFFEE"} menus={nonCoffee.content || ""} images={nonCoffee.img?.split(";").map(e=>imgAddress+e) || ["/images/cafe-empty.png"]}/>}
+                        {dessert && <SectionSlider title={"BRUNCH & DESSERT"} menus={dessert.content || ""} images={dessert.img?.split(";").map(e=>imgAddress+e) || ["/images/cafe-empty.png"]} />}
+                        {tea && <SectionSlider title={"TEA"} menus={tea.content || ""} images={tea.img?.split(";").map(e=>imgAddress+e) || ["/images/cafe-empty.png"]} />}
+                    </div>
                 </div>
-
-                {/* Dot indicators */}
-                <div className="flex absolute bottom-4 left-1/2 transform -translate-x-1/2 space-x-2">
-                    {mainImgs.map((_, i) => (
-                    <button
-                        key={`dot-${i}`}
-                        className={`h-3 w-3 rounded-full transition-all duration-300 ${index === i ? "bg-white" : "bg-gray-400"}`}
-                        onClick={() => setIndex(i)}
-                    ></button>
-                    ))}
-                </div>
-                </div>
-
-                {/* menus */}
-                <div className="container mt-10 py-10 px-5 md:mx-auto grid grid-cols-1 items-start justify-center md:grid-cols-3 gap-7 md:gap-12">
-                    {/* <div className=" grid gird-cols-1 justify-center md:grid-cols-3 gap-12 border-0 border-gray-600"> */}
-                        <div className="w-full border-0 border-gray-600 overflow-hidden ">
-                            <div className="relative w-full h-[270px] border-0 border-gray-600 overflow-hidden">
-                                <Image 
-                                    src="/images/cafe-menu.png"  
-                                    alt="cafe-menu"
-                                    fill
-                                    style={{ objectFit: "cover" }}
-                                    className="border-0 border-red-500 cursor-pointer duration-1000 transition-all ease-in-out hover:scale-105 hover:opacity-50"
-                                    onClick={() => setIsModalOpen(true)}
-                                />
-                            </div>
-                            <div className="text-3xl font-bold font-pretendard text-joyful-indigo mt-5">
-                                카페 도천의 메뉴
-                            </div>
-                            <div className="mt-5 md:mtmt-10 text-joyful-indigo text-sm">
-                                카페 도천만의 메뉴를 확인해 보세요.
-                            </div>
-                        </div>
-                        {specials.map((special : Cafe, index : number) => (
-                            <div   key={`cafe-special-${index}`}>
-                                <div className="relative w-full h-[270px] border-0 border-gray-600 overflow-hidden">
-                                <Image
-                                    loader={ ()=> special.img? imgAddress + special.img : ''}
-                                style={{ objectFit: "cover" }} src={ special.img? imgAddress + special.img : ''} fill alt="cafe-signature" className="border-0 border-red-500" />
-                                </div>
-                                <div className="text-3xl font-bold font-pretendard text-joyful-indigo mt-5">
-                                    {special.note}
-                                </div>
-                                <div className="mt-5 md:mtmt-10 text-joyful-indigo text-sm">
-                                    {special.content}
-                                </div>
-                            </div>
-                        ))}
-                        
-                        {/* <div  className="w-[390px]">
-                            <Image src="/images/cafe/signature.jpeg" width={390} height={270} alt="cafe-signature" />
-                            <div className="text-3xl font-bold font-pretendard text-joyful-indigo mt-10">
-                                대추꿀생강청
-                            </div>
-                            <div className="mt-10 text-joyful-indigo text-sm">
-                            카페 도천에서는 매 시즌마다 특별한 수제청을 선보입니다. 100% 자연 재료로 정성껏 만든 수제청, 도천에서만 느낄 수 있는 특별한 맛을 경험해 보세요.
-                            이번 시즌의 수제청은 ‘대추꿀생강청’입니다. 대추의 달콤함과 생강의 매운맛, 꿀의 부드러움이 어우러져 건강하고 따뜻한 맛을 전해줍니다.
-                            </div>
-                        </div> */}
-                    {/* </div> */}
-                </div>
-
-                {/* arrows */}
-                {/* <div className="flex flex-col space-y-3 mt-5 md:mt-10">
-                    <BelowArrow />
-                    <BelowArrow />
-                    <BelowArrow />
-                </div> */}
-                
-                {/* go to naver */}
-                {/* <IndigoRoundButton className="mt-10" btnName={"네이버 주문"} onClickFunction={()=>OpenWindow(naverorderlink)} /> */}
-
-
-                 {/* Modal overlay for expanded image slider */}
-                {isModalOpen && <ImagePopUp images={["/images/system/menu.png"]} onCloseModal={()=>setIsModalOpen(false)} />}
-            
-                 
-{/* 
-                 <div className="min-h-[38rem] mt-14 md:mt-28">
-                     <div className="flex flex-col items-center space-y-6">
-                         { mainImgs.length > 0 && 
-                        mainImgs.map((src : string, index : number)=>
-                            <Image key={`cafe_image_${index}`} alt={`cafe_image_${index}`} src={"/images/"+src} width={1000} height={652} />)
-                     }
-                </div> 
-
-                
-
-                
-             
-                
-            </div> */}         
             </div>
         </div>
-        // <div className="relative flex flex-col my-16 mx-12 md:mx-44 md:my-32 md:flex md:justify-between ">
-        //     {/* head breadcrumble */}
-        //     <BreadCrumbs crumbs={[{title:'카페',link:'/cafe'}]} />
-
-        //     {/* title */}
-        //     <div className="flex w-full text-center justify-center content-center">
-        //         <p className="text-3xl font-bold">카페도천</p>
-        //     </div>
-
-        //     {/* sub title */}
-        //     <p className="mt-20 flex text-center justify-center">
-        //         { cafeContent.length > 0 && cafeContent.filter((content : Cafe) => content.section==CafeSection.subTitle)[0]?.content}
-        //     </p>
-
-        //     <div className="min-h-[38rem] mt-14 md:mt-28">
-        //         {/* images */}
-        //         <div className="flex flex-col items-center space-y-6">
-        //             { mainImgs.length > 0 && 
-        //                 mainImgs.map((src : string, index : number)=>
-        //                     <Image key={`cafe_image_${index}`} alt={`cafe_image_${index}`} src={"/images/"+src} width={1000} height={652} />)
-        //              }
-        //         </div>
-
-        //         {/* menus */}
-        //         <div className="mt-14 md:mt-28">
-        //             <p className="flex text-center justify-center text-2xl font-bold">카페도천 메뉴</p>
-        //             <p className="mt-6">*카페도천만의 추천메뉴입니다.</p>
-        //             <div className="grid grid-cols-1 grid-rows-1 gap-x-4 gap-y-20 md:grid-cols-2 md:grid-rows-2 mt-12">
-        //                 {menus.map( (menu : Cafe, index : number)=>
-        //                     <div key={`cafe_menu_${index}`}>
-        //                         <p className="flex text-center justify-center text-xl">{menu.note?.toUpperCase()}</p>
-        //                         <div className="mt-5">
-        //                             { menu.img && menu.img.length > 0 && <MobileSlider images={menu.img}  autoPlay={false} /> }
-        //                         </div>
-        //                         <p className="mt-6">
-        //                             {menu.content}
-        //                         </p>
-        //                     </div>
-        //                 )}
-        //             </div>
-        //         </div>
-
-        //         {/* special menus */}
-        //         { specials && specials.length > 0 &&
-        //             specials.map((special : Cafe, index : number)=>
-        //                 <div className="mt-14 md:mt-28"  key={`cafe_special_${index}`}>
-        //                     <p className="flex text-center justify-center text-2xl font-bold">{special.note}</p>
-        //                     <p className="mt-6">{special.content?.split(StringDivider)[0]}</p>
-        //                     <div className="flex flex-col items-center w-full">
-        //                         { special.img && <Image alt="카페이미지3" src={"/images/"+special.img[0]} width={1000} height={652} className="mt-5" /> }
-        //                     </div>
-        //                     <p className="mt-7">{special.content?.split(StringDivider)[1]}</p>
-        //                 </div>
-        //             )
-        //         }
-
-        //         <div className=" mt-14 md:mt-28 flex justify-center text-center ">
-        //             <div className="w-full h-32 border-0 border-0-red-600">
-        //                 <p className="text-2xl mt-3">이쪽에 전화번호 연결 부분이 들어가는게 어떨지?</p>
-        //             </div>
-        //         </div>
-             
-                
-        //     </div>
-        // </div>
+        
     )
 }

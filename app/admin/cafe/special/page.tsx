@@ -157,7 +157,7 @@ export default function ManageProgram(){
             </div>
         </AdminWrapper>
 
-        { isOpenSpecialModal && <div id="hs-basic-modal" className="font-pretendard size-full fixed top-0 start-0 opacity-100 overflow-x-hidden transition-all overflow-y-auto pointer-events-none" role="dialog" aria-labelledby="hs-basic-modal-label">
+        { isOpenSpecialModal && <div id="hs-basic-modal" className="font-arita size-full fixed top-0 start-0 opacity-100 overflow-x-hidden transition-all overflow-y-auto pointer-events-none" role="dialog" aria-labelledby="hs-basic-modal-label">
             <div className="h-full w-full bg-black absolute bg-opacity-25 overflow-y-hidden"></div>
             <div className="fixed top-0 left-1/3 sm:max-w-lg sm:w-full m-3 sm:mx-auto">
                 <div className="flex flex-col  shadow-sm rounded-xl pointer-events-auto bg-white">

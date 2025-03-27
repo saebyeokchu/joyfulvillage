@@ -10,6 +10,7 @@ import * as bizService from './bizService';
 import * as optionService from './optionService';
 import * as roomService from './roomService';
 import * as stayService from './stayService';
+import * as headerInfoService from './headerInfoService';
 
 export {
     aboutService,
@@ -23,5 +24,6 @@ export {
     bizService,
     optionService,
     roomService,
-    stayService
+    stayService,
+    headerInfoService
 }

@@ -80,7 +80,7 @@ export default function AddNewImage({
             </ContentModal>
                 :
             <ContentModal>
-            <div className="flex justify-between px-4 pt-4 font-pretendard text-joyful-indigo">
+            <div className="flex justify-between px-4 pt-4 font-arita text-joyful-indigo">
                 <h3 className="font-bold text-2xl">
                 새로운 이미지 추가하기
                 </h3>
@@ -92,7 +92,7 @@ export default function AddNewImage({
                 </svg>
                 </button>
             </div>
-           <div className="p-3 overflow-y-auto font-pretendard">
+           <div className="p-3 overflow-y-auto font-arita">
                 <FileInput imgRef={imgRef} />
                 <div className="mt-5 flex justify-end gap-x-2">
                     <IndigoRoundButton onClickFunction={onClickAddImgBtn} btnName={"추가하기"} />

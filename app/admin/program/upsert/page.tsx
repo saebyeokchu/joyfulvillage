@@ -102,7 +102,7 @@ function UpsertContent(){
         <>
             <div className="container mx-auto pt-10">
                 <div className="flex justify-between w-full">
-                    <div className="text-3xl font-bold font-pretendard">프로그램 </div>
+                    <div className="text-3xl font-bold font-arita">프로그램 </div>
                     <div className="flex flex-row space-x-3 justify-end">
                         <IndigoRoundButton onClickFunction={onClickListProgram} btnName={"취소하기"} />
                         <IndigoRoundButton onClickFunction={onClickUpsertProgram} btnName={"저장하기"} />

@@ -43,6 +43,9 @@ const AboutContainer = ({
         src={imgAddress + imgSrc} 
         alt="about-soop" 
         layout="intrinsic" 
+        loading="lazy"
+        placeholder="blur"
+        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkAAIAAAoAAv/lxKUAAAAASUVORK5CYII="
         width={936} height={590} 
         style={{maxHeight:"600px", objectFit:"cover"}} /> }
     <div className='flex flex-col justify-between border-0 border-red-500 '>
@@ -62,7 +65,7 @@ const AboutContainer = ({
             </div>
         </div>
 
-        <div className='flex flex-row space-x-3 mt-3 font-bold lg:mt-0 font-pretendard min-h'>
+        <div className='flex flex-row space-x-3 mt-3 font-bold lg:mt-0 font-arita min-h'>
             {/* <div className="w-4 h-4">
                 <a className="inline-flex cursor-pointer justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border-0 border-0-transparent bg-point-hover-rm focus:outline-none focus:bg-point-darker disabled:opacity-50 disabled:pointer-events-none" >
                     <svg className="shrink-0 size-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -93,7 +96,7 @@ const About = () => {
 
     return(
         <>
-        <div className="container mx-auto px-5 md:px-14 py-24 md:py-52 flex flex-col border-0 border-0-red-700 space-y-16 md:space-y-32 min-h-[2160px]" style={{color:"#4B5A62"}}>
+        <div className="container mx-auto px-5 md:px-14 py-32 md:py-52 flex flex-col border-0 border-0-red-700 space-y-32 md:space-y-32 min-h-[2160px]" style={{color:"#4B5A62"}}>
             { data && data.map((about : AboutType, index : number)=>(
                  <AboutContainer 
                     key={`about-container-${index}`}

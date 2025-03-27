@@ -41,7 +41,7 @@ const AdminWrapper = ({
                 <HeaderNotice message="화면의 크기가 너무 작습니다. 화면의 크기를 조정해 주세요." /> 
             </div>
         </div>
-        <div className="hidden bg-point min-h-screen lg:flex lg:flex-row font-pretendard border-0 border-red-500 text-joyful-indigo">
+        <div className="hidden bg-point min-h-screen lg:flex lg:flex-row font-arita border-0 border-red-500 text-joyful-indigo">
             <Sidebar />
             <div className="p-10 border-0 w-full border-red-500">
               <div className="flex justify-between">

@@ -61,7 +61,7 @@ export default function Footer(){
     
           
     return(
-        <footer className="py-5 lg:py-10 bg-joyful-indigo text-white font-pretendard" >
+        <footer className="py-5 lg:py-10 bg-joyful-indigo text-white font-arita" >
             <div className={`container px-5 md:px-16 py-10 md:py-0 md:mx-auto flex flex-col md:flex-row space-y-10 md:space-y-0 justify-between border-0 border-yellow-700`}>
 
                 <div className="flex flex-col md:flex-row border-0 border-red-500 md:space-x-20 space-y-10 md:space-y-0">

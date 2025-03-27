@@ -1,37 +1,17 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import "../public/css/slide.css";
 import "../public/css/color.css";
 import "../public/css/text.css";
 
+import { arita, maruburis } from "@/lib/fonts"
+
 import Middle from "./middle";
 import PrelineScript from "@/components/PrelineScript";
 import ContextProviders from "@/context/ContextProviders";
 
-const maruburis = localFont({
-  src: [
-    {
-      path: '../public/fonts/MaruBuri-ExtraLight.ttf',
-      weight: '200'
-    },{
-      path: '../public/fonts/MaruBuri-Light.ttf',
-      weight: '300'
-    },{
-      path: '../public/fonts/MaruBuri-Regular.ttf',
-      weight: '400'
-    },
-    {
-      path: '../public/fonts/MaruBuri-SemiBold.ttf',
-      weight: '600'
-    },
-    {
-      path: '../public/fonts/MaruBuri-Bold.ttf',
-      weight: '700'
-    }
-  ],
-  variable: '--font-maruburis'
-})
+
+
 
 export const metadata: Metadata = {
   title: "조이풀빌리지",
@@ -45,7 +25,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${maruburis.variable} font-sans text-joyful-indigo  ` }> 
+      <body className={`
+        ${maruburis.variable} 
+        ${arita.variable} 
+        font-sans 
+        text-joyful-indigo ` 
+      }> 
         <ContextProviders>
           <Middle>
             {children}

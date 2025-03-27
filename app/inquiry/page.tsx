@@ -5,7 +5,8 @@ import { GetQnaData } from "@/api/Qna";
 import { StayHeader } from "../stay/component";
 import { GetKakao } from "@/api/Biz";
 import { imgAddress } from "@/lib/const";
-import { PageHeader } from "@/components/layout";
+import { Loading, PageHeader } from "@/components/layout";
+import { headerInfoService } from "@/service";
 
 declare global {
     interface Window {
@@ -14,6 +15,7 @@ declare global {
   }
 
 export default function Inquiry(){
+    const [headerImgSrc, setHeaderImgSrc] = useState<string>("");
 
     const [qnaList, setQnaList ] = useState<any>([]);
     const [addressText, setAddressText ] = useState<string>("");
@@ -21,6 +23,7 @@ export default function Inquiry(){
         qnaList.map(() => false)
       );
     
+  const { headerInfo, isLoading, isError } = headerInfoService.GetById("inquiry");
 
     useEffect(() => {
         getKakaoInfo();
@@ -84,18 +87,51 @@ export default function Inquiry(){
         const newOpenAnswerDiv = openAnswerDiv.map((_, i) => !openAnswerDiv[index] && i === index);
         setOpenAnswerDiv(newOpenAnswerDiv);
       };
+
+      useEffect(() => {
+        if (headerInfo) {  
+            if(headerInfo.imgSrc){
+                setHeaderImgSrc(headerInfo.imgSrc);
+            }
+        }
+    }, [headerInfo]);
+
+      if (isLoading) {
+        return (
+          <div className="h-screen">
+            <Loading />
+          </div>
+        );
+      }
+
+
     
+  if (!headerInfo ) {
+    return (
+      <div className="h-screen">
+        {undefined}
+      </div>
+    );
+  }
+
+
     
 
     return(
         <div className=" border-0 border-0-red-700 " >
             {/* Header */}
-            <PageHeader src={"/images/inquiry-cover.png"} title={""} subTitle1={""} alt={"inquiry-header"} />
+            <PageHeader
+                src={imgAddress + headerImgSrc}
+                title={""}
+                subTitle1={headerInfo.introduction1}
+                subTitle2={headerInfo.introduction2}
+                alt={"inquiry-header"}
+            />
 
             {/* inquiry list */}
-            <div className="container py-24 px-8 md:mx-auto w-full border-0 border-0-purple-500 md:min-h-lvh flex flex-col space-y-20 md:space-y-24 justify-center items-center text-center">
+            <div className="container pt-24 pb-[400px] px-10 md:px-8 md:mx-auto w-full border-0 border-0-purple-500 md:min-h-screen flex flex-col space-y-20 md:space-y-24 justify-center items-center text-center">
                 <div className="w-full md:w-[810px] flex flex-col border-0 border-0-red-500"> 
-                    <h2 className="font-bold text-xl md:leading-tight font-pretendard text-joyful-indigo">자주 묻는 질문</h2>
+                    <h2 className="font-bold text-xl md:leading-tight font-arita text-joyful-indigo">자주 묻는 질문</h2>
                     <div className="pt-16 flex flex-col space-y-10">
                             {
                             // transition-all duration-500 ease-in-out
@@ -137,8 +173,8 @@ export default function Inquiry(){
                 <hr className="w-full md:w-[810px] h-1" style={{backgroundColor:"$E6E2D8"}}/>
 
                 <div className="w-full md:w-[810px] h-min-[64px] ">
-                        <h2 className="text-xl font-bold  md:leading-tight font-pretendard text-joyful-indigo">오시는 길</h2>
-                        <span className={`block text-sm mt-4 md:text-base font-pretendard text-joyful-indigo`}>
+                        <h2 className="text-xl font-bold  md:leading-tight font-arita text-joyful-indigo">오시는 길</h2>
+                        <span className={`block text-sm mt-4 md:text-base font-arita text-joyful-indigo`}>
                             {addressText}</span>
                        <div id="map" className="border-0-point mt-10" style={{ width: "100%", height: "400px" }}>Kakao Map</div>
                    </div>

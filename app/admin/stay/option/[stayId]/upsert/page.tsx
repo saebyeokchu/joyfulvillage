@@ -1,6 +1,5 @@
 "use client"
 
-import { ContentModal } from "@/components/layout"
 import { CustomTextInput } from "@/components/ui";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
@@ -11,15 +10,16 @@ import { CustomTextArea } from "@/components/ui/CustomInput";
 import AdminWrapper from "@/app/admin/component/AdminWrapper";
 import { ImageLibraryModal } from "@/app/admin/_component";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
-import { useStayContext } from "@/context/StayContext";
 import { StayType } from "@/types";
 import { OptionApi } from "@/api";
 import { GeneralError } from "@/lib/messages";
 import { optionService } from "@/service";
+import Wysiwyg from "@/app/admin/component/Wysiwyg";
 
 const UpsertContent = () => {
-    const [optionMainImgs, setOptionMainImgs] = useState<string[]>([]);
+    // const [optionMainImgs, setOptionMainImgs] = useState<string[]>([]);
     const [contentMainImgs, setContentMainImgs] = useState<string[]>([]);
+    const [content, setContent] = useState(null);
 
     const [optionImageLibrary, setOptionImageLibrary] = useState(false);
     const [contentImageLibrary, setContentImageLibrary] = useState(false);
@@ -31,7 +31,6 @@ const UpsertContent = () => {
 
     const nameRef = useRef<any>(null);
     const introductionRef = useRef<any>(null);
-    const contentRef = useRef<any>(null);
 
     const goToOptionList = () => router.push("/admin/stay/option/"+stayId)
 
@@ -45,9 +44,8 @@ const UpsertContent = () => {
     const isValidOption = () => {
         const name = nameRef.current;
         const introduction = introductionRef.current;
-        const content = contentRef.current;
 
-        return optionMainImgs.length > 0 && contentMainImgs.length > 0 && name.value && content.value && introduction.value;
+        return contentMainImgs.length > 0 && name.value && introduction.value;
     }
 
     const callOption = optionService.GetById(optionId);
@@ -61,8 +59,9 @@ const UpsertContent = () => {
 
     useEffect(() => {
         if (callOption && callOption.option && !initialLoaded) {
-          setContentMainImgs(callOption.option.contentImgs);
-          setOptionMainImgs(callOption.option.mainImg);
+          setContentMainImgs(callOption.option.mainImgs);
+          setContent(callOption.option.content);
+        //   setOptionMainImgs(callOption.option.mainImg);
           setInitialLoaded(true);
         }
       }, [callOption]);
@@ -70,7 +69,6 @@ const UpsertContent = () => {
     const onClickSaveBtn = async () => {
         const name = nameRef.current;
         const introduction = introductionRef.current;
-        const content = contentRef.current;
 
         if(isValidOption() && stayId && typeof stayId == "string"){
             console.log("[onClickSaveBtn]");
@@ -79,8 +77,8 @@ const UpsertContent = () => {
                 id: targetOption && targetOption.id,
                 name: name.value,
                 introduction: introduction.value,
-                content: content.value,
-                mainImgs: optionMainImgs,
+                content: content,
+                mainImgs: contentMainImgs,
                 stay_id: parseInt(stayId)
             }
 
@@ -97,17 +95,7 @@ const UpsertContent = () => {
         }
 
     } 
-        
-    const onClickDeleteImage = (index: number) => {
-        console.log(index, optionMainImgs);
-        setOptionMainImgs((prev) => prev.filter((_, i) => i !== index));
-    };
-
-    const onClickOptionMainImgAddAction = (imgSrc : string) => {
-        setOptionMainImgs([... optionMainImgs, imgSrc]);
-        return true;
-    }
-
+    
     const onClickDeleteContentImage = (index: number) => {
         setContentMainImgs((prev) => prev.filter((_, i) => i !== index));
     };
@@ -129,8 +117,8 @@ const UpsertContent = () => {
                         </div>
                    
                 </div>
-                <div className=" py-4 flex flex-col space-y-2 overflow-y-auto font-pretendard">
-                    <p>대표 이미지(3개 까지)</p>
+                <div className=" py-4 flex flex-col space-y-2 overflow-y-auto font-arita">
+                    {/* <p>대표 이미지(3개 까지)</p>
                     { optionMainImgs.length < 3 && <FilledIndigoBadge onClickFunction={() => setOptionImageLibrary(true)} name={"이미지 추가하기"} /> }
                     { optionMainImgs.length > 0  && <div className="flex flex-row space-x-3 mt-3">
                         { optionMainImgs.map((src : string, index : number) =>  
@@ -148,7 +136,7 @@ const UpsertContent = () => {
                                 </p>
                             </div>
                         )} 
-                    </div>}
+                    </div>} */}
 
                     <p>이름(20자까지)</p>
                     <CustomTextInput
@@ -167,11 +155,12 @@ const UpsertContent = () => {
                     />
 
                     <p>내용</p>
-                    <CustomTextArea
+                    <Wysiwyg content={content} setContent={setContent} isImageAllowed={false} height={0} />
+                    {/* <CustomTextArea
                         inputVal={targetOption && targetOption.content || ''} 
                         placeholder={""} 
                         textRef={contentRef} 
-                    />
+                    /> */}
 
                     <p>내용 이미지</p>
                     <FilledIndigoBadge onClickFunction={() => setContentImageLibrary(true)} name={"이미지 추가하기"} />
@@ -194,11 +183,11 @@ const UpsertContent = () => {
                     </div> }
                 </div> 
         </AdminWrapper>
-
+{/* 
         { optionImageLibrary && 
             <ImageLibraryModal 
                 onClickCloseModal={() => setOptionImageLibrary(false)} 
-                onClickAddAction={onClickOptionMainImgAddAction}  />}
+                onClickAddAction={onClickOptionMainImgAddAction}  />} */}
         
         { contentImageLibrary && 
             <ImageLibraryModal 

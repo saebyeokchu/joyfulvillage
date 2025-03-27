@@ -45,6 +45,7 @@ export default function OptionDetail() {
         optionId={optionId} 
         options={options} 
         handleReturnClick={handleReturnClick} 
+        showBtn={false}
       />
       // <div className="border-0 pb-10">
       //   {optionsError ? (

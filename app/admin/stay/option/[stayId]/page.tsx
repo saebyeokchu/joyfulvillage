@@ -78,8 +78,8 @@ export default function ManageOption(){
                             alt={""}
                             bgColor="bg-white p-5"
                         >
-                            
-                            <div className="flex flex-row space-x-1 justify-center">
+                            {d.content && <div dangerouslySetInnerHTML={{__html: d.content}} />}
+                            <div className="flex flex-row space-x-1 justify-center mt-3">
                                 <FilledIndigoBadge onClickFunction={()=>onClickEditBtn(d)} name={"수정하기"} />
                                 <FilledIndigoBadge onClickFunction={()=>onClickDeleteBtn(d.id)} name={"삭제하기"} />
                             </div>

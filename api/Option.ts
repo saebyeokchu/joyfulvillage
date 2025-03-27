@@ -21,10 +21,11 @@ const GetByStayId = (id : number) => {
 }
 
 const Upsert = (postData : any) => {
-    //mainimgs string으로 만들기
-    postData.data.mainImg = postData.data.mainImg.join(";");
-    postData.data.contentImgs = postData.data.contentImgs.join(";");
     console.log("[api.oprion.upsert]", postData);
+
+    //mainimgs string으로 만들기
+    postData.data.mainImgs = postData.data.mainImgs.join(";");
+    // postData.data.contentImgs = postData.data.contentImgs.join(";");
     try {
         return postJsonFetcher([UpsertOptionData, postData]);
     } catch (error) {

@@ -16,14 +16,17 @@ import { StayType } from "@/types";
 import { useStayContext } from "@/context/StayContext";
 import { stayService } from "@/service";
 import { LayoutType } from "@/lib/enums";
+import { ImagePopUp } from "@/components/layout";
 
 
 function UpsertContent(){
     const [openImageLibrary, setOpenImageLibrary] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [openPopUpModal, setOpenPopUpModal] = useState(false);
+    const [openPopUpModal2, setOpenPopUpModal2] = useState(false);
+
     const [mainImgs, setMainImgs] = useState<string[]>([]);
-    const [optoinAvailbilty, setOptoinAvailbilty] = useState<number | null>(null);
-    const stayContext = useStayContext();
+    const [optoinAvailbilty, setOptoinAvailbilty] = useState<number>(0);
+
     const router = useRouter();
 
     const searchParams = useSearchParams();
@@ -33,7 +36,6 @@ function UpsertContent(){
     const addressRef = useRef<any>(null);
     const introduction1Ref = useRef<any>(null);
     const introduction2Ref = useRef<any>(null);
-    const optionAvailableRef = useRef<any>(null);
 
     const isValidStay = () => {
         const name = nameRef.current;
@@ -49,6 +51,7 @@ function UpsertContent(){
     useEffect(()=>{
         if(data && data.targetStay && data.targetStay.mainImgs){
             setMainImgs(data?.targetStay.mainImgs);
+            setOptoinAvailbilty(data?.targetStay.optionAvailable ? 1 : 0);
         }
     },[targetStay]);
 
@@ -59,8 +62,7 @@ function UpsertContent(){
         const name = nameRef.current;
         const address = addressRef.current;
         const introduction1 = introduction1Ref.current;
-        const introduction2 = introduction1Ref.current;
-        const optionAvailable = optionAvailableRef.current;
+        const introduction2 = introduction2Ref.current;
 
         if(isValidStay()){
             console.log("[onClickSaveBtn]");
@@ -70,9 +72,9 @@ function UpsertContent(){
                 address: address.value,
                 introduction1: introduction1.value,
                 mainImgs: mainImgs,
-                optionAvailable: optionAvailable.value,
-                layoutType: LayoutType.room
+                optionAvailable: optoinAvailbilty === 1 ? true : false,
             }
+            
 
             if(targetStay && targetStay.id){
                 postData.id = targetStay.id;
@@ -81,6 +83,8 @@ function UpsertContent(){
             if(introduction2.value){
                 postData.introduction2 = introduction2.value;
             }
+
+            // console.log("[onClickSaveBtn] postData",postData);
 
             const upsertResult = await StayApi.Upsert({data : postData});
             
@@ -111,10 +115,6 @@ function UpsertContent(){
         setMainImgs((prev) => prev.filter((_, i) => i !== index));
       };
 
-    const onChangeOptionAvailability = (event : any) => {
-        setOptoinAvailbilty(event.target.value);
-    }
-    
     return (
         <>
             <AdminWrapper>
@@ -165,13 +165,13 @@ function UpsertContent(){
                                     placeholder={""} 
                                     textRef={addressRef} />
                                 
-                                <p className=" mt-5">내용(윗줄)</p>
+                                <p className="mt-5 justify-between flex">내용(윗줄) <span onClick={()=>setOpenPopUpModal(true)} className="text-sm hover:underline cursor-pointer font-bold">아래 입력한 내용이 표시되는 곳을 확인하시려면 여기를 클릭하세요.</span></p>
                                 <CustomTextArea  
                                     inputVal={targetStay && targetStay.introduction1 || ''} 
                                     placeholder={""} 
                                     textRef={introduction1Ref} 
                                     />
-                                <p className=" mt-5">내용(아랫줄)</p>
+                                <p className=" mt-5 justify-between flex">내용(아랫줄) <span onClick={()=>setOpenPopUpModal(true)} className="text-sm hover:underline cursor-pointer font-bold">아래 입력한 내용이 표시되는 곳을 확인하시려면 여기를 클릭하세요.</span></p>
                                 <CustomTextArea  
                                     inputVal={targetStay && targetStay.introduction2 || ''} 
                                     placeholder={""} 
@@ -182,13 +182,27 @@ function UpsertContent(){
                     </div>
 
                     <div className="row-span-1">
-                        <EditBox title={"옵션 설정"}>
-                            <select onChange={onChangeOptionAvailability} className="py-3 px-4 pe-9 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" ref={optionAvailableRef} defaultValue={data ? ( targetStay.optionAvailable ? 1 : 0 ) : 0}>
+                        <EditBox title={"옵션 설정" }>
+                            <select 
+                                className="py-3 px-4 pe-9 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" 
+                                value={optoinAvailbilty} onChange={(e)=>setOptoinAvailbilty(parseInt(e.target.value))}>
                                 <option value={1}>사용</option>
                                 <option value={0}>미사용</option>
                             </select>
                         </EditBox>
                     </div>
+
+                    {/* <div className="row-span-1">
+                        <EditBox title={"레이아웃 설정"}>
+                            <p onClick={()=>setOpenPopUpModal2(true)} className="text-sm hover:underline cursor-pointer font-bold text-end">레이아웃 종류를 확인하려면 여기를 클릭하세요.</p>
+                            <select 
+                                className="py-3 px-4 pe-9 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" value={layout} 
+                                onChange={(e)=>setLayout(parseInt(e.target.value) as LayoutType)}>
+                                <option value={LayoutType.room}>객실 레이아웃 사용</option>
+                                <option value={LayoutType.option}>옵션 레이아웃 사용</option>
+                            </select>
+                        </EditBox>
+                    </div> */}
 
                     {/* <div className="col-span-3 row-span-1">
                         <EditBox title={"객실 설정"}>
@@ -204,6 +218,9 @@ function UpsertContent(){
             </div> */}
             
             { openImageLibrary && <ImageLibraryModal onClickCloseModal={() => setOpenImageLibrary(false)} onClickAddAction={onClickAddAction} />}
+
+            { openPopUpModal && <ImagePopUp images={['/images/explain/exp-room-1.png', '/images/explain/exp-room-2.png']} onCloseModal={()=>setOpenPopUpModal(false)} />}
+            { openPopUpModal2 && <ImagePopUp images={['/images/explain/exp-layout-1.png', '/images/explain/exp-layout-2.png']} onCloseModal={()=>setOpenPopUpModal2(false)} />}
         </>
     )
 } 

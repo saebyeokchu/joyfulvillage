@@ -4,7 +4,8 @@ enum AuthError {
 
 enum ImageError {
     'confirmSelect' = '해당 이미지를 선택하시겠습니까?',
-    'confirmAdd' = '해당 이미지를 추가하시겠습니까?'
+    'confirmAdd' = '해당 이미지를 추가하시겠습니까?',
+    'selectTheImage' = '이미지를 선택해주세요.',
 }
 
 enum GeneralError {
@@ -12,6 +13,7 @@ enum GeneralError {
     'successfullySaved' = '성공적으로 저장되었습니다.',
     'successfullyDeleted' = '성공적으로 삭제되었습니다.',
     'unknownError' = '알 수 없는 오류가 발생하였습니다.',
+    'loadingError' = '정보를 불러오던 중 오류가 발생하였습니다.',
     'tryLater' = '잠시후에 다시 시도해 주세요.',
     'unmatchedInfo' = '정보가 일치하지 않습니다.',
     'notValidInfo' = '유효한 정보가 아닙니다.',

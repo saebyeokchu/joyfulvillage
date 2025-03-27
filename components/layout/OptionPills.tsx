@@ -23,7 +23,7 @@ const OptionPills = ({
     return(
         <div className="container mx-auto py-7 px-5 md:px-14">
             {/* 120 x 70 */}
-            <div className="flex flex-row space-x-3 font-pretendard font-bold">
+            <div className="flex flex-row space-x-3 font-arita font-bold">
                 {pills.map((p : Pill, index : number) => (
                     currentPill == p.targetVal ? <SelectedOption key={`selected-option-${index}`} name={p.name} />  : <DefaultOption  key={`default-option-${index}`}  name={p.name} onClickFunction={p.onClickFunction}  /> 
                 ))}

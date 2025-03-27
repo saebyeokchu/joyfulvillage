@@ -84,8 +84,8 @@ function DetailContent() {
             </nav> */}
 
             {/* content */}
-            <div className="container py-10 px-5 md:px-14 md:mx-auto ">
-              { info.id == 1 && <video className='h-full w-full' controls>
+            <div className="container py-24 px-5 md:px-14 md:mx-auto ">
+              { info.name.includes('숲 N멍') && <video className='h-full w-full pb-24' controls>
                 <source src="/videos/dochen-soop.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video> }
