@@ -85,16 +85,20 @@ function DetailContent() {
 
             {/* content */}
             <div className="container py-24 px-5 md:px-14 md:mx-auto ">
-              { info.name.includes('숲 N멍') && <video className='h-full w-full pb-24' controls>
-                <source src="/videos/dochen-soop.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video> }
               <div className='flex flex-row justify-center'>
                 <div
                   className='pt-3'
                     dangerouslySetInnerHTML={{ __html: info.content }}
                 />
               </div>
+              {/* width="560" height="315" */}
+              <div className='flex justify-center py-24'>
+                { info.name.includes('숲 N멍') &&
+                  <iframe className='w-full h-[315px] md:h-[720px]' src="https://www.youtube.com/embed/m7tHzK52bk8?si=hlkeLtU-i5deVE6c&amp;controls=0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                }
+              </div>
+
+
               {/* return button */}
               <div className="mt-10 flex justify-end border-0 border-0-red-400 max-w-[85rem] mx-8 md:mx-auto">
                   <IndigoRoundButton btnName={"목록으로"} onClickFunction={handleReturnClick}/>

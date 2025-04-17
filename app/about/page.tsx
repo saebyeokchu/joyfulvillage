@@ -64,15 +64,8 @@ const AboutContainer = ({
                 {description}
             </div>
         </div>
-
-        <div className='flex flex-row space-x-3 mt-3 font-bold lg:mt-0 font-arita min-h'>
-            {/* <div className="w-4 h-4">
-                <a className="inline-flex cursor-pointer justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border-0 border-0-transparent bg-point-hover-rm focus:outline-none focus:bg-point-darker disabled:opacity-50 disabled:pointer-events-none" >
-                    <svg className="shrink-0 size-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8Zm7.597 2.214a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2h-.01a1 1 0 0 1-1-1ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z" clipRule="evenodd"/>
-                    </svg>
-                </a>
-            </div> */}
+        
+        <div className={`flex flex-row space-x-3 mt-3 font-bold ${title === "joyful" ? 'lg:mt-36' : 'lg:mt-0'} font-arita min-h`}> 
             <span className='cursor-pointer text-base' onClick={() => OpenWindow(instagramLink)}>@{instagramId}</span>
         </div>
         
@@ -96,7 +89,7 @@ const About = () => {
 
     return(
         <>
-        <div className="container mx-auto px-5 md:px-14 py-32 md:py-52 flex flex-col border-0 border-0-red-700 space-y-32 md:space-y-32 min-h-[2160px]" style={{color:"#4B5A62"}}>
+        <div className="container mx-auto px-5 md:px-14 py-32 md:py-52 flex flex-col border-0 border-0-red-700 space-y-36 md:space-y-32 min-h-[2160px]" style={{color:"#4B5A62"}}>
             { data && data.map((about : AboutType, index : number)=>(
                  <AboutContainer 
                     key={`about-container-${index}`}

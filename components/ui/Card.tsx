@@ -125,8 +125,8 @@ const Card = ({
       </div>}
 
       <div className="mt-3 text-joyful-indigo">
-        <p className="font-bold text-xl font-arita">{name}</p>
-        <p className="mt-1 text-xs  font-arita">{address}</p>
+        <p className="font-bold text-xl font-arita ">{name}</p>
+        <p className="mt-1 font-medium text-xs font-arita ">{address}</p>
 
         <div className="mt-5 max-w-[427px] korean-text text-sm/6">
           {children}

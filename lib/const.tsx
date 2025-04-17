@@ -12,7 +12,7 @@ const InstgramCafeDocehnLink = 'https://www.instagram.com/cafe.docheon/';
 const AdminCode = 'logginedasadmin';
 
 const Env = 'production';
-const AdminEmailAddress =  Env === 'production' ?  'iiimyedam@gmail.com' : 'cuu2252@gmail.com'; //dbal6436@naver.com
+const AdminEmailAddress =  Env === 'production' ?  'dbal6436@naver.com' : 'cuu2252@gmail.com'; //dbal6436@naver.com iiimyedam@gmail.com
 const AdminApiAddress = Env === 'production' ?  `https://back.joyvil.com/api/v1/joyfulset` : 'http://localhost:8000/api/v1/joyfulset';
 const BaseApiAddress = Env === 'production' ?  `https://back.joyvil.com/api/v1`: 'http://localhost:8000/api/v1';
 const imgAddress = Env === 'production' ? "https://back.joyvil.com/media/" : "http://localhost:8000/media/" ;

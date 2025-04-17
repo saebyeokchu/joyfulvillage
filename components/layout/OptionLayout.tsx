@@ -26,7 +26,7 @@ const OptionDetailWrapper = ({option, index, onClickImage} : {option : StayType.
         </div>
         <div className="flex flex-col md:ml-4 " >
             <p className="text-xl font-bold font-arita">{option.name}</p>
-            <p className="font-arita mt-3">{option.introduction}</p>
+            <p className="font-arita mt-1 text-xs font-medium">{option.introduction}</p>
             <div className="mt-6 text-gray-500">
                 <div dangerouslySetInnerHTML={{__html: option.content || ''}} />
             </div>
@@ -130,6 +130,7 @@ const OptionLayout = ({
       if(targetOption.reserveLink){
           router.push(targetOption.reserveLink === "realtime" ? '/booking' : targetOption.reserveLink);
       }else{
+          
           window.alert(targetOption.reserveNumber+"로 문의주세요." );
       }
   }
@@ -147,6 +148,7 @@ const OptionLayout = ({
               // 실시간 예약으로 이동하거나 네이버로 이동
               btnName={targetOption.reserveLink ? "예약하기" : "문의하기"}
               onClickBtn={onClickPageHeaderBtn} 
+              btnPhoneNumber={targetOption.reserveNumber}
             />
   
             {/* Stay list */}

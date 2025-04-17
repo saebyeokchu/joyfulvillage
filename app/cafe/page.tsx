@@ -101,7 +101,9 @@ export default function CafePage(){
         temp = response.filter((content : Cafe) => content.section==CafeSection.specials);
         if(temp.length > 0){
             setSpecials(temp);
+        console.log("specials", temp)
         }
+
 
          //set coffee
          temp = response.filter((content : Cafe) => content.section==CafeSection.coffee);
@@ -198,21 +200,26 @@ export default function CafePage(){
                 </div>
 
                 <div className="flex flex-col px-5 space-y-7 mt-16 md:mt-20">
-                    { mainImgs.map( (data : Cafe, index:number)  => data.img && <ImageTag key={`cafe-main-img-${index}`} index={0} src={data.img} /> ) }
+                    { mainImgs.map( (data : Cafe, index:number)  => data.img && <ImageTag key={`cafe-main-img-${index}`} index={0} src={imgAddress + data.img} /> ) }
                 </div>
 
-                <div className="mt-16 md:mt-32 text-center border-0 border-red-500 place-items-center">
-                    <div className="text-xl">
-                        카페도천만의 수제청
+                {/* specials */}
+                {specials.map((special : Cafe,index : number)=>
+                    <div key={`cafe-special-div-${index}`} className="mt-16 md:mt-32 text-center border-0 border-red-500 place-items-center">
+                        <div className="text-xl">
+                            {special.note}
+                        </div>
+                        <div className="text-sm w-96 mt-4 border-0 border-red-500 break-words">
+                            {/* 카페 도천에서는 매 시즌마다 특별한 수제청을 선보입니다. 100% 자연 재료로 정성껏 만든 수제청, 도천에서만 느낄 수 있는 특별한 맛을 경험해 보세요.
+                            이번 시즌의 수제청은 ‘대추꿀생강청’ 입니다. 대추의 달콤함과 생강의 매운맛, 꿀의 부드러움이 어우러져 건강하고 따뜻한 맛을 전해줍니다. */}
+                            {special.content}
+                        </div>
+                        <div className="flex flex-col space-y-7 mt-11 px-5">
+                            <ImageTag index={index} src={imgAddress + special.img || "/images/cafe1.png"} />
+                        </div>
                     </div>
-                    <div className="text-sm w-96 mt-4 border-0 border-red-500 break-words">
-                        카페 도천에서는 매 시즌마다 특별한 수제청을 선보입니다. 100% 자연 재료로 정성껏 만든 수제청, 도천에서만 느낄 수 있는 특별한 맛을 경험해 보세요.
-                        이번 시즌의 수제청은 ‘대추꿀생강청’ 입니다. 대추의 달콤함과 생강의 매운맛, 꿀의 부드러움이 어우러져 건강하고 따뜻한 맛을 전해줍니다.
-                    </div>
-                    <div className="flex flex-col space-y-7 mt-11 px-5">
-                        <ImageTag index={3} src={"/images/cafe1.png"} />
-                    </div>
-                </div>
+                )}
+                
 
                 <div className="mt-16 md:mt-40 text-center border-0 border-red-500 place-items-center">
                     <div className="text-xl font-semibold">

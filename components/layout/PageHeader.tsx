@@ -10,7 +10,8 @@ const PageHeader = ({
     alt,
     showBtn = false,
     btnName,
-    onClickBtn
+    onClickBtn,
+    btnPhoneNumber
 }:{
     src : string,
     title : string,
@@ -20,6 +21,7 @@ const PageHeader = ({
     showBtn? : boolean,
     btnName? : string,
     onClickBtn? : string | any,
+    btnPhoneNumber? : string | undefined
 }) => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -54,11 +56,11 @@ const PageHeader = ({
                     <div className="flex flex-col md:flex-row md:space-x-6">
                         <p className="text-2xl font-bold md:text-5xl md:font-normal">{title}</p>
                         {/* md screen sub title */}
-                        <p className={`hidden md:block text-sm ${!subTitle2 && 'mt-5'}  md:text-base md:font-bold font-arita`}>
+                        <p className={`hidden md:block text-sm ${!subTitle2 && 'mt-5'}  md:text-base md:font-bold font-arita font-medium`}>
                             {subTitle1} {subTitle2 && <><br />{subTitle2}</> }
                         </p>
                         {/* sm screen sub title */}
-                        <p className="block md:hidden text-sm mt-2  md:text-base md:font-bold font-arita">
+                        <p className="block md:hidden text-sm mt-2  md:text-base md:font-bold font-medium font-arita">
                             {subTitle1} {subTitle2}
                         </p>
                     </div>
@@ -67,18 +69,18 @@ const PageHeader = ({
                         {showBtn  && 
                             ( isScrolled ? 
                             <div
-                                onClick={onClickBtn}
+                                
                                 className={`fixed bottom-5 right-5 md:bottom-16 md:right-32 hidden md:flex w-20 h-20 text-center text-white rounded-full cursor-pointer items-center justify-center z-10`}
                                 style={{ backgroundColor: "#6E8653E5" }}
                                 >
-                                <span>{btnName}</span>
+                                { btnName === '문의하기' ? <a href={`tel:`+btnPhoneNumber}>{btnName}</a> : <span onClick={onClickBtn}>{btnName}</span>}
                             </div> : 
                             <div
-                                onClick={onClickBtn}
                                 className={`absolute bottom-5 right-5 md:bottom-0 md:right-14 hidden md:flex w-20 h-20 text-center text-white rounded-full cursor-pointer items-center justify-center`}
                                 style={{ backgroundColor: "#6E8653E5" }}
                                 >
-                                <span>{btnName}</span>
+                                { btnName === '문의하기' ? <a href={`tel:`+btnPhoneNumber}>{btnName}</a> : <span onClick={onClickBtn}>{btnName}</span>}
+
                             </div> )
                         }
                     </div>

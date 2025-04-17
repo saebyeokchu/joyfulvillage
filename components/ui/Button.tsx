@@ -78,7 +78,7 @@ const IndigoRoundButton = ({
 }) => (
     <button 
         onClick={onClickFunction} 
-        className={clsx(`font-arita flex justify-center text-sm md:text-base text-white w-fit p-4 md:p-5 h-7 items-center rounded-3xl hover:bg-indigo-950`, className)}
+        className={clsx(`font-arita font-medium flex justify-center text-sm md:text-base text-white w-fit p-4 md:p-5 h-7 items-center rounded-3xl hover:bg-indigo-950`, className)}
         style={{backgroundColor:'#4B5A62'}}>
         {btnName}
     </button>

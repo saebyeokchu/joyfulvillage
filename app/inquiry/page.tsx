@@ -174,7 +174,7 @@ export default function Inquiry(){
 
                 <div className="w-full md:w-[810px] h-min-[64px] ">
                         <h2 className="text-xl font-bold  md:leading-tight font-arita text-joyful-indigo">오시는 길</h2>
-                        <span className={`block text-sm mt-4 md:text-base font-arita text-joyful-indigo`}>
+                        <span className={`block font-medium text-sm mt-4 md:text-base font-arita text-joyful-indigo`}>
                             {addressText}</span>
                        <div id="map" className="border-0-point mt-10" style={{ width: "100%", height: "400px" }}>Kakao Map</div>
                    </div>

@@ -27,7 +27,7 @@ WORKDIR /code
 COPY package.json package-lock.json ./
 
 # Install only production dependencies to reduce size
-RUN npm --force install --omit=dev
+RUN npm install --force --omit=dev
 
 # Copy all source files
 COPY . .

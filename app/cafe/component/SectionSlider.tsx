@@ -37,6 +37,7 @@ const [index, setIndex] = useState(0);
     trackMouse: true, // optional, allows swipe using mouse events
   });
 
+
   return (
     <div>
         <p>{title}</p>
@@ -77,6 +78,7 @@ const [index, setIndex] = useState(0);
                         <Image
                             src={imgSrc}
                             alt={`${title} ${i}`}
+                            loader={()=>imgSrc} 
                             fill
                             className="object-cover"
                             loading="lazy"
